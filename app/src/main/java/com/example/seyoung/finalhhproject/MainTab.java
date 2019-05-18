@@ -14,11 +14,17 @@ public class MainTab extends TabActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mainframe);
 
+        Intent intent = getIntent();
+        String nickname = intent.getExtras().getString("nickname");
+        String profileImagePath = intent.getExtras().getString("profileImagePath");
+
         TabHost tabHost = getTabHost();
 
         TabHost.TabSpec tabCurrentMyHikingStatus = tabHost.newTabSpec("currentMyHikingStatus").setIndicator("등산 현황");
-        //tabCurrentMyHikingStatus.setContent(R.id.tabCurrentMyHikingStatus);
-        tabCurrentMyHikingStatus.setContent(new Intent(this, tab1.class));
+        Intent int1 = new Intent(this, tab1.class);
+        tabCurrentMyHikingStatus.setContent(int1);
+        int1.putExtra("nickname", nickname);
+        int1.putExtra("profileImagePath", profileImagePath);
         tabHost.addTab(tabCurrentMyHikingStatus);
 
         TabHost.TabSpec tabRecommendation = tabHost.newTabSpec("recommendation").setIndicator("등산로 추천");
@@ -36,9 +42,13 @@ public class MainTab extends TabActivity {
         tabHost.addTab(tabRestaurant);
 
         TabHost.TabSpec tabReview = tabHost.newTabSpec("review").setIndicator("등산 후기");
-        tabReview.setContent(R.id.tabReview);
+        //tabReview.setContent(R.id.tabReview);
+        Intent int5 = new Intent(this, tab5.class);
+        tabReview.setContent(int5);
+        int5.putExtra("nickname", nickname);
+        int5.putExtra("profileImagePath", profileImagePath);
         tabHost.addTab(tabReview);
 
-        tabHost.setCurrentTab(2); // 등산로 추천 탭부터 시작
+        tabHost.setCurrentTab(3); // 등산로 추천 탭부터 시작
     }
 }
