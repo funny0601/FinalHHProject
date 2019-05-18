@@ -28,7 +28,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#00dd00"
                 android:id="@+id/tabCurrentMyHikingStatus"
                 android:orientation="vertical">
             </LinearLayout>
@@ -36,7 +35,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#ff00dd"
                 android:id="@+id/tabRecommendation"
                 android:orientation="vertical">
             </LinearLayout>
@@ -44,7 +42,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#ffdd"
                 android:id="@+id/tabWeather"
                 android:orientation="vertical">
             </LinearLayout>
@@ -52,7 +49,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#ff0"
                 android:id="@+id/tabRestaurant"
                 android:orientation="vertical">
             </LinearLayout>
@@ -60,7 +56,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#0000ff"
                 android:id="@+id/tabReview"
                 android:orientation="vertical">
             </LinearLayout>

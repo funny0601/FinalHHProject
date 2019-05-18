@@ -4,12 +4,17 @@ import android.app.TabActivity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.inputmethod.InputMethod;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TabHost;
+
 import com.kakao.auth.ISessionCallback;
-import com.kakao.auth.Session;import android.content.Intent;
+import com.kakao.auth.Session;
+
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
@@ -40,16 +45,37 @@ import static com.kakao.usermgmt.UserManagement.*;
 @SuppressWarnings("deprecation")
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "";
-    SessionCallback callback;
+    //SessionCallback callback;
     Button btLogOut;
+    ImageView mainlogo;
 
+    protected void onCreate(final Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        Intent intent = new Intent(MainActivity.this, MainTab.class);
+        startActivity(intent);
+    }
+}
+
+    /*
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mainlogo = (ImageView)findViewById(R.id.mainLogo);
+        mainlogo.setImageResource(R.drawable.mainlogo);
+
+        DisplayMetrics metrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        int screenHeight = metrics.heightPixels;
+        int screenWidth = metrics.widthPixels;
+
+        mainlogo.getLayoutParams().width = screenWidth/2;
+        mainlogo.getLayoutParams().height= screenHeight/2;
+
         // 유저마다 해시코드 값이 다르니 일단 네이버 개발자 등록에서 하단 코드로 해시코드 확인 후 등록해야 api 사용가능
-/*
+
             try {
                 PackageInfo info = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_SIGNATURES);
                 for (Signature signature : info.signatures) {
@@ -64,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-*/
+
 
 
 
@@ -135,3 +161,4 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 }
+*/

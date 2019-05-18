@@ -16,9 +16,7 @@
         android:layout_centerVertical="true"
         android:id="@+id/mainLogo"
         android:scaleType = "fitCenter"
-        android:adjustViewBounds="true"
-
-        />
+        android:adjustViewBounds="true" />
 
     <com.kakao.usermgmt.LoginButton
         android:id="@+id/btn_kakao_login"
