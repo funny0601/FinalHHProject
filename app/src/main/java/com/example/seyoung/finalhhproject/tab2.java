@@ -39,7 +39,7 @@ public class tab2 extends Activity {
 
             URL url = new URL("http://openapi.forest.go.kr/openapi/service/cultureInfoService/gdTrailInfoOpenAPI?"
                     + "&ServiceKey="
-                    + "4FcVLRe97xKWFdwheMXNZV1fPyNwFmnF%2BqSBEbqr9PyBvLK6hB6zZFCRduwJGmf7tgizTg%2BcM0%2Bp6WxyUJFLfA%3D%3D"
+                    + "" // 본인 서비스키 넣으면 됨
                     + "&searchMtNm=%EA%B0%80&searchArNm=%EA%B0%95%EC%9B%90&pageNo=1&startPage=1&numOfRows=10&pageSize=1"); //검색 URL부분
 
             XmlPullParserFactory parserCreator = XmlPullParserFactory.newInstance();
