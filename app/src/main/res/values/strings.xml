@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">맛동산</string>
-    <string name="kakao_app_key">카카오키 </string>
+    <string name="kakao_app_key">카카오키 입력</string>
 </resources>
