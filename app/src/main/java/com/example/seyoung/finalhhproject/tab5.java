@@ -44,6 +44,7 @@ public class tab5 extends Activity {
             imgView.setImageBitmap(bm);
         } catch (Exception e) {
             imgView.setImageDrawable(getResources().getDrawable(R.drawable.dd2));
+            // 프사 없을 경우에 기존에 저장되어있는 대체 사진으로 변경 
         }
 
 
