@@ -14,6 +14,7 @@ import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
 
+@SuppressWarnings("deprecation")
 public class tab5 extends Activity {
     ImageView imgView;
 
@@ -23,7 +24,8 @@ public class tab5 extends Activity {
 
         Intent intent = getIntent();
         String nickname = intent.getExtras().getString("nickname");
-        String profileImagePath = intent.getExtras().getString("profileImagePath");
+        //String profileImagePath = intent.getExtras().getString("profileImagePath");
+        String profileImagePath ="";
 
         TextView username = (TextView) findViewById(R.id.name);
         username.setText(nickname);
@@ -41,6 +43,7 @@ public class tab5 extends Activity {
             bis.close();
             imgView.setImageBitmap(bm);
         } catch (Exception e) {
+            imgView.setImageDrawable(getResources().getDrawable(R.drawable.dd2));
         }
 
 

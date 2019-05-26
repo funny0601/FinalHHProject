@@ -56,13 +56,13 @@ public class MainActivity extends AppCompatActivity {
         // 매번 로그아웃을 요청함
         // 이거 빼면 로그인 안 해도 됌
 
-        UserManagement.getInstance().requestLogout(new LogoutResponseCallback() {
+        /*UserManagement.getInstance().requestLogout(new LogoutResponseCallback() {
             @Override
             public void onCompleteLogout() {
                 //로그아웃 성공 후 하고싶은 내용 코딩 ~
             }
         });
-
+        */
 
         callback = new SessionCallback();
         Session.getCurrentSession().addCallback(callback);
