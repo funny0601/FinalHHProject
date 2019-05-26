@@ -24,8 +24,8 @@ public class tab5 extends Activity {
 
         Intent intent = getIntent();
         String nickname = intent.getExtras().getString("nickname");
-        //String profileImagePath = intent.getExtras().getString("profileImagePath");
-        String profileImagePath ="";
+        String profileImagePath = intent.getExtras().getString("profileImagePath");
+        //String profileImagePath ="";
 
         TextView username = (TextView) findViewById(R.id.name);
         username.setText(nickname);
