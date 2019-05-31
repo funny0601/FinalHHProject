@@ -27,7 +27,6 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 
 public class tab1 extends Activity {
-    private SharedPreferences appData;
 
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,12 +76,13 @@ public class tab1 extends Activity {
         */
         try {
 
-
+            for (int i = 1; i < 3; i++) {
                 url = new URL("http://openapi.forest.go.kr/openapi/service/cultureInfoService/gdTrailInfoOpenAPI?"
                         + "&ServiceKey="
-                        //+ "4FcVLRe97xKWFdwheMXNZV1fPyNwFmnF%2BqSBEbqr9PyBvLK6hB6zZFCRduwJGmf7tgizTg%2BcM0%2Bp6WxyUJFLfA%3D%3D" // 본인 서비스키 넣으면 됨
+                        //+ "cg57liprV33JjaeFy1LJgzsD6EYcgoaVf9Du7P2W8P47pfco85kGJPMrOhESrZluVfW1D2k%2BgX7yxn%2F40U6VWA%3D%3D" // 본인 서비스키 넣으면 됨
+                        + "&pageNo=" + i + "&numOfRows=100"
                         //+ "&searchMtNm=" + URLEncoder.encode(Character.toString(hangeul.get(i)), "UTF-8")
-                        + "&searchMtNm=%EA%B0%80&searchArNm=%EA%B0%95%EC%9B%90&pageNo=1&startPage=1&numOfRows=100&pageSize=10"
+                        // + "&searchMtNm=%EA%B0%80&searchArNm=%EA%B0%95%EC%9B%90&pageNo=1&startPage=1&numOfRows=100&pageSize=10"
                 ); //검색 URL부분
 
                 XmlPullParserFactory parserCreator = XmlPullParserFactory.newInstance();
@@ -170,7 +170,7 @@ public class tab1 extends Activity {
             status1.setText(text);
             */
 
-
+            }
         } catch (Exception e) {
             //status1.setText("에러가..났습니다...");
             Toast.makeText(this, e.toString(), Toast.LENGTH_LONG);
