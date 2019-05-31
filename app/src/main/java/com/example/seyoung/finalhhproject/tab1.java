@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.os.StrictMode;
 import android.view.View;
 import android.widget.AdapterView;
@@ -13,6 +14,7 @@ import android.widget.Filter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +33,9 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
 
 public class tab1 extends Activity {
 
@@ -38,9 +43,10 @@ public class tab1 extends Activity {
     ImageButton searchBtn;
     EditText mountainSearch;
     ListView list;
+    ArrayList<mountainTable> xmlParsingData = new ArrayList<mountainTable>();
     ArrayList<String> mnt_name_list = new ArrayList<String>();
-    ArrayList<String> area_name_list = new ArrayList<String>();
-    ArrayList<Integer> mnt_height_list = new ArrayList<Integer>();
+
+    ArrayList<HashMap<String, String>> mntMapList = new ArrayList<HashMap<String, String>>();
     String search;
 
     ArrayList<String> temp = new ArrayList<String>();
@@ -72,106 +78,23 @@ public class tab1 extends Activity {
         searchBtn = (ImageButton) findViewById(R.id.searchButton);
         mountainSearch = (EditText) findViewById(R.id.mountainSearch);
 
-        try {
+        parseXML dataLoad = new parseXML();
+        xmlParsingData= dataLoad.createData();
 
-            for (int i = 1; i < 3; i++) {
-                url = new URL("http://openapi.forest.go.kr/openapi/service/cultureInfoService/gdTrailInfoOpenAPI?"
-                        + "&ServiceKey="
-                        //+ "cg57liprV33JjaeFy1LJgzsD6EYcgoaVf9Du7P2W8P47pfco85kGJPMrOhESrZluVfW1D2k%2BgX7yxn%2F40U6VWA%3D%3D" // 본인 서비스키 넣으면 됨
-                        + "&pageNo=" + i + "&numOfRows=10"
-                        //+ "&searchMtNm=" + URLEncoder.encode(Character.toString(hangeul.get(i)), "UTF-8")
-                        // + "&searchMtNm=%EA%B0%80&searchArNm=%EA%B0%95%EC%9B%90&pageNo=1&startPage=1&numOfRows=100&pageSize=10"
-                ); //검색 URL부분
-
-                XmlPullParserFactory parserCreator = XmlPullParserFactory.newInstance();
-                parserCreator.setNamespaceAware(true);
-                XmlPullParser parser = parserCreator.newPullParser();
-
-                parser.setInput(url.openStream(), null);
-                String text = "";
-
-                int parserEvent = parser.getEventType();
-                Toast.makeText(this, "파싱시작합니다.", Toast.LENGTH_LONG);
-
-                while (parserEvent != XmlPullParser.END_DOCUMENT) {
-                    switch (parserEvent) {
-                        case XmlPullParser.START_TAG://parser가 시작 태그를 만나면 실행
-                            if (parser.getName().equals("mntnm")) { //mntnm 만나면 내용을 받을수 있게 하자
-                                inMntnm = true;
-                            }
-                            if (parser.getName().equals("areanm")) { //areanm 만나면 내용을 받을수 있게 하자
-                                inAreanm = true;
-                            }
-                            if (parser.getName().equals("mntheight")) { //mntheight 만나면 내용을 받을수 있게 하자
-                                inMntheight = true;
-                            }
-                            if (parser.getName().equals("aeatreason")) { //aeatreason 만나면 내용을 받을수 있게 하자
-                                inAeatreason = true;
-                            }
-                            if (parser.getName().equals("transport")) { //transport 만나면 내용을 받을수 있게 하자
-                                inTransport = true;
-                            }
-                            if (parser.getName().equals("tourisminf")) { //tourisminf 만나면 내용을 받을수 있게 하자
-                                inTourisminf = true;
-                            }
-                            break;
-
-                        case XmlPullParser.TEXT://parser가 내용에 접근했을때
-                            if (inMntnm) { //inMntnm이 true일 때 태그의 내용을 저장.
-                                mntnm = parser.getText();
-                                mnt_name_list.add(mntnm);
-                                inMntnm = false;
-                            }
-                            if (inAreanm) { //inAreanm이 true일 때 태그의 내용을 저장.
-                                areanm = parser.getText();
-                                area_name_list.add(areanm);
-                                inAreanm = false;
-                            }
-                            if (inMntheight) { //inMntheight이 true일 때 태그의 내용을 저장.
-                                mntheight = parser.getText();
-                                mnt_height_list.add(Integer.parseInt(mntheight));
-                                inMntheight = false;
-                            }
-                            if (inAeatreason) { //inAeatreason이 true일 때 태그의 내용을 저장.
-                                aeatreason = parser.getText();
-                                inAeatreason = false;
-                            }
-                            if (inTransport) { //inTransport이 true일 때 태그의 내용을 저장.
-                                transport = parser.getText();
-                                inTransport = false;
-                            }
-                            if (inTourisminf) { //inTourisminf이 true일 때 태그의 내용을 저장.
-                                tourisminf = parser.getText();
-                                inTourisminf = false;
-                            }
-                            break;
-                        case XmlPullParser.END_TAG: //end tag는 곧 </item> 태그를 의미
-                            if (parser.getName().equals("item")) {
-                            /*status1.setText(status1.getText()+"산코드 : "+ mntncd +"\n 산명: "+ mntnm +"\n 산정보소재지 : " + areanm
-                                    +"\n 산정보높이 : " + mntheight +  "\n 100대명산 선정 이유 : " + aeatreason+ "\n 산정보개관 : " + overview
-                                    +"\n 산정보내용 : " +details+ "\n 대중교통정보설명 : " + transport + "\n 주변관광정보설명 : " +tourisminf
-                                    +"\n");
-                                    */
-
-                                initem = false;
-
-                            }
-
-                            break;
-                    }
-
-                    parserEvent = parser.next();
-                }
-            }
-        } catch (Exception e) {
-            //status1.setText("에러가..났습니다...");
-            //Toast.makeText(this, e.toString(), Toast.LENGTH_LONG);
-            System.out.println(e.toString());
+        // listview에 적용하기 위해 HashMap화 시키기
+        for(mountainTable mountainRespective : xmlParsingData) {
+            HashMap map = new HashMap();
+            map.put("산 이름", mountainRespective.getName());
+            map.put("산 높이", mountainRespective.getHeight());
+            map.put("지역", mountainRespective.getArea());
+            map.put("100대명산 선정 이유", mountainRespective.getReason());
+            mntMapList.add(map);
         }
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>
-                (this, android.R.layout.simple_list_item_multiple_choice, mnt_name_list);
         list = (ListView) findViewById(R.id.listView1);
+        SimpleAdapter adapter= new SimpleAdapter(this, mntMapList, android.R.layout.simple_expandable_list_item_2, new String[] {"산 이름", "지역"},
+                    new int[]{android.R.id.text1, android.R.id.text2});
+
         list.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         list.setAdapter(adapter);
         list.setTextFilterEnabled(true);
@@ -190,7 +113,7 @@ public class tab1 extends Activity {
             @Override
             public void onClick(View v) {
                 mountainSearch.setText("");
-                ((ArrayAdapter<String>)list.getAdapter()).getFilter().filter("");
+                ((SimpleAdapter)list.getAdapter()).getFilter().filter("");
             }
         });
 
@@ -198,13 +121,13 @@ public class tab1 extends Activity {
             @Override
             public void onClick(View v) {
                 search = mountainSearch.getText().toString();
-                ((ArrayAdapter<String>)list.getAdapter()).getFilter().filter(search);
+                ((SimpleAdapter)list.getAdapter()).getFilter().filter(search);
                 // 검색 결과가 없을 때 띄우고 싶은데..
             }
         });
 
-    }
 
+    }
 
 }
 

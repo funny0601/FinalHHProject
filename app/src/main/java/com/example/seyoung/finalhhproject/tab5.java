@@ -6,6 +6,10 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.View;
+import android.view.WindowManager;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,6 +21,8 @@ import java.net.URLConnection;
 @SuppressWarnings("deprecation")
 public class tab5 extends Activity {
     ImageView imgView;
+    ImageButton save;
+    EditText review;
 
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,9 +36,19 @@ public class tab5 extends Activity {
         TextView username = (TextView) findViewById(R.id.name);
         username.setText(nickname);
 
+        //getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
         imgView = (ImageView) findViewById(R.id.profile);
+        save = (ImageButton) findViewById(R.id.buttonSave);
+        review = (EditText) findViewById(R.id.review);
 
+
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
         try {
             URL url = new URL(profileImagePath);

@@ -4,38 +4,43 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:weightSum="10">
+    android:weightSum="10"
+    android:id="@+id/scrollView">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_weight="8.5"
+        android:background="#0000ff" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.5"
         android:orientation="horizontal"
-        android:layout_weight="2"
         android:weightSum="1">
 
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.3"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2"
             android:orientation="vertical"
             android:weightSum="5">
-
 
             <ImageView
                 android:id="@+id/profile"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="4"
-               />
+                android:layout_weight="3.5" />
 
             <TextView
                 android:id="@+id/name"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1"
-                android:textStyle="bold"
+                android:layout_weight="1.5"
                 android:text="hello"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <EditText
@@ -43,14 +48,38 @@
             android:layout_height="match_parent"
             android:layout_weight="0.7"
             android:background="#ffff00"
-            android:hint="등산 후기를 입력하세요"/>
-    </LinearLayout>
+            android:hint="등산 후기를 입력하세요"
+            android:inputType="text"
+            android:id="@+id/review"
+            android:maxLines="4" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="8"
-        android:background="#0000ff"/>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.1"
+            android:orientation="vertical"
+            android:weightSum="5"
+            android:background="#09ffde">
+
+            <ImageButton
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="3.5"
+                android:src="@drawable/ic_search_black_24dp"
+                android:id="@+id/buttonSave" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1.5"
+                android:background="#11ff0e"
+                android:text="저장"
+                android:textAlignment="center"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 </LinearLayout>
 
