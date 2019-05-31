@@ -25,6 +25,8 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 public class tab1 extends Activity {
 
@@ -39,6 +41,7 @@ public class tab1 extends Activity {
 
         ArrayList<String> mnt_name_list = new ArrayList<String>();
         ArrayList<String> area_name_list = new ArrayList<String>();
+        ArrayList<Integer> mnt_height_list = new ArrayList<Integer>();
 
         boolean inMntnm = false;
         String mntnm = null; // 산명
@@ -76,11 +79,11 @@ public class tab1 extends Activity {
         */
         try {
 
-            for (int i = 1; i < 3; i++) {
+            for (int i = 1; i < 11; i++) {
                 url = new URL("http://openapi.forest.go.kr/openapi/service/cultureInfoService/gdTrailInfoOpenAPI?"
                         + "&ServiceKey="
-                        //+ "cg57liprV33JjaeFy1LJgzsD6EYcgoaVf9Du7P2W8P47pfco85kGJPMrOhESrZluVfW1D2k%2BgX7yxn%2F40U6VWA%3D%3D" // 본인 서비스키 넣으면 됨
-                        + "&pageNo=" + i + "&numOfRows=100"
+                        // + "cg57liprV33JjaeFy1LJgzsD6EYcgoaVf9Du7P2W8P47pfco85kGJPMrOhESrZluVfW1D2k%2BgX7yxn%2F40U6VWA%3D%3D" // 본인 서비스키 넣으면 됨
+                        + "&pageNo=" + i + "&numOfRows=10"
                         //+ "&searchMtNm=" + URLEncoder.encode(Character.toString(hangeul.get(i)), "UTF-8")
                         // + "&searchMtNm=%EA%B0%80&searchArNm=%EA%B0%95%EC%9B%90&pageNo=1&startPage=1&numOfRows=100&pageSize=10"
                 ); //검색 URL부분
@@ -131,6 +134,7 @@ public class tab1 extends Activity {
                             }
                             if (inMntheight) { //inMntheight이 true일 때 태그의 내용을 저장.
                                 mntheight = parser.getText();
+                                mnt_height_list.add(Integer.parseInt(mntheight));
                                 inMntheight = false;
                             }
                             if (inAeatreason) { //inAeatreason이 true일 때 태그의 내용을 저장.
@@ -173,7 +177,7 @@ public class tab1 extends Activity {
             }
         } catch (Exception e) {
             //status1.setText("에러가..났습니다...");
-            Toast.makeText(this, e.toString(), Toast.LENGTH_LONG);
+            //Toast.makeText(this, e.toString(), Toast.LENGTH_LONG);
             System.out.println(e.toString());
         }
 
@@ -187,16 +191,11 @@ public class tab1 extends Activity {
         String nickname = intent.getExtras().getString("nickname");
         String profileImagePath = intent.getExtras().getString("profileImagePath");
 
+        //Collections.sort(mnt_height_list);
+        //int max = Collections.max(mnt_height_list); //1947
+        //int min = Collections.min(mnt_height_list); //328
+        //System.out.println(max+","+min);
 
 
-
-        /*
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-            }
-        });
-        */
     }
 }

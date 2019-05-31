@@ -44,8 +44,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainTab"></activity>
-        <activity android:name=".tab1"></activity>
+        <activity android:name=".MainTab"
+            android:windowSoftInputMode="adjustNothing"></activity>
+        <activity android:name=".tab1"
+            android:windowSoftInputMode="adjustNothing">
+        </activity>
         <activity android:name=".tab2"></activity>
         <activity android:name=".tab3"></activity>
         <activity android:name=".tab5"></activity>
