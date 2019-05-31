@@ -8,6 +8,10 @@ import android.os.StrictMode;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.Filter;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,59 +34,50 @@ import java.util.Collections;
 
 public class tab1 extends Activity {
 
+    ImageButton clearBtn;
+    ImageButton searchBtn;
+    EditText mountainSearch;
+    ListView list;
+    ArrayList<String> mnt_name_list = new ArrayList<String>();
+    ArrayList<String> area_name_list = new ArrayList<String>();
+    ArrayList<Integer> mnt_height_list = new ArrayList<Integer>();
+    String search;
+
+    ArrayList<String> temp = new ArrayList<String>();
+    // 검색한 데이터가 나올 리스트
+
+    boolean initem = false;
+
+    boolean inMntnm = false;
+    String mntnm = null; // 산명
+    boolean inAreanm = false;
+    String areanm = null; // 산정보소재지
+    boolean inMntheight = false;
+    String mntheight = null; // 산정보높이
+    boolean inAeatreason = false;
+    String aeatreason = null; // 100대 명산 선정 이유
+    boolean inTransport = false;
+    String transport = null; // 대중교통정보설명
+    boolean inTourisminf = false;
+    String tourisminf = null; // 주변관광정보설명
+    URL url;
+
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tab1_frame);
 
         StrictMode.enableDefaults();
 
+        clearBtn = (ImageButton) findViewById(R.id.clearButton);
+        searchBtn = (ImageButton) findViewById(R.id.searchButton);
+        mountainSearch = (EditText) findViewById(R.id.mountainSearch);
 
-        boolean initem = false;
-
-        ArrayList<String> mnt_name_list = new ArrayList<String>();
-        ArrayList<String> area_name_list = new ArrayList<String>();
-        ArrayList<Integer> mnt_height_list = new ArrayList<Integer>();
-
-        boolean inMntnm = false;
-        String mntnm = null; // 산명
-        boolean inAreanm = false;
-        String areanm = null; // 산정보소재지
-        boolean inMntheight = false;
-        String mntheight = null; // 산정보높이
-        boolean inAeatreason = false;
-        String aeatreason = null; // 100대 명산 선정 이유
-        boolean inTransport = false;
-        String transport = null; // 대중교통정보설명
-        boolean inTourisminf = false;
-        String tourisminf = null; // 주변관광정보설명
-        URL url;
-        ArrayList<Character> hangeul = new ArrayList<Character>();
-        /*
-        try {
-            //파일 객체 생성
-            InputStream inputStream = getResources().openRawResource(R.raw.hangeul);
-            InputStreamReader inputreader = new InputStreamReader(inputStream);
-
-            int singleCh = 0;
-            while ((singleCh =inputreader.read()) != -1) {
-                hangeul.add(((char) singleCh));
-            }
-
-            inputreader.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("파일 없음");
-        } catch (IOException e) {
-            System.out.println("파일 없음");
-        }
-
-        Toast.makeText(this, hangeul.size(), Toast.LENGTH_LONG).show();
-        */
         try {
 
-            for (int i = 1; i < 11; i++) {
+            for (int i = 1; i < 3; i++) {
                 url = new URL("http://openapi.forest.go.kr/openapi/service/cultureInfoService/gdTrailInfoOpenAPI?"
                         + "&ServiceKey="
-                        // + "cg57liprV33JjaeFy1LJgzsD6EYcgoaVf9Du7P2W8P47pfco85kGJPMrOhESrZluVfW1D2k%2BgX7yxn%2F40U6VWA%3D%3D" // 본인 서비스키 넣으면 됨
+                        //+ "cg57liprV33JjaeFy1LJgzsD6EYcgoaVf9Du7P2W8P47pfco85kGJPMrOhESrZluVfW1D2k%2BgX7yxn%2F40U6VWA%3D%3D" // 본인 서비스키 넣으면 됨
                         + "&pageNo=" + i + "&numOfRows=10"
                         //+ "&searchMtNm=" + URLEncoder.encode(Character.toString(hangeul.get(i)), "UTF-8")
                         // + "&searchMtNm=%EA%B0%80&searchArNm=%EA%B0%95%EC%9B%90&pageNo=1&startPage=1&numOfRows=100&pageSize=10"
@@ -167,13 +162,6 @@ public class tab1 extends Activity {
 
                     parserEvent = parser.next();
                 }
-            /*
-            for(int i=0; i<area_name_list.size(); i++){
-                text = text + area_name_list.get(i).toString() + " ";
-            }
-            status1.setText(text);
-            */
-
             }
         } catch (Exception e) {
             //status1.setText("에러가..났습니다...");
@@ -183,9 +171,10 @@ public class tab1 extends Activity {
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>
                 (this, android.R.layout.simple_list_item_multiple_choice, mnt_name_list);
-        ListView list = (ListView) findViewById(R.id.listView1);
+        list = (ListView) findViewById(R.id.listView1);
         list.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         list.setAdapter(adapter);
+        list.setTextFilterEnabled(true);
 
         Intent intent = getIntent();
         String nickname = intent.getExtras().getString("nickname");
@@ -194,8 +183,30 @@ public class tab1 extends Activity {
         //Collections.sort(mnt_height_list);
         //int max = Collections.max(mnt_height_list); //1947
         //int min = Collections.min(mnt_height_list); //328
-        //System.out.println(max+","+min);
 
+
+        // x버튼 누르면 입력창 초기화
+        clearBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mountainSearch.setText("");
+                ((ArrayAdapter<String>)list.getAdapter()).getFilter().filter("");
+            }
+        });
+
+        searchBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                search = mountainSearch.getText().toString();
+                ((ArrayAdapter<String>)list.getAdapter()).getFilter().filter(search);
+                // 검색 결과가 없을 때 띄우고 싶은데..
+            }
+        });
 
     }
+
+
 }
+
+
+

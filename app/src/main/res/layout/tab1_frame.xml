@@ -26,6 +26,9 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="6.5"
+            android:inputType="text"
+            android:maxLines="1"
+            android:maxLength="6"
             android:hint="산을 검색하세요"/>
 
         <ImageButton
