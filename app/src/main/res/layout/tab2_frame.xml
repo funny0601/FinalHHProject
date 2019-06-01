@@ -1,19 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    >
+    tools:context=".MainActivity">
 
-    <ScrollView
+
+
+    <CheckBox
+
+        android:text="지역"
+        android:textSize="30dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:background="#64A176"
+        android:layout_margin="10dp"
+        android:id="@+id/ChkAgree"/>
 
-        <TextView
-            android:id="@+id/result"
-            android:layout_width="fill_parent"
+    <Spinner
+
+        android:id="@+id/spinner2"
+
+        android:layout_width="match_parent"
+
+        android:layout_height="wrap_content"></Spinner>
+
+
+    <CheckBox
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="30dp"
+        android:text="높이"
+        android:background="#64A176"
+        android:layout_margin="10dp"
+        android:id="@+id/ChkAgree2"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <CheckBox
+            android:id="@+id/high1"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="50dp"
-            android:text="hellllo"/>
-    </ScrollView>
+            android:checked="true"
+            android:text="상" />
+
+        <CheckBox
+            android:id="@+id/high2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="중" />
+
+        <CheckBox
+            android:id="@+id/high3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="하" />
+
+    </LinearLayout>
+
+
+
+
+
+    <CheckBox
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="30dp"
+        android:text="산정보 주제"
+        android:layout_margin="10dp"
+        android:background="#64A176"
+        android:id="@+id/ChkAgree3"/>
+
+    <Spinner
+
+        android:id="@+id/spinner3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></Spinner>
+
+
+
+
+
+    <Button
+        android:id="@+id/btnSearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="선택완료" />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/listview1"
+        android:layout_weight="9">
+
+    </ListView>
+
+
+
+
+
+
+
 </LinearLayout>
+

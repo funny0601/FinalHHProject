@@ -29,6 +29,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 @SuppressWarnings("deprecation")
+
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "";
     SessionCallback callback;
@@ -51,6 +52,8 @@ public class MainActivity extends AppCompatActivity {
         mainlogo.getLayoutParams().width = screenWidth / 2;
         mainlogo.getLayoutParams().height = screenHeight / 2;
 
+
+
         /**카카오톡 로그아웃 요청**/
         //한번 로그인이 성공하면 세션 정보가 남아있어서 로그인창이 뜨지 않고 바로 onSuccess()메서드를 호출하므로
         // 매번 로그아웃을 요청함
@@ -66,6 +69,8 @@ public class MainActivity extends AppCompatActivity {
 
         callback = new SessionCallback();
         Session.getCurrentSession().addCallback(callback);
+
+
     }
 
     class SessionCallback implements ISessionCallback {
@@ -80,9 +85,11 @@ public class MainActivity extends AppCompatActivity {
 
                     ErrorCode result = ErrorCode.valueOf(errorResult.getErrorCode());
                     if (result == ErrorCode.CLIENT_ERROR_CODE) {
+                        //Toast.makeText(MainActivity.this, "로그인에 실패", Toast.LENGTH_SHORT).show();
                         //에러로 인한 로그인 실패
                         // finish();
                     } else {
+                        //Toast.makeText(MainActivity.this, "넌 뭐냐", Toast.LENGTH_SHORT).show();
                         //redirectMainActivity();
                     }
                 }
@@ -126,14 +133,13 @@ public class MainActivity extends AppCompatActivity {
         // 세션 실패시
         @Override
         public void onSessionOpenFailed(KakaoException exception) {
-        }
-    }
-}
 
+            Toast.makeText(MainActivity.this, "시발", Toast.LENGTH_SHORT).show();
+            System.out.println("Session Fail Error is " + exception.getMessage().toString());
 
-/*
- // 유저마다 해시코드 값이 다르니 일단 네이버 개발자 등록에서 하단 코드로 해시코드 확인 후 등록해야 api 사용가능
+            // 유저마다 해시코드 값이 다르니 일단 네이버 개발자 등록에서 하단 코드로 해시코드 확인 후 등록해야 api 사용가능
 
+            /*
             try {
                 PackageInfo info = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_SIGNATURES);
                 for (Signature signature : info.signatures) {
@@ -146,6 +152,14 @@ public class MainActivity extends AppCompatActivity {
             } catch (NoSuchAlgorithmException e) {
                 e.printStackTrace();
             }
+            */
+
         }
+    }
+}
+
+
+/*
+
 
  */
