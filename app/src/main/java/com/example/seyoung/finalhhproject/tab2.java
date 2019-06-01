@@ -87,7 +87,7 @@ public class tab2 extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.tab2_frame);
 
         chkAgree = (CheckBox) findViewById(R.id.ChkAgree);
         chkAgree2 = (CheckBox) findViewById(R.id.ChkAgree2);
