@@ -16,7 +16,7 @@
         android:textSize="30dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#64A176"
+        android:background="#803EA843"
         android:layout_margin="10dp"
         android:id="@+id/ChkAgree"/>
 
@@ -34,7 +34,7 @@
         android:layout_height="wrap_content"
         android:textSize="30dp"
         android:text="높이"
-        android:background="#64A176"
+        android:background="#803EA843"
         android:layout_margin="10dp"
         android:id="@+id/ChkAgree2"/>
 
@@ -66,16 +66,13 @@
     </LinearLayout>
 
 
-
-
-
     <CheckBox
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="30dp"
         android:text="산정보 주제"
         android:layout_margin="10dp"
-        android:background="#64A176"
+        android:background="#803EA843"
         android:id="@+id/ChkAgree3"/>
 
     <Spinner
@@ -83,9 +80,6 @@
         android:id="@+id/spinner3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"></Spinner>
-
-
-
 
 
     <Button
@@ -101,11 +95,6 @@
         android:layout_weight="9">
 
     </ListView>
-
-
-
-
-
 
 
 </LinearLayout>

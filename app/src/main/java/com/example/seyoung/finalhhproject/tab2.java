@@ -25,12 +25,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.StringReader;
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Array;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 
+// 지금 쓰는 데이터 이름 : 산 정보 조회  , 대략 데이터 수가 15000 개 정도..
 public class tab2 extends Activity {
 
     /*
@@ -51,6 +53,7 @@ public class tab2 extends Activity {
 
     }*/
 
+    String keyword;
 
     //큰 체크박스들
     CheckBox chkAgree;//"지역"
@@ -73,7 +76,7 @@ public class tab2 extends Activity {
     ArrayAdapter<String> arrayAdapter2;
 
     //선택완료 버튼
-    Button btSearch;
+    Button btnSearch;
 
     // String logt= "mountain";
 
@@ -99,15 +102,25 @@ public class tab2 extends Activity {
         high3 = (CheckBox) findViewById(R.id.high3);
 
 
-
         //"지역" 체크박스 선택시 스피너 안에 들어갈 arrayList
         arrayList = new ArrayList<>();
 
-        arrayList.add("서울특별시");arrayList.add("부산광역시");arrayList.add("대구광역시");arrayList.add("인천광역시");
-        arrayList.add("광주광역시");arrayList.add("대전광역시");arrayList.add("울산광역시");arrayList.add("경기도");
-        arrayList.add("강원도");arrayList.add("충청북도");arrayList.add("충청남도");arrayList.add("전라북도");
-        arrayList.add("전라남도");arrayList.add("경상북도");arrayList.add("경상남도");arrayList.add("제주도");
-
+        arrayList.add("서울특별시");
+        arrayList.add("부산광역시");
+        arrayList.add("대구광역시");
+        arrayList.add("인천광역시");
+        arrayList.add("광주광역시");
+        arrayList.add("대전광역시");
+        arrayList.add("울산광역시");
+        arrayList.add("경기도");
+        arrayList.add("강원도");
+        arrayList.add("충청북도");
+        arrayList.add("충청남도");
+        arrayList.add("전라북도");
+        arrayList.add("전라남도");
+        arrayList.add("경상북도");
+        arrayList.add("경상남도");
+        arrayList.add("제주도");
 
 
         arrayAdapter = new ArrayAdapter<>(getApplicationContext(),
@@ -115,14 +128,13 @@ public class tab2 extends Activity {
                 arrayList);
 
 
-
-        spinner2 = (Spinner)findViewById(R.id.spinner2);
+        spinner2 = (Spinner) findViewById(R.id.spinner2);
         spinner2.setAdapter(arrayAdapter);
         spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
 
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(getApplicationContext(),arrayList.get(i)+"가 선택되었습니다.",
+                Toast.makeText(getApplicationContext(), arrayList.get(i) + "가 선택되었습니다.",
                         Toast.LENGTH_SHORT).show();
 
             }
@@ -151,15 +163,21 @@ public class tab2 extends Activity {
         //여기까지     "지역" 체크박스 선택시 스피너
 
 
-
-
         //이제부터  "산정보 주제" 체크박스 선택시 스피너에 들어갈 어레이리스트
 
         arrayList2 = new ArrayList<>();
 
-        arrayList2.add("계곡");arrayList2.add("단풍");arrayList2.add("억새");arrayList2.add("바다");
-        arrayList2.add("문화유적");arrayList2.add("일출/일몰");arrayList2.add("가족산행");arrayList2.add("바위");
-        arrayList2.add("봄꽃");arrayList2.add("조망");arrayList2.add("설경");
+        arrayList2.add("계곡");
+        arrayList2.add("단풍");
+        arrayList2.add("억새");
+        arrayList2.add("바다");
+        arrayList2.add("문화유적");
+        arrayList2.add("일출/일몰");
+        arrayList2.add("가족산행");
+        arrayList2.add("바위");
+        arrayList2.add("봄꽃");
+        arrayList2.add("조망");
+        arrayList2.add("설경");
 
 
         arrayAdapter2 = new ArrayAdapter<>(getApplicationContext(),
@@ -167,15 +185,14 @@ public class tab2 extends Activity {
                 arrayList2);
 
 
-
-        spinner3 = (Spinner)findViewById(R.id.spinner3);
+        spinner3 = (Spinner) findViewById(R.id.spinner3);
         spinner3.setAdapter(arrayAdapter2);
         spinner3.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             @Override
 
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(getApplicationContext(),arrayList2.get(i)+"가 선택되었습니다.",
+                Toast.makeText(getApplicationContext(), arrayList2.get(i) + "가 선택되었습니다.",
                         Toast.LENGTH_SHORT).show();
 
             }
@@ -189,14 +206,12 @@ public class tab2 extends Activity {
         });
 
 
-
         //여기까지  "산정보 주제" 체크박스 선택시 스피너
 
 
         high1.setVisibility(android.view.View.INVISIBLE);//처음에는 "높이" 상중하 체크박스 3개 모두 안보이게
         high2.setVisibility(android.view.View.INVISIBLE);
         high3.setVisibility(android.view.View.INVISIBLE);
-
 
 
         chkAgree2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -216,8 +231,6 @@ public class tab2 extends Activity {
         });
 
 
-
-
         spinner3.setVisibility(android.view.View.INVISIBLE);
 
         chkAgree3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -234,42 +247,37 @@ public class tab2 extends Activity {
         });
 
 
+        btnSearch = (Button) findViewById(R.id.btnSearch);
+        listview = (ListView) findViewById(R.id.listview1);
 
+        keyword=null;
 
-        btSearch= (Button) findViewById(R.id.btnSearch);
-        //tv= (TextView) findViewById(R.id.data);
+        // 인코딩 에러날 수 있어서 try-catch 처리한거임
+        // 체크박스에서 선택된 변수들에 맞게 여기에 집어넣을 수 있게 함수를 만들던
+        // 각 체크박스 별로 문자 다 넣어놓고 배열 만들어서 여기에서는 배열만 넣어서 인코딩하던
+        // 효율적으로 처리만 해주면 될듯
+        try {
+            keyword = URLEncoder.encode("가리왕산", "utf-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
 
-
-        listview = (ListView)findViewById(R.id.listview1);
-
-/*
-
-
-        btSearch.setOnClickListener(new View.OnClickListener() {
+        btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                String serviceUrl= "http://openapi.forest.go.kr/openapi/service/trailInfoService/getforeststoryservice";
-                String serviceKey="AH9qYYkdDabmHdMVNVZt4viR7E2TclJYSbjCck2jgrsVTe%2FcBC7lyWLbEBMoUo3gtUrixKaUpRRBM%2BeVwGJIrQ%3D%3D";
-                //String strSrch= etBus.getText().toString();
-                //String strUrl= serviceUrl+"?ServiceKey="+serviceKey +"&strSrch="+strSrch;
+                String serviceUrl = "http://openapi.forest.go.kr/openapi/service/trailInfoService/getforeststoryservice";
+                //본인 키값!
+                String serviceKey = ""
+                        //"cg57liprV33JjaeFy1LJgzsD6EYcgoaVf9Du7P2W8P47pfco85kGJPMrOhESrZluVfW1D2k%2BgX7yxn%2F40U6VWA%3D%3D"
+                        ;
+                String strUrl = serviceUrl + "?serviceKey=" + serviceKey + "&mntnNm=" + keyword;
 
+                System.out.println(strUrl);
 
-
-
-                //실제 넣어야할것 예시
-                //String strUrl=serviceUrl+"?mntnInfoAraCd="+"01"+"?mntnHght="+"1561"+"?mntnInfoThmCd="+"02"+"&serviceKey="+serviceKey;
-                String strUrl=serviceUrl+"?mntnNm="+"가리왕산"+"&serviceKey="+serviceKey;
                 new DownloadWebpageTask().execute(strUrl);
-        }
+            }
         });
-
-
-
-지금 버튼 눌러도 아무일도 안일어나서 주석처리..
-*/
-
-
 
     }
 
@@ -278,19 +286,13 @@ public class tab2 extends Activity {
         @Override
         protected String doInBackground(String... urls) {
             try {
-                return (String)downloadUrl((String)urls[0]);
+                return (String) downloadUrl((String) urls[0]);
             } catch (IOException e) {
                 return "==>다운로드 실패";
             }
         }
 
-        protected void onPostExecute(String result) {
-            //Log.d(tag, result);
-            //tv.append(result + "\n");
-            //tv.append("========== 파싱 결과 ==========\n");
-
-
-
+        protected void onPostExecute(String result){
             try {
                 XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
                 factory.setNamespaceAware(true);
@@ -298,46 +300,38 @@ public class tab2 extends Activity {
 
                 xpp.setInput(new StringReader(result));
                 int eventType = xpp.getEventType();
-                boolean  bSetNo=false, bSetmnt=false;
-                String mnt="";
+                boolean bSetmnt = false;
+                String mnt = "";
 
-                adapter=new ListViewAdapter();
+                adapter = new ListViewAdapter();
+
+                // 지금 신경써야하는 태그가 3가지 이니까 3가지에 맞게 더 추가해서 다 넣어줘야하는데
+                // 만약 유저가 3가지 조건중에 2개만 선택하면 (예를 들어 산이름, 산높이, 산주제중에 산이름하고 높이만 선택했을때)
+                // 그럼 선택되지 않은 산주제 태그에 대해서는 그냥 "" 이 값 (근데 이건 위에서 변수 선언할때 default로 넣어줄거니까
+                // 넣어주면 &mntnHght= 이렇게 하고 바로 그냥 조건안에 넣어준거 없으니까 별 에러 안내고 넘어감
+                // 모르겠으면 직접 링크에 숫자 넣었다가 뺐다가 해보기
 
                 while (eventType != XmlPullParser.END_DOCUMENT) {
-                    if(eventType == XmlPullParser.START_DOCUMENT) {
-                        ;
-                    } else if(eventType == XmlPullParser.START_TAG) {
+                    if (eventType == XmlPullParser.START_DOCUMENT) {
+                    } else if (eventType == XmlPullParser.START_TAG) {
                         String tag_name = xpp.getName();
-                        if (tag_name.equals("mntnsbttlinfo"))//산정보 부제의 경우
+                        if (tag_name.equals("mntnnm")) //산이름
                             bSetmnt = true;
-                        else if (tag_name.equals("no"))
-                            bSetNo = true;
-
-                    } else if(eventType == XmlPullParser.TEXT) {
-
+                    } else if (eventType == XmlPullParser.TEXT) {
                         if (bSetmnt) {
-                            //String content = xpp.getText();
-                            //tv.append(xpp.getText()+"\n");
-                            mnt=xpp.getText();
+                            mnt = xpp.getText();
+                            System.out.println("hello mountain name is"+mnt);
+                            adapter.addItem(mnt);
                             bSetmnt = false;
                         }
 
-                        if (bSetNo) {
-                            //String content = xpp.getText();
-                            //tv.append(xpp.getText()+"\n");
-                            adapter.addItem(mnt);
-                            bSetNo = false;
-                        }
-
-
-                    } else if(eventType == XmlPullParser.END_TAG) {
-                        ;
+                    } else if (eventType == XmlPullParser.END_TAG) {
                     }
                     eventType = xpp.next();
                 } // while
                 listview.setAdapter(adapter);//리스트뷰에 붙이기
             } catch (Exception e) {
-                // tv.setText("\n"+e.getMessage());
+
             }
         }
 
@@ -345,22 +339,20 @@ public class tab2 extends Activity {
 
             HttpURLConnection conn = null;
             try {
-                //Log.d(tag, "downloadUrl : "+  myurl);
                 URL url = new URL(myurl);
                 conn = (HttpURLConnection) url.openConnection();
                 BufferedInputStream buf = new BufferedInputStream(conn.getInputStream());
                 BufferedReader bufreader = new BufferedReader(new InputStreamReader(buf, "utf-8"));
                 String line = null;
                 String page = "";
-                while((line = bufreader.readLine()) != null) {
+                while ((line = bufreader.readLine()) != null) {
                     page += line;
                 }
 
                 return page;
-            } catch(Exception e){
+            } catch (Exception e) {
                 return " ";
-            }
-            finally {
+            } finally {
                 conn.disconnect();
             }
         }
