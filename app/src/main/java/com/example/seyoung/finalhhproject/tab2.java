@@ -57,13 +57,8 @@ public class tab2 extends Activity {
 
     //큰 체크박스들
     CheckBox chkAgree;//"지역"
-    CheckBox chkAgree2;//"높이"
-    CheckBox chkAgree3;//"산정보 주제"
-
-    //chAgree2("높이")에 들어갈 checkBox3개
-    CheckBox high1;//상
-    CheckBox high2;//중
-    CheckBox high3;//하
+    CheckBox chkAgree2;//"산정보 주제"
+    CheckBox chkAgree3;//"산정보 계절"
 
     //"지역" 체크박스 선택시 스피너
     private Spinner spinner2;
@@ -74,6 +69,11 @@ public class tab2 extends Activity {
     private Spinner spinner3;
     ArrayList<String> arrayList2;
     ArrayAdapter<String> arrayAdapter2;
+
+    //"산정보 계절" 체크박스 선택시 스피너
+    private Spinner spinner4;
+    ArrayList<String> arrayList3;
+    ArrayAdapter<String> arrayAdapter3;
 
     //선택완료 버튼
     Button btnSearch;
@@ -89,7 +89,7 @@ public class tab2 extends Activity {
     Integer key3;//산주제코드
 
 
-    Integer key4;//산 높은것
+    Integer key4;//산정보계절코드
 
     @Override
 
@@ -101,12 +101,6 @@ public class tab2 extends Activity {
         chkAgree = (CheckBox) findViewById(R.id.ChkAgree);
         chkAgree2 = (CheckBox) findViewById(R.id.ChkAgree2);
         chkAgree3 = (CheckBox) findViewById(R.id.ChkAgree3);
-
-
-        high1 = (CheckBox) findViewById(R.id.high1);
-        high2 = (CheckBox) findViewById(R.id.high2);
-        high3 = (CheckBox) findViewById(R.id.high3);
-
 
         //"지역" 체크박스 선택시 스피너 안에 들어갈 arrayList
         arrayList = new ArrayList<>();
@@ -142,9 +136,7 @@ public class tab2 extends Activity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 Toast.makeText(getApplicationContext(), arrayList.get(i) + "가 선택되었습니다.",
                         Toast.LENGTH_SHORT).show();
-
                 key2=i+1;
-
             }
 
             @Override
@@ -217,42 +209,84 @@ public class tab2 extends Activity {
         });
 
 
+
+
+        //이제부터  "산정보 계절" 체크박스 선택시 스피너에 들어갈 어레이리스트
+
+        arrayList3 = new ArrayList<>();
+
+        arrayList3.add("봄");
+        arrayList3.add("여름");
+        arrayList3.add("가을");
+        arrayList3.add("겨울");
+        arrayList3.add("봄/여름");
+        arrayList3.add("봄/가을");
+        arrayList3.add("봄/겨울");
+        arrayList3.add("여름/가을");
+        arrayList3.add("여름/겨울");
+        arrayList3.add("가을/겨울");
+        arrayList3.add("사계절");
+
+
+        arrayAdapter3 = new ArrayAdapter<>(getApplicationContext(),
+                android.R.layout.simple_spinner_dropdown_item,
+                arrayList3);
+
+
+        spinner4 = (Spinner) findViewById(R.id.spinner4);
+        spinner4.setAdapter(arrayAdapter3);
+        spinner4.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                Toast.makeText(getApplicationContext(), arrayList3.get(i) + "가 선택되었습니다.",
+                        Toast.LENGTH_SHORT).show();
+
+                key4=i+1;
+
+            }
+
+            @Override
+
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+
+        });
+
+
+
+
         //여기까지  "산정보 주제" 체크박스 선택시 스피너
 
-
-        high1.setVisibility(android.view.View.INVISIBLE);//처음에는 "높이" 상중하 체크박스 3개 모두 안보이게
-        high2.setVisibility(android.view.View.INVISIBLE);
-        high3.setVisibility(android.view.View.INVISIBLE);
-
+        spinner3.setVisibility(android.view.View.INVISIBLE);
 
         chkAgree2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton arg0, boolean arg1) {
                 // "높이" 체크되면 모두 보이도록 설정
                 if (chkAgree2.isChecked() == true) {
-                    high1.setVisibility(android.view.View.VISIBLE);
-                    high2.setVisibility(android.view.View.VISIBLE);
-                    high3.setVisibility(android.view.View.VISIBLE);
-
-                } else {
-                    high1.setVisibility(android.view.View.INVISIBLE);
-                    high2.setVisibility(android.view.View.INVISIBLE);
-                    high3.setVisibility(android.view.View.INVISIBLE);
-                }
-            }
-        });
-
-
-        spinner3.setVisibility(android.view.View.INVISIBLE);
-
-        chkAgree3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            public void onCheckedChanged(CompoundButton arg0, boolean arg1) {
-                // "산정보 주제" 체크되면 스피너 보이도록 설정
-                if (chkAgree3.isChecked() == true) {
 
                     spinner3.setVisibility(android.view.View.VISIBLE);
 
                 } else {
                     spinner3.setVisibility(android.view.View.INVISIBLE);
+                }
+            }
+        });
+
+
+        spinner4.setVisibility(android.view.View.INVISIBLE);
+
+        chkAgree3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton arg0, boolean arg1) {
+                // "산정보 계절" 체크되면 스피너 보이도록 설정
+                if (chkAgree3.isChecked() == true) {
+
+                    spinner4.setVisibility(android.view.View.VISIBLE);
+
+                } else {
+                    spinner4.setVisibility(android.view.View.INVISIBLE);
                 }
             }
         });
@@ -294,7 +328,7 @@ public class tab2 extends Activity {
                         ;
 
 
-                String strUrl = serviceUrl + "?serviceKey=" + serviceKey + "&mntnInfoAraCd="+key2+"&mntnInfoThmCd="+key3;
+                String strUrl = serviceUrl + "?serviceKey=" + serviceKey + "&mntnInfoAraCd="+key2+"&mntnInfoThmCd="+key3+"&mntnInfoSsnCd="+key4;
 
                 //String strUrl = serviceUrl + "?serviceKey=" + serviceKey +"&mntnHght=" + 1708  + "&mntnHght=" +1915 ;
                 //

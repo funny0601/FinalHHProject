@@ -33,51 +33,34 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="30dp"
-        android:text="높이"
+        android:text="산정보주제"
         android:background="#803EA843"
         android:layout_margin="10dp"
         android:id="@+id/ChkAgree2"/>
 
-    <LinearLayout
+    <Spinner
+
+        android:id="@+id/spinner3"
+
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center">
 
-        <CheckBox
-            android:id="@+id/high1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="true"
-            android:text="상" />
+        android:layout_height="wrap_content"></Spinner>
 
-        <CheckBox
-            android:id="@+id/high2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="중" />
 
-        <CheckBox
-            android:id="@+id/high3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="하" />
-
-    </LinearLayout>
 
 
     <CheckBox
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="30dp"
-        android:text="산정보 주제"
+        android:text="산정보 계절"
         android:layout_margin="10dp"
         android:background="#803EA843"
         android:id="@+id/ChkAgree3"/>
 
     <Spinner
 
-        android:id="@+id/spinner3"
+        android:id="@+id/spinner4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"></Spinner>
 
