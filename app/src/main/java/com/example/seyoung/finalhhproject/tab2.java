@@ -85,6 +85,12 @@ public class tab2 extends Activity {
     ListView listview;
     ListViewAdapter adapter;
 
+    Integer key2;//산지역정보
+    Integer key3;//산주제코드
+
+
+    Integer key4;//산 높은것
+
     @Override
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -136,6 +142,8 @@ public class tab2 extends Activity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 Toast.makeText(getApplicationContext(), arrayList.get(i) + "가 선택되었습니다.",
                         Toast.LENGTH_SHORT).show();
+
+                key2=i+1;
 
             }
 
@@ -195,6 +203,9 @@ public class tab2 extends Activity {
                 Toast.makeText(getApplicationContext(), arrayList2.get(i) + "가 선택되었습니다.",
                         Toast.LENGTH_SHORT).show();
 
+                key3=i+1;
+
+
             }
 
             @Override
@@ -247,6 +258,14 @@ public class tab2 extends Activity {
         });
 
 
+       /* high1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                key4=1915;
+            }
+        });*/
+
+
         btnSearch = (Button) findViewById(R.id.btnSearch);
         listview = (ListView) findViewById(R.id.listview1);
 
@@ -262,17 +281,23 @@ public class tab2 extends Activity {
             e.printStackTrace();
         }
 
+
+
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 String serviceUrl = "http://openapi.forest.go.kr/openapi/service/trailInfoService/getforeststoryservice";
                 //본인 키값!
-                String serviceKey = ""
+                String serviceKey = //"AH9qYYkdDabmHdMVNVZt4viR7E2TclJYSbjCck2jgrsVTe%2FcBC7lyWLbEBMoUo3gtUrixKaUpRRBM%2BeVwGJIrQ%3D%3D"
                         //"cg57liprV33JjaeFy1LJgzsD6EYcgoaVf9Du7P2W8P47pfco85kGJPMrOhESrZluVfW1D2k%2BgX7yxn%2F40U6VWA%3D%3D"
                         ;
-                String strUrl = serviceUrl + "?serviceKey=" + serviceKey + "&mntnNm=" + keyword;
 
+
+                String strUrl = serviceUrl + "?serviceKey=" + serviceKey + "&mntnInfoAraCd="+key2+"&mntnInfoThmCd="+key3;
+
+                //String strUrl = serviceUrl + "?serviceKey=" + serviceKey +"&mntnHght=" + 1708  + "&mntnHght=" +1915 ;
+                //
                 System.out.println(strUrl);
 
                 new DownloadWebpageTask().execute(strUrl);
