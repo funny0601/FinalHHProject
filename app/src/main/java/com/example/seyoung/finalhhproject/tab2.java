@@ -2,9 +2,11 @@ package com.example.seyoung.finalhhproject;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -31,6 +33,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.Random;
 
 // 지금 쓰는 데이터 이름 : 산 정보 조회  , 대략 데이터 수가 15000 개 정도..
 public class tab2 extends Activity {
@@ -85,11 +88,16 @@ public class tab2 extends Activity {
     ListView listview;
     ListViewAdapter adapter;
 
-    Integer key2;//산지역정보
-    Integer key3;//산주제코드
+    String key2;//산지역정보
+    String key3;//산주제코드
 
 
-    Integer key4;//산정보계절코드
+    String key4;//산정보계절코드
+
+    String mymountain;//산이름
+
+
+
 
     @Override
 
@@ -136,12 +144,13 @@ public class tab2 extends Activity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 Toast.makeText(getApplicationContext(), arrayList.get(i) + "가 선택되었습니다.",
                         Toast.LENGTH_SHORT).show();
-                key2=i+1;
+                key2= Integer.toString(i+1);
             }
 
             @Override
 
             public void onNothingSelected(AdapterView<?> adapterView) {
+
             }
         });
 
@@ -155,6 +164,7 @@ public class tab2 extends Activity {
                     spinner2.setVisibility(android.view.View.VISIBLE);
                 } else {
                     spinner2.setVisibility(android.view.View.INVISIBLE);
+                    key2="";//선택안하면 "" 처리
                 }
             }
         });
@@ -195,7 +205,7 @@ public class tab2 extends Activity {
                 Toast.makeText(getApplicationContext(), arrayList2.get(i) + "가 선택되었습니다.",
                         Toast.LENGTH_SHORT).show();
 
-                key3=i+1;
+                key3= Integer.toString(i+1);
 
 
             }
@@ -243,7 +253,7 @@ public class tab2 extends Activity {
                 Toast.makeText(getApplicationContext(), arrayList3.get(i) + "가 선택되었습니다.",
                         Toast.LENGTH_SHORT).show();
 
-                key4=i+1;
+                key4= Integer.toString(i+1);
 
             }
 
@@ -271,6 +281,7 @@ public class tab2 extends Activity {
 
                 } else {
                     spinner3.setVisibility(android.view.View.INVISIBLE);
+                    key3="";//선택안하면 "" 처리
                 }
             }
         });
@@ -287,17 +298,12 @@ public class tab2 extends Activity {
 
                 } else {
                     spinner4.setVisibility(android.view.View.INVISIBLE);
+                    key4= "";//선택안하면 "" 처리
                 }
             }
         });
 
 
-       /* high1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                key4=1915;
-            }
-        });*/
 
 
         btnSearch = (Button) findViewById(R.id.btnSearch);
@@ -323,18 +329,16 @@ public class tab2 extends Activity {
 
                 String serviceUrl = "http://openapi.forest.go.kr/openapi/service/trailInfoService/getforeststoryservice";
                 //본인 키값!
-                String serviceKey = //"AH9qYYkdDabmHdMVNVZt4viR7E2TclJYSbjCck2jgrsVTe%2FcBC7lyWLbEBMoUo3gtUrixKaUpRRBM%2BeVwGJIrQ%3D%3D"
+                String serviceKey = "AH9qYYkdDabmHdMVNVZt4viR7E2TclJYSbjCck2jgrsVTe%2FcBC7lyWLbEBMoUo3gtUrixKaUpRRBM%2BeVwGJIrQ%3D%3D"
                         //"cg57liprV33JjaeFy1LJgzsD6EYcgoaVf9Du7P2W8P47pfco85kGJPMrOhESrZluVfW1D2k%2BgX7yxn%2F40U6VWA%3D%3D"
                         ;
 
 
                 String strUrl = serviceUrl + "?serviceKey=" + serviceKey + "&mntnInfoAraCd="+key2+"&mntnInfoThmCd="+key3+"&mntnInfoSsnCd="+key4;
 
-                //String strUrl = serviceUrl + "?serviceKey=" + serviceKey +"&mntnHght=" + 1708  + "&mntnHght=" +1915 ;
-                //
-                System.out.println(strUrl);
-
                 new DownloadWebpageTask().execute(strUrl);
+
+
             }
         });
 
@@ -362,7 +366,7 @@ public class tab2 extends Activity {
                 boolean bSetmnt = false;
                 String mnt = "";
 
-                adapter = new ListViewAdapter();
+               // adapter = new ListViewAdapter();
 
                 // 지금 신경써야하는 태그가 3가지 이니까 3가지에 맞게 더 추가해서 다 넣어줘야하는데
                 // 만약 유저가 3가지 조건중에 2개만 선택하면 (예를 들어 산이름, 산높이, 산주제중에 산이름하고 높이만 선택했을때)
@@ -380,9 +384,23 @@ public class tab2 extends Activity {
                         if (bSetmnt) {
                             mnt = xpp.getText();
                             System.out.println("hello mountain name is"+mnt);
-                            adapter.addItem(mnt);
+                            mymountain=mnt;
+                           // Random random=new Random();
+                           // random.nextInt(i);
+
+                            //선택한 조건으로 버튼누르면 구글맵에 뜬다!
+                            Intent mapIntent1=new Intent(Intent.ACTION_VIEW, Uri.parse("geo:0,0?q="+mymountain));
+                            startActivity(mapIntent1);
+
+
+                           //adapter.addItem(mnt); 원래 밑에 리스트 뜨게 하는건데 사용안함
                             bSetmnt = false;
                         }
+
+                        //else{
+                         //   mnt="해당하는산이 존재하지않습니다.";
+                        //    adapter.addItem(mnt);
+                       // }
 
                     } else if (eventType == XmlPullParser.END_TAG) {
                     }

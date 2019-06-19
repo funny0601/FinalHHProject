@@ -48,11 +48,13 @@
         <activity android:name=".tab1"></activity>
         <activity android:name=".tab2"></activity>
         <activity android:name=".tab3"></activity>
+        <activity android:name=".tab4"></activity>
         <activity android:name=".tab5"></activity>
+        <activity android:name=".tab2_second"></activity>
 
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyDoc5UL4VUSaGnEa_tNBGO1UCpXU9eRigQ"/>
+            android:value="AIzaSyA24IOS3WYlg0oFxEwC6VNiqzY_nI5xE5E"/><!--윤진api키: AIzaSyA24IOS3WYlg0oFxEwC6VNiqzY_nI5xE5E-->
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false"/>

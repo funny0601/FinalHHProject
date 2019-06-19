@@ -49,7 +49,8 @@ public class MainTab extends TabActivity {
         ImageView tw04 = new ImageView(this);
         tw04.setImageResource(R.drawable.tw_4);
         TabHost.TabSpec tabRestaurant = tabHost.newTabSpec("restaurant").setIndicator(tw04);
-        tabRestaurant.setContent(R.id.tabRestaurant);
+       // tabRestaurant.setContent(R.id.tabRestaurant);
+        tabRestaurant.setContent(new Intent(this, tab4.class));
         tabHost.addTab(tabRestaurant);
 
         ImageView tw05 = new ImageView(this);
@@ -80,6 +81,6 @@ public class MainTab extends TabActivity {
         for(int i=0; i<tabHost.getTabWidget().getChildCount(); i++) {
             tabHost.getTabWidget().getChildAt(i).getLayoutParams().height = (screenHeight*15)/200;
         }
-        tabHost.setCurrentTab(3); // 등산로 추천 탭부터 시작
+        tabHost.setCurrentTab(2); // 등산로 추천 탭부터 시작
     }
 }
