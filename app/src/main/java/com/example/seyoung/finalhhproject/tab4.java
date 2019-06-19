@@ -91,10 +91,10 @@ public class tab4 extends Activity {
                 viewHolder = (RowDataViewHolder) convertView.getTag();
             }
 
-            viewHolder.nameTvHolder.setText(arr.get(position).name);
-            viewHolder.phoneTvHolder.setText(arr.get(position).phone);
-            viewHolder.explainTvHolder.setText(arr.get(position).explain);
-            viewHolder.foodIvHoler.setImageResource(arr.get(position).resId);
+            viewHolder.nameTvHolder.setText(arr.get(position).getName());
+            viewHolder.phoneTvHolder.setText(arr.get(position).getPhone());
+            viewHolder.explainTvHolder.setText(arr.get(position).getExplain());
+            viewHolder.foodIvHoler.setImageResource(arr.get(position).getResId());
 
             return convertView;
         }
