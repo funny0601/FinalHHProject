@@ -57,7 +57,7 @@ public class tab3 extends Activity {
 
             Toast.makeText(tab3.this, "SD 카드가 반드시 필요합니다.", Toast.LENGTH_LONG).show();
 
-            finish();
+            //finish();
 
             return;
 
@@ -85,7 +85,7 @@ public class tab3 extends Activity {
         if (mplist.length == 0) {
 
             Toast.makeText(tab3.this, "재생할 파일이 없습니다.", Toast.LENGTH_LONG).show();
-            finish();
+            //finish();
             return;
 
         }
@@ -133,7 +133,7 @@ public class tab3 extends Activity {
 
             Toast.makeText(tab3.this, "파일을 읽을 수 없습니다.", Toast.LENGTH_LONG).show();
 
-            finish();
+            //finish();
 
         }
 
