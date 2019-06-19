@@ -80,6 +80,7 @@ public class tab2 extends Activity {
 
     //선택완료 버튼
     Button btnSearch;
+    Button btnInit;
 
     // String logt= "mountain";
 
@@ -194,7 +195,6 @@ public class tab2 extends Activity {
                 android.R.layout.simple_spinner_dropdown_item,
                 arrayList2);
 
-
         spinner3 = (Spinner) findViewById(R.id.spinner3);
         spinner3.setAdapter(arrayAdapter2);
         spinner3.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -307,9 +307,11 @@ public class tab2 extends Activity {
 
 
         btnSearch = (Button) findViewById(R.id.btnSearch);
+        btnInit = (Button) findViewById(R.id.btnInit);
         listview = (ListView) findViewById(R.id.listview1);
 
         keyword=null;
+
 
         // 인코딩 에러날 수 있어서 try-catch 처리한거임
         // 체크박스에서 선택된 변수들에 맞게 여기에 집어넣을 수 있게 함수를 만들던
@@ -339,6 +341,16 @@ public class tab2 extends Activity {
                 new DownloadWebpageTask().execute(strUrl);
 
 
+            }
+        });
+
+        // 초기화 버튼 누르면 체크박스 누른거 다 해제
+        btnInit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                chkAgree.setChecked(false);
+                chkAgree2.setChecked(false);
+                chkAgree3.setChecked(false);
             }
         });
 

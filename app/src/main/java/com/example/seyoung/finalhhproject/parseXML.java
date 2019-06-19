@@ -1,17 +1,10 @@
 package com.example.seyoung.finalhhproject;
 
-import android.os.Bundle;
 import android.os.StrictMode;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.ListView;
-import android.widget.Toast;
-
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 
 import java.net.URL;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -44,10 +37,10 @@ public class parseXML {
             for (int i = 1; i < 3; i++) {
                 url = new URL("http://openapi.forest.go.kr/openapi/service/cultureInfoService/gdTrailInfoOpenAPI?"
                         + "&ServiceKey="
-                        + "R4cJYAXkTydlNuoOpXcQ0dolab13Br9ZtURL8o8cwm7jkUNE%2BBLMrHuYzFRNrm4SssCQIv%2B2KYu%2BcX03j%2BwELA%3D%3D" // 본인 서비스키 넣으면 됨
+                        +"cg57liprV33JjaeFy1LJgzsD6EYcgoaVf9Du7P2W8P47pfco85kGJPMrOhESrZluVfW1D2k%2BgX7yxn%2F40U6VWA%3D%3D" // 본인 서비스키 넣으면 됨
                         + "&pageNo=" + i + "&numOfRows=10"
-                       // + "&searchMtNm=" + URLEncoder.encode(Character.toString(hangeul.get(i)), "UTF-8")
-                       //  + "&searchMtNm=%EA%B0%80&searchArNm=%EA%B0%95%EC%9B%90&pageNo=1&startPage=1&numOfRows=100&pageSize=10"
+                        //+ "&searchMtNm=" + URLEncoder.encode(Character.toString(hangeul.get(i)), "UTF-8")
+                        // + "&searchMtNm=%EA%B0%80&searchArNm=%EA%B0%95%EC%9B%90&pageNo=1&startPage=1&numOfRows=100&pageSize=10"
                 ); //검색 URL부분
 
                 XmlPullParserFactory parserCreator = XmlPullParserFactory.newInstance();

@@ -6,14 +6,31 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
+    android:layout_marginTop="20dp"
+    android:layout_marginBottom="20dp"
+    tools:context=".MainActivity"
+    >
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#8064A176"
+        android:text="산에 대한 부가적인 정보를 선택하여
+        지금 내가 등산하고 싶은 산을 추천 받아보세요."/>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
 
 
     <CheckBox
 
         android:text="지역"
-        android:textSize="30dp"
+        android:textSize="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#803EA843"
@@ -23,17 +40,17 @@
     <Spinner
 
         android:id="@+id/spinner2"
-
         android:layout_width="match_parent"
-
-        android:layout_height="wrap_content"></Spinner>
+        android:layout_height="wrap_content"
+        android:overlapAnchor="false"
+        android:visibility="invisible"></Spinner>
 
 
     <CheckBox
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="30dp"
-        android:text="산정보주제"
+        android:textSize="20dp"
+        android:text="테마"
         android:background="#803EA843"
         android:layout_margin="10dp"
         android:id="@+id/ChkAgree2"/>
@@ -41,9 +58,9 @@
     <Spinner
 
         android:id="@+id/spinner3"
-
+        android:visibility="invisible"
         android:layout_width="match_parent"
-
+        android:overlapAnchor="false"
         android:layout_height="wrap_content"></Spinner>
 
 
@@ -52,24 +69,42 @@
     <CheckBox
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="30dp"
-        android:text="산정보 계절"
+        android:textSize="20dp"
+        android:text="계절"
         android:layout_margin="10dp"
         android:background="#803EA843"
         android:id="@+id/ChkAgree3"/>
 
     <Spinner
-
+        android:overlapAnchor="false"
+        android:visibility="invisible"
         android:id="@+id/spinner4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"></Spinner>
 
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
+    <Button
+        android:id="@+id/btnInit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="선택 초기화"
+        android:textSize="15dp"
+        android:layout_marginLeft="70dp"
+        android:layout_alignParentLeft="true"
+        android:background="#8064A176"/>
     <Button
         android:id="@+id/btnSearch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="선택완료" />
+        android:text="선택 완료"
+        android:layout_marginRight="70dp"
+        android:layout_alignParentRight="true"
+        android:textSize="15dp"
+        android:background="#8064A176"/>
+</RelativeLayout>
 
     <ListView
         android:layout_width="match_parent"
@@ -78,7 +113,7 @@
         android:layout_weight="9">
 
     </ListView>
-
+</LinearLayout>
 
 </LinearLayout>
 

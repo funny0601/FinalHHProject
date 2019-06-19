@@ -35,7 +35,6 @@ public class tab3 extends Activity {
     boolean wasPlaying;
 
 
-
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
@@ -43,12 +42,9 @@ public class tab3 extends Activity {
         setContentView(R.layout.tab3_frame);
 
 
-
-
         mList = new ArrayList<String>();
 
         mPlayer = new MediaPlayer();
-
 
 
         // SD 카드가 없을 시 에러 처리한다.
@@ -66,7 +62,6 @@ public class tab3 extends Activity {
             return;
 
         }
-
 
 
         // SD 카드 루트의 MP3 파일 목록을 구한다.
@@ -90,14 +85,12 @@ public class tab3 extends Activity {
         if (mplist.length == 0) {
 
             Toast.makeText(tab3.this, "재생할 파일이 없습니다.", Toast.LENGTH_LONG).show();
-
             finish();
-
             return;
 
         }
 
-        for(String s : mplist) {
+        for (String s : mplist) {
 
             mList.add(sdPath + "/" + s);
 
@@ -106,12 +99,11 @@ public class tab3 extends Activity {
         mIdx = 0;
 
 
-
         // 버튼들의 클릭 리스너 등록
 
-        mFileName = (TextView)findViewById(R.id.filename);
+        mFileName = (TextView) findViewById(R.id.filename);
 
-        mPlayBtn = (Button)findViewById(R.id.playBtn);
+        mPlayBtn = (Button) findViewById(R.id.playBtn);
 
         mPlayBtn.setOnClickListener(mClickPlay);
 
@@ -122,19 +114,17 @@ public class tab3 extends Activity {
         findViewById(R.id.nextBtn).setOnClickListener(mClickPrevNext);
 
 
-
         // 완료 리스너, 시크바 변경 리스너 등록
 
         mPlayer.setOnCompletionListener(mOnComplete);
 
         mPlayer.setOnSeekCompleteListener(mOnSeekComplete);
 
-        mProgress = (SeekBar)findViewById(R.id.mProgress);
+        mProgress = (SeekBar) findViewById(R.id.mProgress);
 
         mProgress.setOnSeekBarChangeListener(mOnSeek);
 
-        mProgressHandler.sendEmptyMessageDelayed(0,200);
-
+        mProgressHandler.sendEmptyMessageDelayed(0, 200);
 
 
         // 첫 곡 읽기 및 준비
@@ -148,7 +138,6 @@ public class tab3 extends Activity {
         }
 
     }
-
 
 
     // 액티비티 종료시 재생 강제 종료
@@ -166,7 +155,6 @@ public class tab3 extends Activity {
         }
 
     }
-
 
 
     // 항상 준비 상태여야 한다.
@@ -206,7 +194,6 @@ public class tab3 extends Activity {
     }
 
 
-
     boolean Prepare() {
 
         try {
@@ -226,7 +213,6 @@ public class tab3 extends Activity {
         return true;
 
     }
-
 
 
     // 재생 및 일시 정지
@@ -254,7 +240,6 @@ public class tab3 extends Activity {
     };
 
 
-
     // 재생 정지. 재시작을 위해 미리 준비해 놓는다.
 
     Button.OnClickListener mClickStop = new View.OnClickListener() {
@@ -274,7 +259,6 @@ public class tab3 extends Activity {
     };
 
 
-
     Button.OnClickListener mClickPrevNext = new View.OnClickListener() {
 
         public void onClick(View v) {
@@ -282,23 +266,20 @@ public class tab3 extends Activity {
             boolean wasPlaying = mPlayer.isPlaying();
 
 
-
             if (v.getId() == R.id.prevBtn) {
 
-                mIdx = (mIdx == 0 ? mList.size() - 1:mIdx - 1);
+                mIdx = (mIdx == 0 ? mList.size() - 1 : mIdx - 1);
 
             } else {
 
-                mIdx = (mIdx == mList.size() - 1 ? 0:mIdx + 1);
+                mIdx = (mIdx == mList.size() - 1 ? 0 : mIdx + 1);
 
             }
-
 
 
             mPlayer.reset();
 
             LoadMedia(mIdx);
-
 
 
             // 이전에 재생중이었으면 다음 곡 바로 재생
@@ -316,14 +297,13 @@ public class tab3 extends Activity {
     };
 
 
-
     // 재생 완료되면 다음곡으로
 
     MediaPlayer.OnCompletionListener mOnComplete = new MediaPlayer.OnCompletionListener() {
 
         public void onCompletion(MediaPlayer arg0) {
 
-            mIdx = (mIdx == mList.size() - 1 ? 0:mIdx + 1);
+            mIdx = (mIdx == mList.size() - 1 ? 0 : mIdx + 1);
 
             mPlayer.reset();
 
@@ -334,7 +314,6 @@ public class tab3 extends Activity {
         }
 
     };
-
 
 
     // 에러 발생시 메시지 출력
@@ -354,7 +333,6 @@ public class tab3 extends Activity {
     };
 
 
-
     // 위치 이동 완료 처리
 
     MediaPlayer.OnSeekCompleteListener mOnSeekComplete = new MediaPlayer.OnSeekCompleteListener() {
@@ -372,7 +350,6 @@ public class tab3 extends Activity {
     };
 
 
-
     // 0.2초에 한번꼴로 재생 위치 갱신
 
     Handler mProgressHandler = new Handler() {
@@ -387,12 +364,11 @@ public class tab3 extends Activity {
 
             }
 
-            mProgressHandler.sendEmptyMessageDelayed(0,200);
+            mProgressHandler.sendEmptyMessageDelayed(0, 200);
 
         }
 
     };
-
 
 
     // 재생 위치 이동
@@ -410,7 +386,6 @@ public class tab3 extends Activity {
         }
 
 
-
         public void onStartTrackingTouch(SeekBar seekBar) {
 
             wasPlaying = mPlayer.isPlaying();
@@ -422,7 +397,6 @@ public class tab3 extends Activity {
             }
 
         }
-
 
 
         public void onStopTrackingTouch(SeekBar seekBar) {
