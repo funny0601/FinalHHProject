@@ -81,6 +81,6 @@ public class MainTab extends TabActivity {
         for(int i=0; i<tabHost.getTabWidget().getChildCount(); i++) {
             tabHost.getTabWidget().getChildAt(i).getLayoutParams().height = (screenHeight*15)/200;
         }
-        tabHost.setCurrentTab(2); // 등산로 추천 탭부터 시작
+        tabHost.setCurrentTab(4); // 등산로 추천 탭부터 시작
     }
 }
