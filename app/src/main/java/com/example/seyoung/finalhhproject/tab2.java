@@ -315,7 +315,9 @@ public class tab2 extends Activity {
 
 
         btnSearch = (ImageButton) findViewById(R.id.btnSearch);
+        btnSearch.setImageResource(R.drawable.finish_xml);
         btnInit = (ImageButton) findViewById(R.id.btnInit);
+        btnInit.setImageResource(R.drawable.init_xml);
         //listview = (ListView) findViewById(R.id.listview1);
 
         keyword = null;

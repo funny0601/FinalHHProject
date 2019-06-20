@@ -11,7 +11,8 @@
         android:id="@+id/gallery1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:spacing="5dp" />
+        android:spacing="5dp"
+        android:background="#00ff00"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -19,7 +20,8 @@
         android:layout_marginTop="20dp"
         android:layout_gravity="center_horizontal"
         android:text="음식을 선택해주세요"
-        android:textSize="30dp"
+        android:textStyle="bold"
+        android:textSize="20dp"
         android:layout_height="wrap_content" />
 
     <ImageView

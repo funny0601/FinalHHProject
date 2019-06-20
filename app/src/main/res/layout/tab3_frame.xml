@@ -10,12 +10,13 @@
         android:layout_width="wrap_content"
         android:orientation="horizontal"
         android:layout_gravity="center_horizontal"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
+            android:textSize="17dp"
             android:id="@+id/weathertv"
             android:layout_marginRight="20dp"
             android:text="북한산의 현재 날씨는?"
@@ -27,7 +28,7 @@
             android:id="@+id/spinnertab3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
+            android:layout_gravity="center"
             android:overlapAnchor="false"
             android:visibility="visible"></Spinner>
 
@@ -35,14 +36,14 @@
 
 
 
-    <Button
+    <ImageButton
         android:id="@+id/btnSearch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="버튼을 눌러주세요"
+        android:src="@drawable/weathercheck"
         android:layout_gravity="center_horizontal"
         android:textSize="15dp"
-        android:background="#803EA843"/>
+        android:background="#ffffff"/>
 
 
     <ListView
@@ -61,8 +62,9 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="This is music !"
-        android:textSize="20dp"
+        android:text="기분에 맞는 음악을 들어보세요."
+        android:textSize="15dp"
+        android:textStyle="bold"
         android:layout_marginBottom="10dp"
         android:layout_gravity="center_horizontal"
         android:id="@+id/filename"
@@ -73,37 +75,37 @@
         android:gravity="center_horizontal"
         android:layout_height="wrap_content">
 
-        <Button
+        <ImageButton
             android:id="@+id/playBtn"
-            android:background="#803EA843"
+            android:background="#ffffff"
             android:layout_marginHorizontal="3dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="재생"/>
+            android:src="@drawable/play"/>
 
-        <Button
+        <ImageButton
             android:id="@+id/pauseBtn"
-            android:background="#803EA843"
+            android:background="#ffffff"
             android:layout_marginHorizontal="3dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="중지"/>
+            android:src="@drawable/pause"/>
 
-        <Button
+        <ImageButton
             android:id="@+id/prevBtn"
-            android:background="#803EA843"
+            android:background="#ffffff"
             android:layout_marginHorizontal="3dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="이전곡"/>
+            android:src="@drawable/prevsong"/>
 
-        <Button
+        <ImageButton
             android:id="@+id/nextBtn"
-            android:background="#803EA843"
+            android:background="#ffffff"
             android:layout_marginHorizontal="3dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="다음곡"/>
+            android:src="@drawable/nextsong"/>
 
 
     </LinearLayout>

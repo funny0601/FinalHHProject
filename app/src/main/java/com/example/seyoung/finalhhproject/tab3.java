@@ -1,6 +1,7 @@
 package com.example.seyoung.finalhhproject;
 
 import android.app.Activity;
+import android.media.Image;
 import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.SeekBar;
 import android.widget.Spinner;
@@ -44,10 +46,8 @@ public class tab3 extends Activity {
     String ny = "127";// 격자Y
 
 
-
-
-    Button btn1,btn2, btn3, btn4; //재생버튼과  멈춤 버튼, 이전곡 , 다음곡
-    MediaPlayer mp,mp1,mp2;
+    ImageButton btn1, btn2, btn3, btn4; //재생버튼과  멈춤 버튼, 이전곡 , 다음곡
+    MediaPlayer mp, mp1, mp2;
 
     private int songs[]; // 음원 목록
     private int playing = -1; // 현재 연주중인
@@ -61,7 +61,7 @@ public class tab3 extends Activity {
     //여기부터는 위에 날씨뜨게 하는것
 
     //선택완료 버튼
-    Button btnSearch;
+    ImageButton btnSearch;
 
     //리스트뷰
     ListView listview;
@@ -69,7 +69,7 @@ public class tab3 extends Activity {
 
 
     String mymountain;//산이름
-    int index=0;
+    int index = 0;
 
 
     public void onCreate(Bundle savedInstanceState) {
@@ -113,71 +113,71 @@ public class tab3 extends Activity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 Toast.makeText(getApplicationContext(), arrayListtab3.get(i) + "가 선택되었습니다.",
                         Toast.LENGTH_SHORT).show();
-               // key2= Integer.toString(i);
-                weathertv.setText(arrayListtab3.get(i)+"의 현재 날씨는?");
-                if(i==0){//서울
-                    nx="60";
-                    ny="127";
+                // key2= Integer.toString(i);
+                weathertv.setText(arrayListtab3.get(i) + "의 현재 날씨는?");
+                if (i == 0) {//서울
+                    nx = "60";
+                    ny = "127";
                 }
-                if(i==1){//부산
-                    nx="98";
-                    ny="76";
+                if (i == 1) {//부산
+                    nx = "98";
+                    ny = "76";
                 }
-                if(i==2){//대구
-                    nx="89";
-                    ny="90";
+                if (i == 2) {//대구
+                    nx = "89";
+                    ny = "90";
                 }
-                if(i==3){//인천
-                    nx="55";
-                    ny="124";
+                if (i == 3) {//인천
+                    nx = "55";
+                    ny = "124";
                 }
-                if(i==4){//광주
-                    nx="58";
-                    ny="74";
+                if (i == 4) {//광주
+                    nx = "58";
+                    ny = "74";
                 }
-                if(i==5){//대전
-                    nx="67";
-                    ny="100";
+                if (i == 5) {//대전
+                    nx = "67";
+                    ny = "100";
                 }
-                if(i==6){//울산
-                    nx="102";
-                    ny="84";
+                if (i == 6) {//울산
+                    nx = "102";
+                    ny = "84";
                 }
-                if(i==7){//경기도
-                    nx="60";
-                    ny="120";
+                if (i == 7) {//경기도
+                    nx = "60";
+                    ny = "120";
                 }
-                if(i==8){//강원도
-                    nx="73";
-                    ny="134";
+                if (i == 8) {//강원도
+                    nx = "73";
+                    ny = "134";
                 }
-                if(i==9){//충청북도
-                    nx="69";
-                    ny="107";
+                if (i == 9) {//충청북도
+                    nx = "69";
+                    ny = "107";
                 }
-                if(i==10){//충청남도
-                    nx="68";
-                    ny="100";
+                if (i == 10) {//충청남도
+                    nx = "68";
+                    ny = "100";
                 }
-                if(i==11){//전라북도
-                    nx="63";
-                    ny="89";
+                if (i == 11) {//전라북도
+                    nx = "63";
+                    ny = "89";
                 }
-                if(i==12){//전라남도
-                    nx="51";
-                    ny="67";
+                if (i == 12) {//전라남도
+                    nx = "51";
+                    ny = "67";
                 }
-                if(i==13){//경상북도
-                    nx="89";
-                    ny="91";
+                if (i == 13) {//경상북도
+                    nx = "89";
+                    ny = "91";
                 }
-                if(i==14){//경상남도
-                    nx="91";
-                    ny="77";
+                if (i == 14) {//경상남도
+                    nx = "91";
+                    ny = "77";
                 }
-                if(i==15){//제주도
-                    nx="52";
-                    ny="38";
+                if (i == 15) {//제주도
+                    nx = "52";
+                    ny = "38";
                 }
 
             }
@@ -190,22 +190,23 @@ public class tab3 extends Activity {
         });
 
 
-
-
-
-        btn1 = (Button)findViewById(R.id.playBtn);
-        btn2 = (Button)findViewById(R.id.pauseBtn);
-        btn3 = (Button)findViewById(R.id.prevBtn);
-        btn4 = (Button)findViewById(R.id.nextBtn);
+        btn1 = (ImageButton) findViewById(R.id.playBtn);
+        btn1.setImageResource(R.drawable.play_xml);
+        btn2 = (ImageButton) findViewById(R.id.pauseBtn);
+        btn2.setImageResource(R.drawable.pause_xml);
+        btn3 = (ImageButton) findViewById(R.id.prevBtn);
+        btn3.setImageResource(R.drawable.prev_xml);
+        btn4 = (ImageButton) findViewById(R.id.nextBtn);
+        btn4.setImageResource(R.drawable.next_xml);
 
 
         mFileName = (TextView) findViewById(R.id.filename);
 
         mProgress = (SeekBar) findViewById(R.id.mProgress);
 
-       // mProgress.setOnSeekBarChangeListener(mOnSeek);
+        // mProgress.setOnSeekBarChangeListener(mOnSeek);
 
-      //  mProgressHandler.sendEmptyMessageDelayed(0, 200);
+        //  mProgressHandler.sendEmptyMessageDelayed(0, 200);
 
 
         songs = new int[3];
@@ -217,21 +218,16 @@ public class tab3 extends Activity {
         mp2 = MediaPlayer.create(tab3.this, R.raw.music2);
 
 
-
-
-
-
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                playing=0;
-                if( mp!=null ) {
+                playing = 0;
+                if (mp != null) {
                     mp.stop(); // 혹은 pause
                 }
-                mp = MediaPlayer.create(tab3.this, songs[ playing ]);
-                mFileName.setText("파일 : "+(playing+1)+"번째음악");
+                mp = MediaPlayer.create(tab3.this, songs[playing]);
+                mFileName.setText("파일 : " + (playing + 1) + "번째음악");
                 mp.start();
-
 
 
                 mProgress.setMax(mp.getDuration()); //음악의 총길이를 가져와 sb의 길이로 만든다.
@@ -239,7 +235,7 @@ public class tab3 extends Activity {
                 mProgress.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
                     @Override
                     public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                        if(b){ //3번째로 넘어오는 값 b는 사용자가 움직여서 값이 변하면 true, setProgress등으로 움직이면 false
+                        if (b) { //3번째로 넘어오는 값 b는 사용자가 움직여서 값이 변하면 true, setProgress등으로 움직이면 false
                             mp.seekTo(i); //재생위치 변경해주기
                         }
                     }
@@ -265,12 +261,6 @@ public class tab3 extends Activity {
                 });
 
 
-
-
-
-
-
-
             }
         });
 
@@ -279,13 +269,13 @@ public class tab3 extends Activity {
             public void onClick(View v) {
                 //playing=0;
                 //if( mp!=null ) {
-               //     mp.stop(); // 혹은 pause
-               // }
-               // mp = MediaPlayer.create(tab3.this, songs[ playing ]);
+                //     mp.stop(); // 혹은 pause
+                // }
+                // mp = MediaPlayer.create(tab3.this, songs[ playing ]);
                 mp.stop();
                 //mp.seekTo(0); //0으로 재생위치변경
 
-               // btn.setText(R.string.start);
+                // btn.setText(R.string.start);
                 mProgress.setProgress(0);
 
 
@@ -295,42 +285,37 @@ public class tab3 extends Activity {
         btn3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                playing = (playing+5)%songs.length; // 목록의 끝에 도달하면 다시 첫번째를 선택.
-                if( mp!=null ) {
+                playing = (playing + 5) % songs.length; // 목록의 끝에 도달하면 다시 첫번째를 선택.
+                if (mp != null) {
                     mp.stop(); // 혹은 pause
                 }
-                mp = MediaPlayer.create(tab3.this, songs[ playing ]);
-                mFileName.setText("파일 : "+(playing+1)+"번째음악");
+                mp = MediaPlayer.create(tab3.this, songs[playing]);
+                mFileName.setText("파일 : " + (playing + 1) + "번째음악");
                 mp.start();
             }
         });
-
 
 
         btn4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                playing = (playing+1)%songs.length; // 목록의 끝에 도달하면 다시 첫번째를 선택.
-                if( mp!=null ) {
+                playing = (playing + 1) % songs.length; // 목록의 끝에 도달하면 다시 첫번째를 선택.
+                if (mp != null) {
                     mp.stop(); // 혹은 pause
                 }
-                mp = MediaPlayer.create(tab3.this, songs[ playing ]);
-                mFileName.setText("파일 : "+(playing+1)+"번째음악");
+                mp = MediaPlayer.create(tab3.this, songs[playing]);
+                mFileName.setText("파일 : " + (playing + 1) + "번째음악");
                 mp.start();
             }
         });
 
 
+        //음악
 
 
-    //음악
-
-
-
-
-    btnSearch = (Button) findViewById(R.id.btnSearch);
+        btnSearch = (ImageButton) findViewById(R.id.btnSearch);
+        btnSearch.setImageResource(R.drawable.weather_check);
         listview = (ListView) findViewById(R.id.listview1);
-
 
 
         btnSearch.setOnClickListener(new View.OnClickListener() {
@@ -350,13 +335,13 @@ public class tab3 extends Activity {
                 // 서비스 인증키입니다. 공공데이터포털에서 제공해준 인증키를 넣어주시면 됩니다.
                 // String serviceKey = "개인별로 받은 인증키를 넣어주세요";
                 // 정보를 모아서 URL정보를 만들면됩니다. 맨 마지막 "&_type=json"에 따라 반환 데이터의 형태가 정해집니다.
-                String strUrl = "http://newsky2.kma.go.kr/service/SecndSrtpdFrcstInfoService2/ForecastSpaceData?"+ "serviceKey=" + serviceKey + "&base_date=" + baseDate + "&base_time=" + baseTime+ "&nx="+ nx + "&ny=" + ny ;
+                String strUrl = "http://newsky2.kma.go.kr/service/SecndSrtpdFrcstInfoService2/ForecastSpaceData?" + "serviceKey=" + serviceKey + "&base_date=" + baseDate + "&base_time=" + baseTime + "&nx=" + nx + "&ny=" + ny;
                 System.out.println(strUrl);
-                btnSearch.setText("선택되었습니다.");
+
 
                 // String strUrl = serviceUrl + "?serviceKey=" + serviceKey + "&mntnInfoAraCd="+key2+"&mntnInfoThmCd="+key3+"&mntnInfoSsnCd="+key4;
-                System.out.println("nx:"+nx);
-                System.out.println("ny:"+ny);
+                System.out.println("nx:" + nx);
+                System.out.println("ny:" + ny);
                 new DownloadWebpageTask().execute(strUrl);
 
 
@@ -365,7 +350,6 @@ public class tab3 extends Activity {
 
 
     }
-
 
 
     //onCreate
@@ -381,7 +365,7 @@ public class tab3 extends Activity {
             }
         }
 
-        protected void onPostExecute(String result){
+        protected void onPostExecute(String result) {
             try {
                 XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
                 factory.setNamespaceAware(true);
@@ -391,7 +375,7 @@ public class tab3 extends Activity {
                 int eventType = xpp.getEventType();
                 boolean bSetmnt = false;
                 String mnt = "";
-                index=0;
+                index = 0;
                 adapter = new ListViewAdapter();
 
                 while (eventType != XmlPullParser.END_DOCUMENT) {
@@ -406,31 +390,30 @@ public class tab3 extends Activity {
 
                             mnt = xpp.getText();
                             index++;
-                            if(index==1){
-                                System.out.println("hello mountain name is"+mnt);
-                                mymountain=mnt;
-                                adapter.addItem("강수확률 : "+mnt+"%");
+                            if (index == 1) {
+                                System.out.println("hello mountain name is" + mnt);
+                                mymountain = mnt;
+                                adapter.addItem("강수확률 : " + mnt + "%");
                                 bSetmnt = false;
                             }
-                            if(index==3){
-                                System.out.println("hello mountain name is"+mnt);
-                                mymountain=mnt;
-                                adapter.addItem("습도 : "+mnt+"%");
+                            if (index == 3) {
+                                System.out.println("hello mountain name is" + mnt);
+                                mymountain = mnt;
+                                adapter.addItem("습도 : " + mnt + "%");
                                 bSetmnt = false;
                             }
-                            if(index==5){
-                                System.out.println("hello mountain name is"+mnt);
-                                Integer mnt2=Integer.parseInt(mnt);
-                                adapter.addItem("3시간 이내 평균기온 : "+(double)(mnt2/3)+"℃");
+                            if (index == 5) {
+                                System.out.println("hello mountain name is" + mnt);
+                                Integer mnt2 = Integer.parseInt(mnt);
+                                adapter.addItem("3시간 이내 평균기온 : " + (double) (mnt2 / 3) + "℃");
                                 bSetmnt = false;
                             }
-                            if(index==6){
-                                System.out.println("hello mountain name is"+mnt);
-                                mymountain=mnt;
-                                adapter.addItem("풍속(동서) : "+mnt+"m/s");
+                            if (index == 6) {
+                                System.out.println("hello mountain name is" + mnt);
+                                mymountain = mnt;
+                                adapter.addItem("풍속(동서) : " + mnt + "m/s");
                                 bSetmnt = false;
                             }
-
 
 
                         }
@@ -468,7 +451,6 @@ public class tab3 extends Activity {
             }
         }
     }
-
 
 
 }
