@@ -103,9 +103,11 @@ public class tab5 extends Activity {
 
             String str=reader.readLine();//한 줄씩 읽어오기
 
-            HashMap map = new HashMap();
+
 
             while(str!=null){
+                if(str.equals("-----&-----&-----"))
+                    continue;
                 System.out.println("첫줄:"+str);
                 String split[] = str.split("&");
 
@@ -114,14 +116,13 @@ public class tab5 extends Activity {
                 System.out.println("내용"+split[2]);
 
                 DiarySave ds = new DiarySave(split[0], split[1], split[2]);
-
-                map.put("제목", ds.getTitle());
-                map.put("날짜", ds.getDate());
-                map.put("내용", ds.getContent());
+                HashMap map = new HashMap();
+                map.put("제목", split[0]);
+                map.put("날짜", split[1]);
+                map.put("내용",  split[2]);
 
                 dsArray.add(ds);
                 diaryList.add(map);
-                adapter.notifyDataSetChanged();
                 str=reader.readLine();
             }
             reader.close();
@@ -151,14 +152,6 @@ public class tab5 extends Activity {
                 date1.setText(diaryList.get(position).get("날짜"));
                 content_review.setText(diaryList.get(position).get("내용"));
                 dlg2.setPositiveButton("닫기", null);
-                dlg2.setNegativeButton("삭제", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                        diaryList.remove(p);
-                        adapter.notifyDataSetChanged();
-                    }
-                });
                 dlg2.show();
             }
         });
