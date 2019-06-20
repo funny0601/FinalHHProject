@@ -16,8 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#8064A176"
-        android:text="산에 대한 부가적인 정보를 선택하여
-        지금 내가 등산하고 싶은 산을 추천 받아보세요." />
+        android:text="산에 대한 부가적인 정보를 선택하여 지금 내가 등산하고 싶은 산을 추천 받아보세요." />
 
     <LinearLayout
         android:layout_width="match_parent"

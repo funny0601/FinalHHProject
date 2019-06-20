@@ -282,7 +282,7 @@ public class tab2 extends Activity {
 
         btnSearch = (ImageButton) findViewById(R.id.btnSearch);
         btnInit = (ImageButton) findViewById(R.id.btnInit);
-        listview = (ListView) findViewById(R.id.listview1);
+       //listview = (ListView) findViewById(R.id.listview1);
 
         keyword = null;
 
@@ -366,8 +366,8 @@ public class tab2 extends Activity {
                             mnt = xpp.getText();
                             System.out.println("hello mountain name is" + mnt);
                             mymountain = mnt;
-
-                            selectedMounts.add(new selectedMount(mymountain));
+                            selectedMount stm = new selectedMount(mymountain);
+                            selectedMounts.add(stm);
 
                             for (int i = 0; i < selectedMounts.size(); i++) {
                                 System.out.println(selectedMounts.get(i).getMnt());
@@ -394,12 +394,13 @@ public class tab2 extends Activity {
                 System.out.println(randomNum);
 
                 selectedMounts.get(randomNum).setSelected(true);
+                System.out.println(selectedMounts.get(randomNum).isSelected());
                 // 구글맵 띄우기
-                Intent mapIntent1 = new Intent(Intent.ACTION_VIEW, Uri.parse("geo:0,0?q=" + selectedMounts.get(randomNum).getMnt().toString()));
-                startActivity(mapIntent1);
+                //Intent mapIntent1 = new Intent(Intent.ACTION_VIEW, Uri.parse("geo:0,0?q=" + selectedMounts.get(randomNum).getMnt().toString()));
+                //startActivity(mapIntent1);
 
-
-                listview.setAdapter(adapter);//리스트뷰에 붙이기
+                Toast.makeText(tab2.this, selectedMounts.get(randomNum).getMnt(), Toast.LENGTH_LONG).show();
+                //listview.setAdapter(adapter);//리스트뷰에 붙이기
             } catch (Exception e) {
 
             }

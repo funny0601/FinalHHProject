@@ -23,7 +23,7 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import com.example.seyoung.finalhhproject.tab2;
 import org.w3c.dom.Text;
 
 import java.io.BufferedInputStream;
@@ -52,15 +52,17 @@ public class tab5 extends Activity {
     ImageView imgView;
     TextView review, selected;
     View review_Text, review_Full;
-    EditText title, content;
+    EditText title, content, mntName;
     TextView content_review, date1;
     int selectYear, selectMonth, selectDay;
     String date;
     CalendarView cv;
     ListView list;
     int p;
-    ArrayList<selectedMount> selectedMounts = new ArrayList<selectedMount>();
+
+    //ArrayList<selectedMount> selectedMounts = new ArrayList<selectedMount>();
     ArrayList<DiarySave> dsArray = new ArrayList<DiarySave>();
+    ImageButton refresh;
 
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,6 +81,7 @@ public class tab5 extends Activity {
         imgView = (ImageView) findViewById(R.id.profile);
         review = (TextView) findViewById(R.id.review);
         selected = (TextView) findViewById(R.id.selected);
+
 
         StringBuffer buffer= new StringBuffer();
 
@@ -130,9 +133,6 @@ public class tab5 extends Activity {
 
 
 
-
-
-
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             String title_mini;
 
@@ -145,6 +145,7 @@ public class tab5 extends Activity {
                 AlertDialog.Builder dlg2 = new AlertDialog.Builder(tab5.this);
                 dlg2.setTitle(title_mini);
                 dlg2.setView(review_Full);
+
                 content_review = (TextView) review_Full.findViewById(R.id.content2);
                 date1 = (TextView)review_Full.findViewById(R.id.date1);
                 date1.setText(diaryList.get(position).get("날짜"));
@@ -173,6 +174,7 @@ public class tab5 extends Activity {
                 dlg.setTitle("등산 후기 등록");
                 dlg.setView(review_Text);
                 cv = (CalendarView) review_Text.findViewById(R.id.calendar);
+                mntName = (EditText) review_Text.findViewById(R.id.mntName);
 
                 cv.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
                     @Override
@@ -187,6 +189,7 @@ public class tab5 extends Activity {
                     public void onClick(DialogInterface dialog, int which) {
                         // 다이얼로그에 입력한 내용 받아서 DiarySave 클래스에 넣고, 거기에 저장한 정보 다시 가져와서 리스트에 동적 추가
                         title = (EditText) review_Text.findViewById(R.id.title);
+                        selected.setText(mntName.getText().toString());
                         String mnt_name = selected.getText().toString();
                         content = (EditText) review_Text.findViewById(R.id.content);
                         date = Integer.toString(selectYear) + "년 " + Integer.toString(selectMonth) + "월 " + Integer.toString(selectDay) + "일";
