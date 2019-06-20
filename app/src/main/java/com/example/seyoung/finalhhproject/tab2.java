@@ -42,6 +42,10 @@ package com.example.seyoung.finalhhproject;
 public class tab2 extends Activity {
 
 
+    boolean mInitSpinner;
+    boolean mInitSpinner1;
+    boolean mInitSpinner2;
+
     String keyword;
 
     //큰 체크박스들
@@ -89,6 +93,8 @@ public class tab2 extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tab2_frame);
 
+        Toast.makeText(getApplicationContext(), "",Toast.LENGTH_SHORT).show();
+
         chkAgree = (CheckBox) findViewById(R.id.ChkAgree);
         chkAgree2 = (CheckBox) findViewById(R.id.ChkAgree2);
         chkAgree3 = (CheckBox) findViewById(R.id.ChkAgree3);
@@ -125,7 +131,12 @@ public class tab2 extends Activity {
             @Override
 
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(getApplicationContext(), arrayList.get(i) + "가 선택되었습니다.",
+
+                if(mInitSpinner2==false){
+                    mInitSpinner2=true;
+                    return;
+                }
+                Toast.makeText(getApplicationContext(), arrayList.get(i) + "(이/가) 선택되었습니다.",
                         Toast.LENGTH_SHORT).show();
                 key2 = Integer.toString(i + 1);
             }
@@ -184,7 +195,12 @@ public class tab2 extends Activity {
             @Override
 
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(getApplicationContext(), arrayList2.get(i) + "가 선택되었습니다.",
+
+                if(mInitSpinner1==false){
+                    mInitSpinner1=true;
+                    return;
+                }
+                Toast.makeText(getApplicationContext(), arrayList2.get(i) + "(이/가) 선택되었습니다.",
                         Toast.LENGTH_SHORT).show();
 
                 key3 = Integer.toString(i + 1);
@@ -225,17 +241,30 @@ public class tab2 extends Activity {
 
         spinner4 = (Spinner) findViewById(R.id.spinner4);
         spinner4.setAdapter(arrayAdapter3);
+
+
         spinner4.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+
 
             @Override
 
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(getApplicationContext(), arrayList3.get(i) + "가 선택되었습니다.",
+
+
+                if(mInitSpinner==false){
+                    mInitSpinner=true;
+                    return;
+                }
+                Toast.makeText(getApplicationContext(), arrayList3.get(i) + "(이/가) 선택되었습니다.",
                         Toast.LENGTH_SHORT).show();
 
                 key4 = Integer.toString(i + 1);
 
+
+
             }
+
 
             @Override
 
@@ -243,7 +272,10 @@ public class tab2 extends Activity {
 
             }
 
+
+
         });
+
 
 
         //여기까지  "산정보 주제" 체크박스 선택시 스피너

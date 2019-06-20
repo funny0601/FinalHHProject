@@ -6,7 +6,7 @@ android {
         applicationId "com.example.seyoung.finalhhproject"
         minSdkVersion 28
         targetSdkVersion 28
-        //실행안되면 targetSdkVersion 22로 바꿨다가 실행했다가 다시 28로 바꾸는거 한 5번 반복하면 될것입니다....
+        //실행안되면 targetSdkVersion 22로 바꿨다가 실행했다가 다시 28로 바꿔서실행했다가 한 5번 반복하면 될것입니다....
         //음악이 22버전 이상부터는 오류가 잘난다고하네요.
         versionCode 1
         versionName "1.0"
