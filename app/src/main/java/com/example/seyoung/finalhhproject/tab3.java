@@ -286,6 +286,7 @@ public class tab3 extends Activity {
 
                 String serviceKey = "AH9qYYkdDabmHdMVNVZt4viR7E2TclJYSbjCck2jgrsVTe%2FcBC7lyWLbEBMoUo3gtUrixKaUpRRBM%2BeVwGJIrQ%3D%3D";
                 String baseDate = sFormat.format(now);// 현재 날짜
+                System.out.println("오늘 몇일"+baseDate);
                 String baseTime = "0500";// 자신이 조회하고싶은 시간대
 
                 String strUrl = "http://newsky2.kma.go.kr/service/SecndSrtpdFrcstInfoService2/ForecastSpaceData?" + "serviceKey=" + serviceKey + "&base_date=" + baseDate + "&base_time=" + baseTime + "&nx=" + nx + "&ny=" + ny;
