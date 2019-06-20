@@ -78,9 +78,9 @@ public class tab2 extends Activity {
     ListView listview;
     ListViewAdapter adapter;
 
-    String key2;//산지역정보
-    String key3;//산주제코드
-    String key4;//산정보계절코드
+    String key2="";//산지역정보
+    String key3="";//산주제코드
+    String key4="";//산정보계절코드
 
     String mymountain;//산이름
 
