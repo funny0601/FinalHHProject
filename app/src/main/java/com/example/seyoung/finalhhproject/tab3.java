@@ -2,37 +2,74 @@ package com.example.seyoung.finalhhproject;
 
 import android.app.Activity;
 import android.media.MediaPlayer;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.SeekBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserFactory;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.StringReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 
 public class tab3 extends Activity {
 
-    ArrayList<String> mList;
+    private Spinner spinnertab3;
+    ArrayList<String> arrayListtab3;
+    ArrayAdapter<String> arrayAdaptertab3;
 
-    int mIdx;
+    TextView weathertv;
 
-    MediaPlayer mPlayer;
+    String nx = "60";// 격자X
+    String ny = "127";// 격자Y
 
-    Button mPlayBtn;
+
+
+
+    Button btn1,btn2, btn3, btn4; //재생버튼과  멈춤 버튼, 이전곡 , 다음곡
+    MediaPlayer mp,mp1,mp2;
+
+    private int songs[]; // 음원 목록
+    private int playing = -1; // 현재 연주중인
 
     TextView mFileName;
 
     SeekBar mProgress;
-
     boolean wasPlaying;
+
+
+    //여기부터는 위에 날씨뜨게 하는것
+
+    //선택완료 버튼
+    Button btnSearch;
+
+    //리스트뷰
+    ListView listview;
+    ListViewAdapter adapter;
+
+
+    String mymountain;//산이름
+    int index=0;
 
 
     public void onCreate(Bundle savedInstanceState) {
@@ -41,369 +78,403 @@ public class tab3 extends Activity {
 
         setContentView(R.layout.tab3_frame);
 
+        weathertv = (TextView) findViewById(R.id.weathertv);
 
-        mList = new ArrayList<String>();
+        arrayListtab3 = new ArrayList<>();
 
-        mPlayer = new MediaPlayer();
-
-
-        // SD 카드가 없을 시 에러 처리한다.
-
-        String ext = Environment.getExternalStorageState();
-
-        String sdPath;
-
-        if (ext.equals(Environment.MEDIA_MOUNTED) == false) {
-
-            Toast.makeText(tab3.this, "SD 카드가 반드시 필요합니다.", Toast.LENGTH_LONG).show();
-
-            //finish();
-
-            return;
-
-        }
+        arrayListtab3.add("서울특별시");
+        arrayListtab3.add("부산광역시");
+        arrayListtab3.add("대구광역시");
+        arrayListtab3.add("인천광역시");
+        arrayListtab3.add("광주광역시");
+        arrayListtab3.add("대전광역시");
+        arrayListtab3.add("울산광역시");
+        arrayListtab3.add("경기도");
+        arrayListtab3.add("강원도");
+        arrayListtab3.add("충청북도");
+        arrayListtab3.add("충청남도");
+        arrayListtab3.add("전라북도");
+        arrayListtab3.add("전라남도");
+        arrayListtab3.add("경상북도");
+        arrayListtab3.add("경상남도");
+        arrayListtab3.add("제주도");
 
 
-        // SD 카드 루트의 MP3 파일 목록을 구한다.
+        arrayAdaptertab3 = new ArrayAdapter<>(getApplicationContext(),
+                android.R.layout.simple_spinner_dropdown_item,
+                arrayListtab3);
 
-        sdPath = Environment.getExternalStorageDirectory().getAbsolutePath();
 
-        File sdRoot = new File(sdPath);
+        spinnertab3 = (Spinner) findViewById(R.id.spinnertab3);
+        spinnertab3.setAdapter(arrayAdaptertab3);
+        spinnertab3.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
 
-        FilenameFilter filter = new FilenameFilter() {
-
-            public boolean accept(File dir, String name) {
-
-                return name.endsWith(".mp3");
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                Toast.makeText(getApplicationContext(), arrayListtab3.get(i) + "가 선택되었습니다.",
+                        Toast.LENGTH_SHORT).show();
+               // key2= Integer.toString(i);
+                weathertv.setText(arrayListtab3.get(i)+"의 현재 날씨는?");
+                if(i==0){//서울
+                    nx="60";
+                    ny="127";
+                }
+                if(i==1){//부산
+                    nx="98";
+                    ny="76";
+                }
+                if(i==2){//대구
+                    nx="89";
+                    ny="90";
+                }
+                if(i==3){//인천
+                    nx="55";
+                    ny="124";
+                }
+                if(i==4){//광주
+                    nx="58";
+                    ny="74";
+                }
+                if(i==5){//대전
+                    nx="67";
+                    ny="100";
+                }
+                if(i==6){//울산
+                    nx="102";
+                    ny="84";
+                }
+                if(i==7){//경기도
+                    nx="60";
+                    ny="120";
+                }
+                if(i==8){//강원도
+                    nx="73";
+                    ny="134";
+                }
+                if(i==9){//충청북도
+                    nx="69";
+                    ny="107";
+                }
+                if(i==10){//충청남도
+                    nx="68";
+                    ny="100";
+                }
+                if(i==11){//전라북도
+                    nx="63";
+                    ny="89";
+                }
+                if(i==12){//전라남도
+                    nx="51";
+                    ny="67";
+                }
+                if(i==13){//경상북도
+                    nx="89";
+                    ny="91";
+                }
+                if(i==14){//경상남도
+                    nx="91";
+                    ny="77";
+                }
+                if(i==15){//제주도
+                    nx="52";
+                    ny="38";
+                }
 
             }
 
-        };
+            @Override
 
-        String[] mplist = sdRoot.list(filter);
+            public void onNothingSelected(AdapterView<?> adapterView) {
 
-        if (mplist.length == 0) {
-
-            Toast.makeText(tab3.this, "재생할 파일이 없습니다.", Toast.LENGTH_LONG).show();
-            //finish();
-            return;
-
-        }
-
-        for (String s : mplist) {
-
-            mList.add(sdPath + "/" + s);
-
-        }
-
-        mIdx = 0;
+            }
+        });
 
 
-        // 버튼들의 클릭 리스너 등록
+
+
+
+        btn1 = (Button)findViewById(R.id.playBtn);
+        btn2 = (Button)findViewById(R.id.pauseBtn);
+        btn3 = (Button)findViewById(R.id.prevBtn);
+        btn4 = (Button)findViewById(R.id.nextBtn);
+
 
         mFileName = (TextView) findViewById(R.id.filename);
 
-        mPlayBtn = (Button) findViewById(R.id.playBtn);
-
-        mPlayBtn.setOnClickListener(mClickPlay);
-
-        findViewById(R.id.pauseBtn).setOnClickListener(mClickStop);
-
-        findViewById(R.id.prevBtn).setOnClickListener(mClickPrevNext);
-
-        findViewById(R.id.nextBtn).setOnClickListener(mClickPrevNext);
-
-
-        // 완료 리스너, 시크바 변경 리스너 등록
-
-        mPlayer.setOnCompletionListener(mOnComplete);
-
-        mPlayer.setOnSeekCompleteListener(mOnSeekComplete);
-
         mProgress = (SeekBar) findViewById(R.id.mProgress);
 
-        mProgress.setOnSeekBarChangeListener(mOnSeek);
+       // mProgress.setOnSeekBarChangeListener(mOnSeek);
 
-        mProgressHandler.sendEmptyMessageDelayed(0, 200);
+      //  mProgressHandler.sendEmptyMessageDelayed(0, 200);
 
 
-        // 첫 곡 읽기 및 준비
+        songs = new int[3];
+        songs[0] = R.raw.music;
+        songs[1] = R.raw.music1;
+        songs[2] = R.raw.music2;
+        mp = MediaPlayer.create(tab3.this, R.raw.music);
+        mp1 = MediaPlayer.create(tab3.this, R.raw.music1);
+        mp2 = MediaPlayer.create(tab3.this, R.raw.music2);
 
-        if (LoadMedia(mIdx) == false) {
 
-            Toast.makeText(tab3.this, "파일을 읽을 수 없습니다.", Toast.LENGTH_LONG).show();
 
-            //finish();
 
-        }
+
+
+        btn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                playing=0;
+                if( mp!=null ) {
+                    mp.stop(); // 혹은 pause
+                }
+                mp = MediaPlayer.create(tab3.this, songs[ playing ]);
+                mFileName.setText("파일 : "+(playing+1)+"번째음악");
+                mp.start();
+
+
+
+                mProgress.setMax(mp.getDuration()); //음악의 총길이를 가져와 sb의 길이로 만든다.
+
+                mProgress.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                    @Override
+                    public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                        if(b){ //3번째로 넘어오는 값 b는 사용자가 움직여서 값이 변하면 true, setProgress등으로 움직이면 false
+                            mp.seekTo(i); //재생위치 변경해주기
+                        }
+                    }
+
+                    @Override
+                    public void onStartTrackingTouch(SeekBar seekBar) {
+                        while (mp.isPlaying()) {
+
+                            try {
+                                Thread.sleep(1000);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                            mProgress.setProgress(mp.getCurrentPosition());
+
+                        }
+                    }
+
+                    @Override
+                    public void onStopTrackingTouch(SeekBar seekBar) {
+
+                    }
+                });
+
+
+
+
+
+
+
+
+            }
+        });
+
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //playing=0;
+                //if( mp!=null ) {
+               //     mp.stop(); // 혹은 pause
+               // }
+               // mp = MediaPlayer.create(tab3.this, songs[ playing ]);
+                mp.stop();
+                //mp.seekTo(0); //0으로 재생위치변경
+
+               // btn.setText(R.string.start);
+                mProgress.setProgress(0);
+
+
+            }
+        });
+
+        btn3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                playing = (playing+5)%songs.length; // 목록의 끝에 도달하면 다시 첫번째를 선택.
+                if( mp!=null ) {
+                    mp.stop(); // 혹은 pause
+                }
+                mp = MediaPlayer.create(tab3.this, songs[ playing ]);
+                mFileName.setText("파일 : "+(playing+1)+"번째음악");
+                mp.start();
+            }
+        });
+
+
+
+        btn4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                playing = (playing+1)%songs.length; // 목록의 끝에 도달하면 다시 첫번째를 선택.
+                if( mp!=null ) {
+                    mp.stop(); // 혹은 pause
+                }
+                mp = MediaPlayer.create(tab3.this, songs[ playing ]);
+                mFileName.setText("파일 : "+(playing+1)+"번째음악");
+                mp.start();
+            }
+        });
+
+
+
+
+    //음악
+
+
+
+
+    btnSearch = (Button) findViewById(R.id.btnSearch);
+        listview = (ListView) findViewById(R.id.listview1);
+
+
+
+        btnSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                //본인 키값!
+                String serviceKey = "AH9qYYkdDabmHdMVNVZt4viR7E2TclJYSbjCck2jgrsVTe%2FcBC7lyWLbEBMoUo3gtUrixKaUpRRBM%2BeVwGJIrQ%3D%3D";
+
+                //윤진 키 :  String serviceKey = "AH9qYYkdDabmHdMVNVZt4viR7E2TclJYSbjCck2jgrsVTe%2FcBC7lyWLbEBMoUo3gtUrixKaUpRRBM%2BeVwGJIrQ%3D%3D";
+
+                //자신이 조회를 원하는 지역의 경도와 위도를 입력해주세요
+
+                String baseDate = "20190620";
+                // 자신이 조회하고싶은 날짜를 입력해주세요(무조건 현재 날짜만 됨)
+                String baseTime = "0500";
+                // 자신이 조회하고싶은 시간대를 입력해주세요
+                // 서비스 인증키입니다. 공공데이터포털에서 제공해준 인증키를 넣어주시면 됩니다.
+                // String serviceKey = "개인별로 받은 인증키를 넣어주세요";
+                // 정보를 모아서 URL정보를 만들면됩니다. 맨 마지막 "&_type=json"에 따라 반환 데이터의 형태가 정해집니다.
+                String strUrl = "http://newsky2.kma.go.kr/service/SecndSrtpdFrcstInfoService2/ForecastSpaceData?"+ "serviceKey=" + serviceKey + "&base_date=" + baseDate + "&base_time=" + baseTime+ "&nx="+ nx + "&ny=" + ny ;
+
+                btnSearch.setText("선택되었습니다.");
+
+                // String strUrl = serviceUrl + "?serviceKey=" + serviceKey + "&mntnInfoAraCd="+key2+"&mntnInfoThmCd="+key3+"&mntnInfoSsnCd="+key4;
+
+                new DownloadWebpageTask().execute(strUrl);
+
+
+            }
+        });
+
 
     }
 
 
-    // 액티비티 종료시 재생 강제 종료
 
-    public void onDestroy() {
+    //onCreate
 
-        super.onDestroy();
+    private class DownloadWebpageTask extends AsyncTask<String, Void, String> {
 
-        if (mPlayer != null) {
-
-            mPlayer.release();
-
-            mPlayer = null;
-
+        @Override
+        protected String doInBackground(String... urls) {
+            try {
+                return (String) downloadUrl((String) urls[0]);
+            } catch (IOException e) {
+                return "==>다운로드 실패";
+            }
         }
 
+        protected void onPostExecute(String result){
+            try {
+                XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
+                factory.setNamespaceAware(true);
+                XmlPullParser xpp = factory.newPullParser();
+
+                xpp.setInput(new StringReader(result));
+                int eventType = xpp.getEventType();
+                boolean bSetmnt = false;
+                String mnt = "";
+
+                adapter = new ListViewAdapter();
+
+                // 지금 신경써야하는 태그가 3가지 이니까 3가지에 맞게 더 추가해서 다 넣어줘야하는데
+                // 만약 유저가 3가지 조건중에 2개만 선택하면 (예를 들어 산이름, 산높이, 산주제중에 산이름하고 높이만 선택했을때)
+                // 그럼 선택되지 않은 산주제 태그에 대해서는 그냥 "" 이 값 (근데 이건 위에서 변수 선언할때 default로 넣어줄거니까
+                // 넣어주면 &mntnHght= 이렇게 하고 바로 그냥 조건안에 넣어준거 없으니까 별 에러 안내고 넘어감
+                // 모르겠으면 직접 링크에 숫자 넣었다가 뺐다가 해보기
+
+                while (eventType != XmlPullParser.END_DOCUMENT) {
+                    if (eventType == XmlPullParser.START_DOCUMENT) {
+                    } else if (eventType == XmlPullParser.START_TAG) {
+                        String tag_name = xpp.getName();
+                        if (tag_name.equals("fcstValue")) //산이름
+                            bSetmnt = true;
+                    } else if (eventType == XmlPullParser.TEXT) {
+                        if (bSetmnt) {
+
+                            mnt = xpp.getText();
+                            index++;
+                            if(index==1){
+                                System.out.println("hello mountain name is"+mnt);
+                                mymountain=mnt;
+                                adapter.addItem("강수확률 : "+mnt+"%");
+                                bSetmnt = false;
+                            }
+                            if(index==3){
+                                System.out.println("hello mountain name is"+mnt);
+                                mymountain=mnt;
+                                adapter.addItem("습도 : "+mnt+"%");
+                                bSetmnt = false;
+                            }
+                            if(index==5){
+                                System.out.println("hello mountain name is"+mnt);
+                                Integer mnt2=Integer.parseInt(mnt);
+                                adapter.addItem("3시간 이내 평균기온 : "+(double)(mnt2/3)+"℃");
+                                bSetmnt = false;
+                            }
+                            if(index==6){
+                                System.out.println("hello mountain name is"+mnt);
+                                mymountain=mnt;
+                                adapter.addItem("풍속(동서) : "+mnt+"m/s");
+                                bSetmnt = false;
+                            }
+
+
+
+                        }
+
+                    } else if (eventType == XmlPullParser.END_TAG) {
+                    }
+                    eventType = xpp.next();
+
+                } // while
+                listview.setAdapter(adapter);//리스트뷰에 붙이기
+            } catch (Exception e) {
+
+            }
+        }
+
+        private String downloadUrl(String myurl) throws IOException {
+
+            HttpURLConnection conn = null;
+            try {
+                URL url = new URL(myurl);
+                conn = (HttpURLConnection) url.openConnection();
+                BufferedInputStream buf = new BufferedInputStream(conn.getInputStream());
+                BufferedReader bufreader = new BufferedReader(new InputStreamReader(buf, "utf-8"));
+                String line = null;
+                String page = "";
+                while ((line = bufreader.readLine()) != null) {
+                    page += line;
+                }
+
+                return page;
+            } catch (Exception e) {
+                return " ";
+            } finally {
+                conn.disconnect();
+            }
+        }
     }
 
-
-    // 항상 준비 상태여야 한다.
-
-    boolean LoadMedia(int idx) {
-
-        try {
-
-            mPlayer.setDataSource(mList.get(idx));
-
-        } catch (IllegalArgumentException e) {
-
-            return false;
-
-        } catch (IllegalStateException e) {
-
-            return false;
-
-        } catch (IOException e) {
-
-            return false;
-
-        }
-
-        if (Prepare() == false) {
-
-            return false;
-
-        }
-
-        mFileName.setText("파일 : " + mList.get(idx));
-
-        mProgress.setMax(mPlayer.getDuration());
-
-        return true;
-
-    }
-
-
-    boolean Prepare() {
-
-        try {
-
-            mPlayer.prepare();
-
-        } catch (IllegalStateException e) {
-
-            return false;
-
-        } catch (IOException e) {
-
-            return false;
-
-        }
-
-        return true;
-
-    }
-
-
-    // 재생 및 일시 정지
-
-    Button.OnClickListener mClickPlay = new View.OnClickListener() {
-
-        public void onClick(View v) {
-
-            if (mPlayer.isPlaying() == false) {
-
-                mPlayer.start();
-
-                mPlayBtn.setText("Pause");
-
-            } else {
-
-                mPlayer.pause();
-
-                mPlayBtn.setText("Play");
-
-            }
-
-        }
-
-    };
-
-
-    // 재생 정지. 재시작을 위해 미리 준비해 놓는다.
-
-    Button.OnClickListener mClickStop = new View.OnClickListener() {
-
-        public void onClick(View v) {
-
-            mPlayer.stop();
-
-            mPlayBtn.setText("Play");
-
-            mProgress.setProgress(0);
-
-            Prepare();
-
-        }
-
-    };
-
-
-    Button.OnClickListener mClickPrevNext = new View.OnClickListener() {
-
-        public void onClick(View v) {
-
-            boolean wasPlaying = mPlayer.isPlaying();
-
-
-            if (v.getId() == R.id.prevBtn) {
-
-                mIdx = (mIdx == 0 ? mList.size() - 1 : mIdx - 1);
-
-            } else {
-
-                mIdx = (mIdx == mList.size() - 1 ? 0 : mIdx + 1);
-
-            }
-
-
-            mPlayer.reset();
-
-            LoadMedia(mIdx);
-
-
-            // 이전에 재생중이었으면 다음 곡 바로 재생
-
-            if (wasPlaying) {
-
-                mPlayer.start();
-
-                mPlayBtn.setText("Pause");
-
-            }
-
-        }
-
-    };
-
-
-    // 재생 완료되면 다음곡으로
-
-    MediaPlayer.OnCompletionListener mOnComplete = new MediaPlayer.OnCompletionListener() {
-
-        public void onCompletion(MediaPlayer arg0) {
-
-            mIdx = (mIdx == mList.size() - 1 ? 0 : mIdx + 1);
-
-            mPlayer.reset();
-
-            LoadMedia(mIdx);
-
-            mPlayer.start();
-
-        }
-
-    };
-
-
-    // 에러 발생시 메시지 출력
-
-    MediaPlayer.OnErrorListener mOnError = new MediaPlayer.OnErrorListener() {
-
-        public boolean onError(MediaPlayer mp, int what, int extra) {
-
-            String err = "OnError occured. what = " + what + " ,extra = " + extra;
-
-            Toast.makeText(tab3.this, err, Toast.LENGTH_LONG).show();
-
-            return false;
-
-        }
-
-    };
-
-
-    // 위치 이동 완료 처리
-
-    MediaPlayer.OnSeekCompleteListener mOnSeekComplete = new MediaPlayer.OnSeekCompleteListener() {
-
-        public void onSeekComplete(MediaPlayer mp) {
-
-            if (wasPlaying) {
-
-                mPlayer.start();
-
-            }
-
-        }
-
-    };
-
-
-    // 0.2초에 한번꼴로 재생 위치 갱신
-
-    Handler mProgressHandler = new Handler() {
-
-        public void handleMessage(Message msg) {
-
-            if (mPlayer == null) return;
-
-            if (mPlayer.isPlaying()) {
-
-                mProgress.setProgress(mPlayer.getCurrentPosition());
-
-            }
-
-            mProgressHandler.sendEmptyMessageDelayed(0, 200);
-
-        }
-
-    };
-
-
-    // 재생 위치 이동
-
-    SeekBar.OnSeekBarChangeListener mOnSeek = new SeekBar.OnSeekBarChangeListener() {
-
-        public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-
-            if (fromUser) {
-
-                mPlayer.seekTo(progress);
-
-            }
-
-        }
-
-
-        public void onStartTrackingTouch(SeekBar seekBar) {
-
-            wasPlaying = mPlayer.isPlaying();
-
-            if (wasPlaying) {
-
-                mPlayer.pause();
-
-            }
-
-        }
-
-
-        public void onStopTrackingTouch(SeekBar seekBar) {
-
-        }
-
-    };
 
 
 }

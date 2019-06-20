@@ -6,153 +6,62 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:id="@+id/weathertv"
+            android:layout_marginRight="20dp"
+            android:text="북한산의 현재 날씨는?"
+            android:paddingVertical="10dp"
+          />
+
+        <Spinner
+
+            android:id="@+id/spinnertab3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:overlapAnchor="false"
+            android:visibility="visible"></Spinner>
+
+    </LinearLayout>
+
+
+
+    <Button
+        android:id="@+id/btnSearch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="30dp"
-        android:text="북한산의 현재 기온 32℃"
-        android:paddingVertical="10dp"
+        android:text="버튼을 눌러주세요"
+        android:layout_gravity="center_horizontal"
+        android:textSize="15dp"
+        android:background="#803EA843"/>
 
-        android:layout_gravity="center"/>
 
-    <LinearLayout
+    <ListView
         android:layout_width="match_parent"
-        android:orientation="horizontal"
+        android:layout_marginTop="15dp"
+        android:layout_gravity="center_horizontal"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        >
+        android:id="@+id/listview1"
+        android:layout_weight="6">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:paddingHorizontal="10dp"
-            android:layout_margin="10dp"
-            android:background="#803EA843"
-            android:text="오늘"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="invisible"
-            android:textSize="20dp"
-            android:paddingHorizontal="10dp"
-            android:layout_margin="10dp"
-            android:background="#803EA843"
-            android:text="이따"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:visibility="visible"
-            android:layout_height="wrap_content"
-            android:textSize="20dp"
-
-            android:paddingHorizontal="10dp"
-            android:layout_margin="10dp"
-            android:background="#803EA843"
-            android:text="내일"/>
-    </LinearLayout>
+    </ListView>
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:orientation="horizontal"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20dp"
-
-            android:layout_marginHorizontal="15dp"
-            android:text="지금"
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20dp"
-
-            android:layout_marginHorizontal="15dp"
-            android:text="21:00"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20dp"
-
-            android:layout_marginHorizontal="15dp"
-            android:text="00:00"/>
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:orientation="horizontal"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:layout_marginHorizontal="15dp"
-            android:text="32℃"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:layout_marginHorizontal="15dp"
-            android:text="27℃"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:layout_marginHorizontal="15dp"
-            android:text="26℃"/>
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:orientation="horizontal"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal">
-
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_marginHorizontal="20dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/ic_wb_sunny_black_24dp"
-            android:layout_height="40dp"
-            />
-
-        <ImageView
-            android:layout_width="40dp"
-            android:src="@drawable/ic_cloud_black_24dp"
-            android:scaleType="fitXY"
-            android:layout_marginHorizontal="15dp"
-            android:layout_height="40dp"
-            />
-
-        <ImageView
-            android:layout_width="40dp"
-            android:src="@drawable/ic_wb_sunny_black_24dp"
-            android:scaleType="fitXY"
-            android:layout_marginHorizontal="15dp"
-            android:layout_height="40dp"
-            />
-    </LinearLayout>
 
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="This is music !"
-        android:layout_marginTop="100dp"
         android:textSize="20dp"
         android:layout_marginBottom="10dp"
         android:layout_gravity="center_horizontal"
