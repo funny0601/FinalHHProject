@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -54,8 +55,6 @@ public class tab3 extends Activity {
 
     TextView mFileName;
 
-    SeekBar mProgress;
-    boolean wasPlaying;
 
 
     //여기부터는 위에 날씨뜨게 하는것
@@ -77,6 +76,14 @@ public class tab3 extends Activity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.tab3_frame);
+
+
+
+
+
+
+
+
 
         weathertv = (TextView) findViewById(R.id.weathertv);
 
@@ -202,11 +209,13 @@ public class tab3 extends Activity {
 
         mFileName = (TextView) findViewById(R.id.filename);
 
-        mProgress = (SeekBar) findViewById(R.id.mProgress);
+       // mProgress = (SeekBar) findViewById(R.id.mProgress);
 
         // mProgress.setOnSeekBarChangeListener(mOnSeek);
 
         //  mProgressHandler.sendEmptyMessageDelayed(0, 200);
+
+
 
 
         songs = new int[3];
@@ -230,35 +239,6 @@ public class tab3 extends Activity {
                 mp.start();
 
 
-                mProgress.setMax(mp.getDuration()); //음악의 총길이를 가져와 sb의 길이로 만든다.
-
-                mProgress.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-                    @Override
-                    public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                        if (b) { //3번째로 넘어오는 값 b는 사용자가 움직여서 값이 변하면 true, setProgress등으로 움직이면 false
-                            mp.seekTo(i); //재생위치 변경해주기
-                        }
-                    }
-
-                    @Override
-                    public void onStartTrackingTouch(SeekBar seekBar) {
-                        while (mp.isPlaying()) {
-
-                            try {
-                                Thread.sleep(1000);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
-                            mProgress.setProgress(mp.getCurrentPosition());
-
-                        }
-                    }
-
-                    @Override
-                    public void onStopTrackingTouch(SeekBar seekBar) {
-
-                    }
-                });
 
 
             }
@@ -267,16 +247,8 @@ public class tab3 extends Activity {
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //playing=0;
-                //if( mp!=null ) {
-                //     mp.stop(); // 혹은 pause
-                // }
-                // mp = MediaPlayer.create(tab3.this, songs[ playing ]);
-                mp.stop();
-                //mp.seekTo(0); //0으로 재생위치변경
 
-                // btn.setText(R.string.start);
-                mProgress.setProgress(0);
+                mp.stop();
 
 
             }
