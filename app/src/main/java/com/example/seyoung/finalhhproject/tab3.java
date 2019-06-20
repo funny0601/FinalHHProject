@@ -67,7 +67,7 @@ public class tab3 extends Activity {
     ListViewAdapter adapter;
 
 
-    String mymountain;//산이름
+    String mymountain;//산의 날씨
     int index = 0;
 
 
@@ -76,13 +76,6 @@ public class tab3 extends Activity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.tab3_frame);
-
-
-
-
-
-
-
 
 
         weathertv = (TextView) findViewById(R.id.weathertv);
@@ -295,23 +288,13 @@ public class tab3 extends Activity {
             public void onClick(View view) {
 
 
-                //본인 키값!
                 String serviceKey = "AH9qYYkdDabmHdMVNVZt4viR7E2TclJYSbjCck2jgrsVTe%2FcBC7lyWLbEBMoUo3gtUrixKaUpRRBM%2BeVwGJIrQ%3D%3D";
+                String baseDate = "20190620";//자신이 조회하고싶은 날짜
+                String baseTime = "0500";// 자신이 조회하고싶은 시간대
 
-                //자신이 조회를 원하는 지역의 경도와 위도를 입력해주세요
-
-                String baseDate = "20190620";
-                // 자신이 조회하고싶은 날짜를 입력해주세요
-                String baseTime = "0500";
-                // 자신이 조회하고싶은 시간대를 입력해주세요
-                // 서비스 인증키입니다. 공공데이터포털에서 제공해준 인증키를 넣어주시면 됩니다.
-                // String serviceKey = "개인별로 받은 인증키를 넣어주세요";
-                // 정보를 모아서 URL정보를 만들면됩니다. 맨 마지막 "&_type=json"에 따라 반환 데이터의 형태가 정해집니다.
                 String strUrl = "http://newsky2.kma.go.kr/service/SecndSrtpdFrcstInfoService2/ForecastSpaceData?" + "serviceKey=" + serviceKey + "&base_date=" + baseDate + "&base_time=" + baseTime + "&nx=" + nx + "&ny=" + ny;
                 System.out.println(strUrl);
 
-
-                // String strUrl = serviceUrl + "?serviceKey=" + serviceKey + "&mntnInfoAraCd="+key2+"&mntnInfoThmCd="+key3+"&mntnInfoSsnCd="+key4;
                 System.out.println("nx:" + nx);
                 System.out.println("ny:" + ny);
                 new DownloadWebpageTask().execute(strUrl);

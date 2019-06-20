@@ -67,8 +67,6 @@ public class ListViewAdapter extends BaseAdapter {
     }
 
 
-//지금은 "산정보 부제" 정보 하나만 받는경우를 가정하고 데이터를 한개만 받음
-
     // 아이템 데이터 추가를 위한 함수. 개발자가 원하는대로 작성 가능.
     public void addItem(String mnt) {
         MountainItem item = new MountainItem();
