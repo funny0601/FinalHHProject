@@ -88,7 +88,6 @@
                 android:background="#80a4c639"
                 android:clickable="true"
                 android:hint="등산 후기를 입력하세요"
-                android:inputType="text"
                 android:maxLines="4" />
 
         </LinearLayout>

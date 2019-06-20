@@ -351,7 +351,7 @@ public class tab3 extends Activity {
                 // String serviceKey = "개인별로 받은 인증키를 넣어주세요";
                 // 정보를 모아서 URL정보를 만들면됩니다. 맨 마지막 "&_type=json"에 따라 반환 데이터의 형태가 정해집니다.
                 String strUrl = "http://newsky2.kma.go.kr/service/SecndSrtpdFrcstInfoService2/ForecastSpaceData?"+ "serviceKey=" + serviceKey + "&base_date=" + baseDate + "&base_time=" + baseTime+ "&nx="+ nx + "&ny=" + ny ;
-
+                System.out.println(strUrl);
                 btnSearch.setText("선택되었습니다.");
 
                 // String strUrl = serviceUrl + "?serviceKey=" + serviceKey + "&mntnInfoAraCd="+key2+"&mntnInfoThmCd="+key3+"&mntnInfoSsnCd="+key4;
@@ -391,7 +391,7 @@ public class tab3 extends Activity {
                 int eventType = xpp.getEventType();
                 boolean bSetmnt = false;
                 String mnt = "";
-
+                index=0;
                 adapter = new ListViewAdapter();
 
                 while (eventType != XmlPullParser.END_DOCUMENT) {
@@ -400,6 +400,7 @@ public class tab3 extends Activity {
                         String tag_name = xpp.getName();
                         if (tag_name.equals("fcstValue")) //산이름
                             bSetmnt = true;
+
                     } else if (eventType == XmlPullParser.TEXT) {
                         if (bSetmnt) {
 
