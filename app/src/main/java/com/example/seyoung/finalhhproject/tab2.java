@@ -14,7 +14,6 @@ package com.example.seyoung.finalhhproject;
         import android.widget.CheckBox;
         import android.widget.CompoundButton;
         import android.widget.ImageButton;
-        import android.widget.ListView;
         import android.widget.Spinner;
         import android.widget.TextView;
         import android.widget.Toast;
@@ -72,12 +71,6 @@ public class tab2 extends Activity {
     ImageButton btnSearch;
     ImageButton btnInit;
 
-    // String logt= "mountain";
-
-    //리스트뷰
-    ListView listview;
-    ListViewAdapter adapter;
-
     String key2="";//산지역정보
     String key3="";//산주제코드
     String key4="";//산정보계절코드
@@ -93,7 +86,7 @@ public class tab2 extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tab2_frame);
 
-        Toast.makeText(getApplicationContext(), "",Toast.LENGTH_SHORT).show();
+
 
         chkAgree = (CheckBox) findViewById(R.id.ChkAgree);
         chkAgree2 = (CheckBox) findViewById(R.id.ChkAgree2);
@@ -131,7 +124,6 @@ public class tab2 extends Activity {
             @Override
 
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
                 if(mInitSpinner2==false){
                     mInitSpinner2=true;
                     return;
@@ -148,25 +140,21 @@ public class tab2 extends Activity {
             }
         });
 
-
-        spinner2.setVisibility(android.view.View.VISIBLE);
         spinner2.setEnabled(false);
         spinner2.setClickable(false);
         spinner2.setAdapter(arrayAdapter);
 
         chkAgree.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton arg0, boolean arg1) {
-                // "지역" 체크박스  체크되면 해당 스피너 보이도록 설정
+
                 if (chkAgree.isChecked() == true) {
-                    spinner2.setVisibility(android.view.View.VISIBLE);
                     spinner2.setEnabled(true);
                     spinner2.setClickable(true);
                     spinner2.setAdapter(arrayAdapter);
                 } else {
                     spinner2.setEnabled(false);
                     spinner2.setClickable(false);
-                    spinner2.setAdapter(arrayAdapter);
-                  //  spinner2.setVisibility(android.view.View.INVISIBLE);
+                    //spinner2.setAdapter(arrayAdapter);
                     key2 = "";//선택안하면 "" 처리
                 }
             }
@@ -260,7 +248,6 @@ public class tab2 extends Activity {
 
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
-
                 if(mInitSpinner==false){
                     mInitSpinner=true;
                     return;
@@ -289,16 +276,13 @@ public class tab2 extends Activity {
 
         //여기까지  "산정보 주제" 체크박스 선택시 스피너
 
-        spinner3.setVisibility(android.view.View.VISIBLE);
         spinner3.setEnabled(false);
         spinner3.setClickable(false);
         spinner3.setAdapter(arrayAdapter2);
 
         chkAgree2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton arg0, boolean arg1) {
-                // "높이" 체크되면 모두 보이도록 설정
                 if (chkAgree2.isChecked() == true) {
-                    spinner3.setVisibility(android.view.View.VISIBLE);
                     spinner3.setEnabled(true);
                     spinner3.setClickable(true);
                     spinner3.setAdapter(arrayAdapter2);
@@ -306,25 +290,20 @@ public class tab2 extends Activity {
                 } else {
                     spinner3.setEnabled(false);
                     spinner3.setClickable(false);
-                    spinner3.setAdapter(arrayAdapter2);
-                  //  spinner3.setVisibility(android.view.View.INVISIBLE);
+                    //spinner3.setAdapter(arrayAdapter2);
                     key3 = "";//선택안하면 "" 처리
                 }
             }
         });
 
 
-        spinner4.setVisibility(android.view.View.VISIBLE);
         spinner4.setEnabled(false);
         spinner4.setClickable(false);
         spinner4.setAdapter(arrayAdapter3);
 
         chkAgree3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton arg0, boolean arg1) {
-                // "산정보 계절" 체크되면 스피너 보이도록 설정
                 if (chkAgree3.isChecked() == true) {
-
-                    spinner4.setVisibility(android.view.View.VISIBLE);
                     spinner4.setEnabled(true);
                     spinner4.setClickable(true);
                     spinner4.setAdapter(arrayAdapter3);
@@ -332,8 +311,7 @@ public class tab2 extends Activity {
                 } else {
                     spinner4.setEnabled(false);
                     spinner4.setClickable(false);
-                    spinner4.setAdapter(arrayAdapter3);
-                   // spinner4.setVisibility(android.view.View.INVISIBLE);
+                    //spinner4.setAdapter(arrayAdapter3);
                     key4 = "";//선택안하면 "" 처리
                 }
             }
@@ -344,15 +322,10 @@ public class tab2 extends Activity {
         btnSearch.setImageResource(R.drawable.finish_xml);
         btnInit = (ImageButton) findViewById(R.id.btnInit);
         btnInit.setImageResource(R.drawable.init_xml);
-        //listview = (ListView) findViewById(R.id.listview1);
 
         keyword = null;
 
 
-        // 인코딩 에러날 수 있어서 try-catch 처리한거임
-        // 체크박스에서 선택된 변수들에 맞게 여기에 집어넣을 수 있게 함수를 만들던
-        // 각 체크박스 별로 문자 다 넣어놓고 배열 만들어서 여기에서는 배열만 넣어서 인코딩하던
-        // 효율적으로 처리만 해주면 될듯
         try {
             keyword = URLEncoder.encode("가리왕산", "utf-8");
         } catch (UnsupportedEncodingException e) {
@@ -415,8 +388,6 @@ public class tab2 extends Activity {
                 boolean bSetmnt = false;
                 String mnt = "";
 
-                // adapter = new ListViewAdapter();
-
                 while (eventType != XmlPullParser.END_DOCUMENT) {
                     if (eventType == XmlPullParser.START_DOCUMENT) {
                     } else if (eventType == XmlPullParser.START_TAG) {
@@ -435,7 +406,6 @@ public class tab2 extends Activity {
                                 System.out.println(selectedMounts.get(i).getMnt());
                             }
 
-                            //adapter.addItem(mnt); 원래 밑에 리스트 뜨게 하는건데 사용안함
                             bSetmnt = false;
                         }
 
@@ -458,11 +428,10 @@ public class tab2 extends Activity {
                 selectedMounts.get(randomNum).setSelected(true);
                 System.out.println(selectedMounts.get(randomNum).isSelected());
                 // 구글맵 띄우기
-                //Intent mapIntent1 = new Intent(Intent.ACTION_VIEW, Uri.parse("geo:0,0?q=" + selectedMounts.get(randomNum).getMnt().toString()));
-                //startActivity(mapIntent1);
+                Intent mapIntent1 = new Intent(Intent.ACTION_VIEW, Uri.parse("geo:0,0?q=" + selectedMounts.get(randomNum).getMnt().toString()));
+                startActivity(mapIntent1);
 
-                Toast.makeText(tab2.this, selectedMounts.get(randomNum).getMnt(), Toast.LENGTH_LONG).show();
-                //listview.setAdapter(adapter);//리스트뷰에 붙이기
+                //Toast.makeText(tab2.this, selectedMounts.get(randomNum).getMnt(), Toast.LENGTH_LONG).show();
             } catch (Exception e) {
 
             }

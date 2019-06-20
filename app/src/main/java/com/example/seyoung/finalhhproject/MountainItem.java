@@ -4,7 +4,6 @@ public class MountainItem {
 
     private String mnt ;
 
-
     public void setMnt(String title) {
         mnt = title ;
     }

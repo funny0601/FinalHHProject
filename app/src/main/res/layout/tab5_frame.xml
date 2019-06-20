@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="8.5"
-        android:background="#8064A176" />
+        android:background="#ffffff" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -51,41 +51,13 @@
             android:orientation="vertical"
             android:weightSum="3">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:orientation="horizontal"
-                android:weightSum="10">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:layout_weight="5"
-                    android:text="산 이름"
-                    android:textAlignment="center"
-                    android:textSize="20dp" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="5"
-                    android:text="등록하여 수정"
-                    android:id="@+id/selected"
-                    android:textAlignment="center"
-                    android:textSize="20dp" />
-
-
-            </LinearLayout>
 
             <TextView
                 android:id="@+id/review"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="2"
-                android:background="#80a4c639"
+                android:layout_weight="3"
+                android:background="#8064A176"
                 android:clickable="true"
                 android:hint="등산 후기를 입력하세요"
                 android:maxLines="4" />

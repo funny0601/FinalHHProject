@@ -39,7 +39,6 @@ public class tab1 extends Activity {
     ArrayList<mountainTable> xmlParsingData = new ArrayList<mountainTable>();
     ArrayList<HashMap<String, String>> mntMapList = new ArrayList<HashMap<String, String>>();
     String search;
-    String tag_name;
     boolean initem = false;
     boolean inMntnm = false;
     boolean inAreanm = false;
@@ -77,7 +76,7 @@ public class tab1 extends Activity {
         list.setAdapter(adapter);
         list.setTextFilterEnabled(true);
 
-        //int count = 0;
+
         for(int i=1; i<6; i++) {
             String strUrl = serviceUrl + "?ServiceKey=" + serviceKey + "&pageNo=" + i + "&numOfRows=20";
             System.out.println(strUrl);
@@ -99,7 +98,6 @@ public class tab1 extends Activity {
             public void onClick(View v) {
                 search = mountainSearch.getText().toString();
                 ((SimpleAdapter) list.getAdapter()).getFilter().filter(search);
-                // 검색 결과가 없을 때 띄우고 싶은데..
             }
         });
     }
@@ -147,41 +145,20 @@ public class tab1 extends Activity {
 
 
                         case XmlPullParser.TEXT://parser가 내용에 접근했을때
-
                             if (inMntnm) { //inMntnm이 true일 때 태그의 내용을 저장.
-
                                 mnt = xpp.getText();
-
-                                //mnt_name_list.add(mntnm);
-
                                 inMntnm = false;
-
                             }
-
                             if (inAreanm) { //inAreanm이 true일 때 태그의 내용을 저장.
-
                                 area = xpp.getText();
-
-                                //area_name_list.add(areanm);
-
                                 inAreanm = false;
-
                             }
-
-
                             break;
-
                         case XmlPullParser.END_TAG: //end tag는 곧 </item> 태그를 의미
-
                             if (xpp.getName().equals("item")) {
-
                                 mountainTable mt = new mountainTable(mnt, area);
 
-                                // 클래스의 객체 하나 생성
-
-                                // System.out.println(mt.getName()); 객체에 값 저장 확인
                                 HashMap map = new HashMap();
-
                                 map.put("산 이름", mnt);
                                 map.put("지역", area);
 

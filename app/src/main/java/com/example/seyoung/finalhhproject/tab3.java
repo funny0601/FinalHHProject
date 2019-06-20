@@ -33,7 +33,9 @@ import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class tab3 extends Activity {
 
@@ -113,7 +115,7 @@ public class tab3 extends Activity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 Toast.makeText(getApplicationContext(), arrayListtab3.get(i) + "가 선택되었습니다.",
                         Toast.LENGTH_SHORT).show();
-                // key2= Integer.toString(i);
+
                 weathertv.setText(arrayListtab3.get(i) + "의 현재 날씨는?");
                 if (i == 0) {//서울
                     nx = "60";
@@ -202,15 +204,6 @@ public class tab3 extends Activity {
 
         mFileName = (TextView) findViewById(R.id.filename);
 
-       // mProgress = (SeekBar) findViewById(R.id.mProgress);
-
-        // mProgress.setOnSeekBarChangeListener(mOnSeek);
-
-        //  mProgressHandler.sendEmptyMessageDelayed(0, 200);
-
-
-
-
         songs = new int[3];
         songs[0] = R.raw.music;
         songs[1] = R.raw.music1;
@@ -287,9 +280,12 @@ public class tab3 extends Activity {
             @Override
             public void onClick(View view) {
 
+                Date now = new Date();
+                SimpleDateFormat sFormat;
+                sFormat = new SimpleDateFormat("yyyyMMdd");
 
                 String serviceKey = "AH9qYYkdDabmHdMVNVZt4viR7E2TclJYSbjCck2jgrsVTe%2FcBC7lyWLbEBMoUo3gtUrixKaUpRRBM%2BeVwGJIrQ%3D%3D";
-                String baseDate = "20190620";//자신이 조회하고싶은 날짜
+                String baseDate = sFormat.format(now);// 현재 날짜
                 String baseTime = "0500";// 자신이 조회하고싶은 시간대
 
                 String strUrl = "http://newsky2.kma.go.kr/service/SecndSrtpdFrcstInfoService2/ForecastSpaceData?" + "serviceKey=" + serviceKey + "&base_date=" + baseDate + "&base_time=" + baseTime + "&nx=" + nx + "&ny=" + ny;
@@ -337,7 +333,7 @@ public class tab3 extends Activity {
                     if (eventType == XmlPullParser.START_DOCUMENT) {
                     } else if (eventType == XmlPullParser.START_TAG) {
                         String tag_name = xpp.getName();
-                        if (tag_name.equals("fcstValue")) //산이름
+                        if (tag_name.equals("fcstValue"))
                             bSetmnt = true;
 
                     } else if (eventType == XmlPullParser.TEXT) {

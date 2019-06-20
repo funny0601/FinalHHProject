@@ -4,18 +4,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-<!--우선 텍스트뷰하나로  정보 뜨게하려고..!-->
+
 
     <LinearLayout
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:orientation="vertical"
-        android:background="#ddffaa">
+        android:layout_margin="20dp"
+        android:background="#803EA843">
 
         <TextView
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
             android:id="@+id/textViewM"
+            android:textAlignment="center"
             android:gravity="center_vertical"
             android:textSize="20dp"/>
 

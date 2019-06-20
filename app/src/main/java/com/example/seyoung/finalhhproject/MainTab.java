@@ -4,7 +4,6 @@ import android.app.TabActivity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.widget.ImageView;
 import android.widget.TabHost;
@@ -32,7 +31,6 @@ public class MainTab extends TabActivity {
         ImageView tw02 = new ImageView(this);
         tw02.setImageResource(R.drawable.tw_2);
         TabHost.TabSpec tabRecommendation = tabHost.newTabSpec("recommendation").setIndicator(tw02);
-        //tabRecommendation.setContent(R.id.tabRecommendation);
         tabRecommendation.setContent(new Intent(this, tab2.class));
         tabHost.addTab(tabRecommendation);
 
@@ -40,20 +38,17 @@ public class MainTab extends TabActivity {
         tw03.setImageResource(R.drawable.tw_3);
         TabHost.TabSpec tabWeather = tabHost.newTabSpec("weather").setIndicator(tw03);
         tabWeather.setContent(new Intent(this, tab3.class));
-        //tabWeather.setContent(R.id.tabWeather);
         tabHost.addTab(tabWeather);
 
         ImageView tw04 = new ImageView(this);
         tw04.setImageResource(R.drawable.tw_4);
         TabHost.TabSpec tabRestaurant = tabHost.newTabSpec("restaurant").setIndicator(tw04);
-       // tabRestaurant.setContent(R.id.tabRestaurant);
         tabRestaurant.setContent(new Intent(this, tab4.class));
         tabHost.addTab(tabRestaurant);
 
         ImageView tw05 = new ImageView(this);
         tw05.setImageResource(R.drawable.tw_5);
         TabHost.TabSpec tabReview = tabHost.newTabSpec("review").setIndicator(tw05);
-        //tabReview.setContent(R.id.tabReview);
         Intent int5 = new Intent(this, tab5.class);
         tabReview.setContent(int5);
         int5.putExtra("nickname", nickname);
@@ -79,6 +74,6 @@ public class MainTab extends TabActivity {
         for(int i=0; i<tabHost.getTabWidget().getChildCount(); i++) {
             tabHost.getTabWidget().getChildAt(i).getLayoutParams().height = (screenHeight*15)/200;
         }
-        tabHost.setCurrentTab(4); // 등산로 추천 탭부터 시작
+        tabHost.setCurrentTab(1); // 등산로 추천 탭부터 시작
     }
 }

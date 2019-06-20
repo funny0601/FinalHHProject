@@ -12,19 +12,13 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.CalendarView;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
-import com.example.seyoung.finalhhproject.tab2;
-import org.w3c.dom.Text;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -45,12 +39,11 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.StringTokenizer;
 
 @SuppressWarnings("deprecation")
 public class tab5 extends Activity {
     ImageView imgView;
-    TextView review, selected;
+    TextView review;
     View review_Text, review_Full;
     EditText title, content, mntName;
     TextView content_review, date1;
@@ -60,9 +53,7 @@ public class tab5 extends Activity {
     ListView list;
     int p;
 
-    //ArrayList<selectedMount> selectedMounts = new ArrayList<selectedMount>();
     ArrayList<DiarySave> dsArray = new ArrayList<DiarySave>();
-    ImageButton refresh;
 
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,17 +61,13 @@ public class tab5 extends Activity {
 
         Intent intent = getIntent();
         String nickname = intent.getExtras().getString("nickname");
-        //String profileImagePath = intent.getExtras().getString("profileImagePath");
-        String profileImagePath ="";
+        String profileImagePath = intent.getExtras().getString("profileImagePath");
 
         TextView username = (TextView) findViewById(R.id.name);
         username.setText(nickname);
 
-        //getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
-
         imgView = (ImageView) findViewById(R.id.profile);
         review = (TextView) findViewById(R.id.review);
-        selected = (TextView) findViewById(R.id.selected);
 
 
         StringBuffer buffer= new StringBuffer();
@@ -96,18 +83,12 @@ public class tab5 extends Activity {
 
 
         try {
-            //FileInputStream 객체생성, 파일명 "data.txt"
+            //FileInputStream 객체생성, 파일명 "diary.txt"
             FileInputStream fis=openFileInput("diary.txt");
-
             BufferedReader reader= new BufferedReader(new InputStreamReader(fis));
-
             String str=reader.readLine();//한 줄씩 읽어오기
 
-
-
             while(str!=null){
-                if(str.equals("-----&-----&-----"))
-                    continue;
                 System.out.println("첫줄:"+str);
                 String split[] = str.split("&");
 
@@ -196,8 +177,7 @@ public class tab5 extends Activity {
                         }
 
                         title = (EditText) review_Text.findViewById(R.id.title);
-                        selected.setText(mntName.getText().toString());
-                        String mnt_name = selected.getText().toString();
+                        String mnt_name = mntName.getText().toString();
                         content = (EditText) review_Text.findViewById(R.id.content);
 
                         HashMap map = new HashMap();
@@ -208,7 +188,7 @@ public class tab5 extends Activity {
                         String title_diary=ds.getTitle()+"_"+ds.getDate();
 
                         try {
-                            //FileOutputStream 객체생성, 파일명 "data.txt", 새로운 텍스트 추가하기 모드
+                            //FileOutputStream 객체생성, 파일명 "diary.txt", 새로운 텍스트 추가하기 모드
                             FileOutputStream fos=openFileOutput("diary.txt", Context.MODE_APPEND);
 
                             PrintWriter writer= new PrintWriter(fos);
