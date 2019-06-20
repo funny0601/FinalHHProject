@@ -149,15 +149,24 @@ public class tab2 extends Activity {
         });
 
 
-        spinner2.setVisibility(android.view.View.INVISIBLE);
+        spinner2.setVisibility(android.view.View.VISIBLE);
+        spinner2.setEnabled(false);
+        spinner2.setClickable(false);
+        spinner2.setAdapter(arrayAdapter);
 
         chkAgree.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton arg0, boolean arg1) {
                 // "지역" 체크박스  체크되면 해당 스피너 보이도록 설정
                 if (chkAgree.isChecked() == true) {
                     spinner2.setVisibility(android.view.View.VISIBLE);
+                    spinner2.setEnabled(true);
+                    spinner2.setClickable(true);
+                    spinner2.setAdapter(arrayAdapter);
                 } else {
-                    spinner2.setVisibility(android.view.View.INVISIBLE);
+                    spinner2.setEnabled(false);
+                    spinner2.setClickable(false);
+                    spinner2.setAdapter(arrayAdapter);
+                  //  spinner2.setVisibility(android.view.View.INVISIBLE);
                     key2 = "";//선택안하면 "" 처리
                 }
             }
@@ -280,24 +289,35 @@ public class tab2 extends Activity {
 
         //여기까지  "산정보 주제" 체크박스 선택시 스피너
 
-        spinner3.setVisibility(android.view.View.INVISIBLE);
+        spinner3.setVisibility(android.view.View.VISIBLE);
+        spinner3.setEnabled(false);
+        spinner3.setClickable(false);
+        spinner3.setAdapter(arrayAdapter2);
 
         chkAgree2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton arg0, boolean arg1) {
                 // "높이" 체크되면 모두 보이도록 설정
                 if (chkAgree2.isChecked() == true) {
-
                     spinner3.setVisibility(android.view.View.VISIBLE);
+                    spinner3.setEnabled(true);
+                    spinner3.setClickable(true);
+                    spinner3.setAdapter(arrayAdapter2);
 
                 } else {
-                    spinner3.setVisibility(android.view.View.INVISIBLE);
+                    spinner3.setEnabled(false);
+                    spinner3.setClickable(false);
+                    spinner3.setAdapter(arrayAdapter2);
+                  //  spinner3.setVisibility(android.view.View.INVISIBLE);
                     key3 = "";//선택안하면 "" 처리
                 }
             }
         });
 
 
-        spinner4.setVisibility(android.view.View.INVISIBLE);
+        spinner4.setVisibility(android.view.View.VISIBLE);
+        spinner4.setEnabled(false);
+        spinner4.setClickable(false);
+        spinner4.setAdapter(arrayAdapter3);
 
         chkAgree3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton arg0, boolean arg1) {
@@ -305,9 +325,15 @@ public class tab2 extends Activity {
                 if (chkAgree3.isChecked() == true) {
 
                     spinner4.setVisibility(android.view.View.VISIBLE);
+                    spinner4.setEnabled(true);
+                    spinner4.setClickable(true);
+                    spinner4.setAdapter(arrayAdapter3);
 
                 } else {
-                    spinner4.setVisibility(android.view.View.INVISIBLE);
+                    spinner4.setEnabled(false);
+                    spinner4.setClickable(false);
+                    spinner4.setAdapter(arrayAdapter3);
+                   // spinner4.setVisibility(android.view.View.INVISIBLE);
                     key4 = "";//선택안하면 "" 처리
                 }
             }
