@@ -5,10 +5,10 @@ public class DiarySave {
     private String content; // 내용
     private String date; // 등록 날짜
 
-    public DiarySave(String title, String content, String date){
+    public DiarySave(String title, String date,  String content){
         this.title= title;
-        this.content=content;
         this.date = date;
+        this.content=content;
     }
 
     public String getContent() {

@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -62,8 +63,8 @@ public class tab2 extends Activity {
     ArrayAdapter<String> arrayAdapter3;
 
     //선택완료 버튼
-    Button btnSearch;
-    Button btnInit;
+    ImageButton btnSearch;
+    ImageButton btnInit;
 
     // String logt= "mountain";
 
@@ -124,7 +125,7 @@ public class tab2 extends Activity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 Toast.makeText(getApplicationContext(), arrayList.get(i) + "가 선택되었습니다.",
                         Toast.LENGTH_SHORT).show();
-                key2= Integer.toString(i+1);
+                key2 = Integer.toString(i + 1);
             }
 
             @Override
@@ -144,7 +145,7 @@ public class tab2 extends Activity {
                     spinner2.setVisibility(android.view.View.VISIBLE);
                 } else {
                     spinner2.setVisibility(android.view.View.INVISIBLE);
-                    key2="";//선택안하면 "" 처리
+                    key2 = "";//선택안하면 "" 처리
                 }
             }
         });
@@ -184,7 +185,7 @@ public class tab2 extends Activity {
                 Toast.makeText(getApplicationContext(), arrayList2.get(i) + "가 선택되었습니다.",
                         Toast.LENGTH_SHORT).show();
 
-                key3= Integer.toString(i+1);
+                key3 = Integer.toString(i + 1);
 
 
             }
@@ -196,8 +197,6 @@ public class tab2 extends Activity {
             }
 
         });
-
-
 
 
         //이제부터  "산정보 계절" 체크박스 선택시 스피너에 들어갈 어레이리스트
@@ -232,7 +231,7 @@ public class tab2 extends Activity {
                 Toast.makeText(getApplicationContext(), arrayList3.get(i) + "가 선택되었습니다.",
                         Toast.LENGTH_SHORT).show();
 
-                key4= Integer.toString(i+1);
+                key4 = Integer.toString(i + 1);
 
             }
 
@@ -243,8 +242,6 @@ public class tab2 extends Activity {
             }
 
         });
-
-
 
 
         //여기까지  "산정보 주제" 체크박스 선택시 스피너
@@ -260,7 +257,7 @@ public class tab2 extends Activity {
 
                 } else {
                     spinner3.setVisibility(android.view.View.INVISIBLE);
-                    key3="";//선택안하면 "" 처리
+                    key3 = "";//선택안하면 "" 처리
                 }
             }
         });
@@ -277,19 +274,17 @@ public class tab2 extends Activity {
 
                 } else {
                     spinner4.setVisibility(android.view.View.INVISIBLE);
-                    key4= "";//선택안하면 "" 처리
+                    key4 = "";//선택안하면 "" 처리
                 }
             }
         });
 
 
-
-
-        btnSearch = (Button) findViewById(R.id.btnSearch);
-        btnInit = (Button) findViewById(R.id.btnInit);
+        btnSearch = (ImageButton) findViewById(R.id.btnSearch);
+        btnInit = (ImageButton) findViewById(R.id.btnInit);
         listview = (ListView) findViewById(R.id.listview1);
 
-        keyword=null;
+        keyword = null;
 
 
         // 인코딩 에러날 수 있어서 try-catch 처리한거임
@@ -303,7 +298,6 @@ public class tab2 extends Activity {
         }
 
 
-
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -314,7 +308,7 @@ public class tab2 extends Activity {
                         //"cg57liprV33JjaeFy1LJgzsD6EYcgoaVf9Du7P2W8P47pfco85kGJPMrOhESrZluVfW1D2k%2BgX7yxn%2F40U6VWA%3D%3D"
                         ;
 
-                String strUrl = serviceUrl + "?serviceKey=" + serviceKey + "&mntnInfoAraCd="+key2+"&mntnInfoThmCd="+key3+"&mntnInfoSsnCd="+key4;
+                String strUrl = serviceUrl + "?serviceKey=" + serviceKey + "&mntnInfoAraCd=" + key2 + "&mntnInfoThmCd=" + key3 + "&mntnInfoSsnCd=" + key4;
                 selectedMounts.clear();
                 new DownloadWebpageTask().execute(strUrl);
             }
@@ -328,9 +322,9 @@ public class tab2 extends Activity {
                 chkAgree2.setChecked(false);
                 chkAgree3.setChecked(false);
 
-                key2="";
-                key3="";
-                key4="";
+                key2 = "";
+                key3 = "";
+                key4 = "";
 
             }
         });
@@ -348,7 +342,7 @@ public class tab2 extends Activity {
             }
         }
 
-        protected void onPostExecute(String result){
+        protected void onPostExecute(String result) {
             try {
                 XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
                 factory.setNamespaceAware(true);
@@ -359,7 +353,7 @@ public class tab2 extends Activity {
                 boolean bSetmnt = false;
                 String mnt = "";
 
-               // adapter = new ListViewAdapter();
+                // adapter = new ListViewAdapter();
 
                 while (eventType != XmlPullParser.END_DOCUMENT) {
                     if (eventType == XmlPullParser.START_DOCUMENT) {
@@ -370,16 +364,16 @@ public class tab2 extends Activity {
                     } else if (eventType == XmlPullParser.TEXT) {
                         if (bSetmnt) {
                             mnt = xpp.getText();
-                            System.out.println("hello mountain name is"+mnt);
-                            mymountain=mnt;
+                            System.out.println("hello mountain name is" + mnt);
+                            mymountain = mnt;
 
                             selectedMounts.add(new selectedMount(mymountain));
 
-                            for (int i=0; i<selectedMounts.size(); i++){
+                            for (int i = 0; i < selectedMounts.size(); i++) {
                                 System.out.println(selectedMounts.get(i).getMnt());
                             }
 
-                           //adapter.addItem(mnt); 원래 밑에 리스트 뜨게 하는건데 사용안함
+                            //adapter.addItem(mnt); 원래 밑에 리스트 뜨게 하는건데 사용안함
                             bSetmnt = false;
                         }
 
@@ -390,20 +384,19 @@ public class tab2 extends Activity {
                 // while
 
                 // 랜덤 선택
-                if(selectedMounts.size()==0){
+                if (selectedMounts.size() == 0) {
                     System.out.println("해당하는 산이 없습니다.");
-                    Toast.makeText(tab2.this, "해당하는 산이 없습니다.", Toast.LENGTH_LONG);
+                    Toast.makeText(tab2.this, "해당하는 산이 없습니다.", Toast.LENGTH_LONG).show();
                 }
 
-                Random random=new Random();
+                Random random = new Random();
                 int randomNum = random.nextInt(selectedMounts.size());
                 System.out.println(randomNum);
 
                 selectedMounts.get(randomNum).setSelected(true);
                 // 구글맵 띄우기
-                Intent mapIntent1=new Intent(Intent.ACTION_VIEW, Uri.parse("geo:0,0?q="+selectedMounts.get(randomNum).getMnt().toString()));
+                Intent mapIntent1 = new Intent(Intent.ACTION_VIEW, Uri.parse("geo:0,0?q=" + selectedMounts.get(randomNum).getMnt().toString()));
                 startActivity(mapIntent1);
-
 
 
                 listview.setAdapter(adapter);//리스트뷰에 붙이기
