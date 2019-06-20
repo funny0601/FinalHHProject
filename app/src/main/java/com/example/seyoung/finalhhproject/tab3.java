@@ -341,12 +341,10 @@ public class tab3 extends Activity {
                 //본인 키값!
                 String serviceKey = "AH9qYYkdDabmHdMVNVZt4viR7E2TclJYSbjCck2jgrsVTe%2FcBC7lyWLbEBMoUo3gtUrixKaUpRRBM%2BeVwGJIrQ%3D%3D";
 
-                //윤진 키 :  String serviceKey = "AH9qYYkdDabmHdMVNVZt4viR7E2TclJYSbjCck2jgrsVTe%2FcBC7lyWLbEBMoUo3gtUrixKaUpRRBM%2BeVwGJIrQ%3D%3D";
-
                 //자신이 조회를 원하는 지역의 경도와 위도를 입력해주세요
 
                 String baseDate = "20190620";
-                // 자신이 조회하고싶은 날짜를 입력해주세요(무조건 현재 날짜만 됨)
+                // 자신이 조회하고싶은 날짜를 입력해주세요
                 String baseTime = "0500";
                 // 자신이 조회하고싶은 시간대를 입력해주세요
                 // 서비스 인증키입니다. 공공데이터포털에서 제공해준 인증키를 넣어주시면 됩니다.
