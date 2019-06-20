@@ -10,18 +10,22 @@
     android:layout_marginRight="20dp"
     android:layout_marginBottom="20dp"
     android:orientation="vertical"
+    android:weightSum="10"
     tools:context=".MainActivity">
 
-    <TextView
+    <ImageView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#8064A176"
-        android:text="산에 대한 부가적인 정보를 선택하여 지금 내가 등산하고 싶은 산을 추천 받아보세요." />
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:scaleType="centerInside"
+        android:src="@drawable/guide" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical"
+        android:layout_weight="8">
 
 
         <CheckBox
@@ -40,6 +44,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:overlapAnchor="false"
+            android:layout_marginBottom="10dp"
             android:visibility="visible"></Spinner>
 
 
@@ -58,6 +63,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:overlapAnchor="false"
+            android:layout_marginBottom="10dp"
             android:visibility="visible"></Spinner>
 
 
@@ -75,6 +81,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:overlapAnchor="false"
+            android:layout_marginBottom="10dp"
             android:visibility="visible"></Spinner>
 
         <LinearLayout
@@ -117,13 +124,6 @@
                 android:layout_weight="0.4"></LinearLayout>
         </LinearLayout>
 
-        <ListView
-            android:id="@+id/listview1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="9">
-
-        </ListView>
     </LinearLayout>
 
 </LinearLayout>

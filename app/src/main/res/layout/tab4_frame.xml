@@ -12,15 +12,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:spacing="5dp"
-        android:background="#00ff00"/>
+        android:background="#803EA843"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:id="@+id/foodtv"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="55dp"
+        android:background="#64A176"
+        android:padding="10dp"
         android:layout_gravity="center_horizontal"
         android:text="음식을 선택해주세요"
         android:textStyle="bold"
+        android:textColor="#ffffff"
         android:textSize="20dp"
         android:layout_height="wrap_content" />
 
@@ -28,6 +31,9 @@
         android:id="@+id/ivPoster"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="20dp" />
+        android:paddingBottom="20dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        />
 
 </LinearLayout>

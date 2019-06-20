@@ -54,7 +54,7 @@ public class tab5 extends Activity {
     View review_Text, review_Full;
     EditText title, content, mntName;
     TextView content_review, date1;
-    int selectYear, selectMonth, selectDay;
+    int selectYear=0, selectMonth=0, selectDay=0;
     String date;
     CalendarView cv;
     ListView list;
@@ -160,7 +160,9 @@ public class tab5 extends Activity {
 
             @Override
             public void onClick(View v) {
-
+                selectYear=0;
+                selectMonth=0;
+                selectDay=0;
                 Log.e("yougoterror", "오류입니당");
                 review_Text = (View) View.inflate(tab5.this, R.layout.tab5_diary_frame, null);
                 AlertDialog.Builder dlg = new AlertDialog.Builder(tab5.this);
@@ -181,11 +183,23 @@ public class tab5 extends Activity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         // 다이얼로그에 입력한 내용 받아서 DiarySave 클래스에 넣고, 거기에 저장한 정보 다시 가져와서 리스트에 동적 추가
+                        Date now = new Date();
+
+                        SimpleDateFormat sFormat;
+
+                        sFormat = new SimpleDateFormat("yyyy년 M월 d일");
+                        if(selectYear==0&&selectMonth==0&&selectDay==0){
+                            date = sFormat.format(now);
+                        }
+                        else{
+                            date = Integer.toString(selectYear) + "년 " + Integer.toString(selectMonth) + "월 " + Integer.toString(selectDay) + "일";
+                        }
+
                         title = (EditText) review_Text.findViewById(R.id.title);
                         selected.setText(mntName.getText().toString());
                         String mnt_name = selected.getText().toString();
                         content = (EditText) review_Text.findViewById(R.id.content);
-                        date = Integer.toString(selectYear) + "년 " + Integer.toString(selectMonth) + "월 " + Integer.toString(selectDay) + "일";
+
                         HashMap map = new HashMap();
                         DiarySave ds = new DiarySave("["+mnt_name+"] "+title.getText().toString(), date, content.getText().toString());
                         map.put("제목", ds.getTitle());
