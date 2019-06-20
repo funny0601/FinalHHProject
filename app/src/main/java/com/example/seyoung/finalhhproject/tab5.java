@@ -30,10 +30,10 @@ import java.util.HashMap;
 @SuppressWarnings("deprecation")
 public class tab5 extends Activity {
     ImageView imgView;
-    TextView review;
+    TextView review, selected;
     View review_Text;
     EditText title, content;
-
+    ArrayList<selectedMount> selectedMounts = new ArrayList<selectedMount>();
     ArrayList<DiarySave> dsArray = new ArrayList<DiarySave>();
 
     protected void onCreate(final Bundle savedInstanceState) {
@@ -52,11 +52,10 @@ public class tab5 extends Activity {
 
         imgView = (ImageView) findViewById(R.id.profile);
         review = (TextView) findViewById(R.id.review);
+        selected = (TextView) findViewById(R.id.selected);
 
         final ArrayList<HashMap<String, String>> diaryList = new ArrayList<HashMap<String, String>>();
         ListView list = (ListView) findViewById(R.id.diarylist);
-
-
 
         final SimpleAdapter adapter = new SimpleAdapter(this, diaryList, android.R.layout.simple_expandable_list_item_2, new String[]{"제목", "날짜"},
                 new int[]{android.R.id.text1, android.R.id.text2});

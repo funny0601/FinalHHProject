@@ -38,23 +38,6 @@ import java.util.Random;
 // 지금 쓰는 데이터 이름 : 산 정보 조회  , 대략 데이터 수가 15000 개 정도..
 public class tab2 extends Activity {
 
-    /*
-    TextView result;
-    ArrayList<mountainTable> mt = new ArrayList<mountainTable>();
-
-    protected void onCreate(final Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.tab2_frame);
-
-        // 앞 클래스에서 파싱한 데이터 저장하는 클래스
-        parseXML dataLoad = new parseXML();
-        mt= dataLoad.createData();
-
-        // 제대로 받아왔는지 체크용 코드
-        result = (TextView)findViewById(R.id.result);
-        result.setText(mt.get(0).getName()+mt.get(0).getArea());
-
-    }*/
 
     String keyword;
 
@@ -84,21 +67,17 @@ public class tab2 extends Activity {
 
     // String logt= "mountain";
 
-
     //리스트뷰
     ListView listview;
     ListViewAdapter adapter;
 
     String key2;//산지역정보
     String key3;//산주제코드
-
-
     String key4;//산정보계절코드
 
     String mymountain;//산이름
 
-
-
+    ArrayList<selectedMount> selectedMounts = new ArrayList<selectedMount>();
 
     @Override
 
@@ -335,12 +314,9 @@ public class tab2 extends Activity {
                         //"cg57liprV33JjaeFy1LJgzsD6EYcgoaVf9Du7P2W8P47pfco85kGJPMrOhESrZluVfW1D2k%2BgX7yxn%2F40U6VWA%3D%3D"
                         ;
 
-
                 String strUrl = serviceUrl + "?serviceKey=" + serviceKey + "&mntnInfoAraCd="+key2+"&mntnInfoThmCd="+key3+"&mntnInfoSsnCd="+key4;
-
+                selectedMounts.clear();
                 new DownloadWebpageTask().execute(strUrl);
-
-
             }
         });
 
@@ -351,6 +327,11 @@ public class tab2 extends Activity {
                 chkAgree.setChecked(false);
                 chkAgree2.setChecked(false);
                 chkAgree3.setChecked(false);
+
+                key2="";
+                key3="";
+                key4="";
+
             }
         });
 
@@ -380,12 +361,6 @@ public class tab2 extends Activity {
 
                // adapter = new ListViewAdapter();
 
-                // 지금 신경써야하는 태그가 3가지 이니까 3가지에 맞게 더 추가해서 다 넣어줘야하는데
-                // 만약 유저가 3가지 조건중에 2개만 선택하면 (예를 들어 산이름, 산높이, 산주제중에 산이름하고 높이만 선택했을때)
-                // 그럼 선택되지 않은 산주제 태그에 대해서는 그냥 "" 이 값 (근데 이건 위에서 변수 선언할때 default로 넣어줄거니까
-                // 넣어주면 &mntnHght= 이렇게 하고 바로 그냥 조건안에 넣어준거 없으니까 별 에러 안내고 넘어감
-                // 모르겠으면 직접 링크에 숫자 넣었다가 뺐다가 해보기
-
                 while (eventType != XmlPullParser.END_DOCUMENT) {
                     if (eventType == XmlPullParser.START_DOCUMENT) {
                     } else if (eventType == XmlPullParser.START_TAG) {
@@ -397,27 +372,40 @@ public class tab2 extends Activity {
                             mnt = xpp.getText();
                             System.out.println("hello mountain name is"+mnt);
                             mymountain=mnt;
-                           // Random random=new Random();
-                           // random.nextInt(i);
 
-                            //선택한 조건으로 버튼누르면 구글맵에 뜬다!
-                            Intent mapIntent1=new Intent(Intent.ACTION_VIEW, Uri.parse("geo:0,0?q="+mymountain));
-                            startActivity(mapIntent1);
+                            selectedMounts.add(new selectedMount(mymountain));
 
+                            for (int i=0; i<selectedMounts.size(); i++){
+                                System.out.println(selectedMounts.get(i).getMnt());
+                            }
 
                            //adapter.addItem(mnt); 원래 밑에 리스트 뜨게 하는건데 사용안함
                             bSetmnt = false;
                         }
 
-                        //else{
-                         //   mnt="해당하는산이 존재하지않습니다.";
-                        //    adapter.addItem(mnt);
-                       // }
-
                     } else if (eventType == XmlPullParser.END_TAG) {
                     }
                     eventType = xpp.next();
-                } // while
+                }
+                // while
+
+                // 랜덤 선택
+                if(selectedMounts.size()==0){
+                    System.out.println("해당하는 산이 없습니다.");
+                    Toast.makeText(tab2.this, "해당하는 산이 없습니다.", Toast.LENGTH_LONG);
+                }
+
+                Random random=new Random();
+                int randomNum = random.nextInt(selectedMounts.size());
+                System.out.println(randomNum);
+
+                selectedMounts.get(randomNum).setSelected(true);
+                // 구글맵 띄우기
+                Intent mapIntent1=new Intent(Intent.ACTION_VIEW, Uri.parse("geo:0,0?q="+selectedMounts.get(randomNum).getMnt().toString()));
+                startActivity(mapIntent1);
+
+
+
                 listview.setAdapter(adapter);//리스트뷰에 붙이기
             } catch (Exception e) {
 

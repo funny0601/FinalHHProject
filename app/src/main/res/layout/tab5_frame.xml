@@ -73,6 +73,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="도봉산"
+                    android:id="@+id/selected"
                     android:textAlignment="center"
                     android:textSize="20dp" />
             </LinearLayout>

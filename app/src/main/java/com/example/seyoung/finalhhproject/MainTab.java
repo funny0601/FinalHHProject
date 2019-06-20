@@ -74,6 +74,7 @@ public class MainTab extends TabActivity {
             }
         });
 
+
         DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
         int screenHeight = metrics.heightPixels;
