@@ -4,12 +4,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
-import android.widget.Gallery;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -17,73 +14,89 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class tab4 extends Activity {
+    MyAdapter adapter;
+    ArrayList<FoodInfo> arr = new ArrayList<>();
 
-    TextView foodtv;
+    ListView mainLv;
+
+
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tab4_frame);
 
-        Gallery gallery = (Gallery) findViewById(R.id.gallery1);
-        foodtv=(TextView)findViewById(R.id.foodtv) ;
+        mainLv = (ListView) findViewById(R.id.mainLv);
+        adapter = new MyAdapter(this);
+        mainLv.setAdapter(adapter);
 
-        MyGalleryAdapter galAdapter = new MyGalleryAdapter(this);
-        gallery.setAdapter(galAdapter);
+        init();
     }
 
-    public class MyGalleryAdapter extends BaseAdapter {
+    private void init(){
+        arr.add(new FoodInfo("간장게장최고","032-0101-0101","이곳은 간장게장",R.drawable.ic_child_care_black_24dp));
+        arr.add(new FoodInfo("맘스터치최고","032-1323-1920","이곳은 맘스터치",R.drawable.ic_child_care_black_24dp));
+        arr.add(new FoodInfo("망고쥬스최고","032-1093-1120","이곳은 망고쥬스집",R.drawable.ic_child_care_black_24dp));
+        arr.add(new FoodInfo("붕자네최고","032-7865-5123","이곳은 붕자네",R.drawable.ic_child_care_black_24dp));
+        arr.add(new FoodInfo("낙곱새최고","032-7952-1572","이곳은 낙곱새",R.drawable.ic_child_care_black_24dp));
+        adapter.notifyDataSetChanged();
+    }
 
-        Context context;
-        Integer[] posterID = { R.drawable.beef, R.drawable.bibimbap,
-                R.drawable.chicken, R.drawable.coffee, R.drawable.fish,
-                R.drawable.hambuger, R.drawable.jajang, R.drawable.kimbab,
-                R.drawable.pasta, R.drawable.pizza, R.drawable.ramen,
-                R.drawable.shrimp, R.drawable.sushi, R.drawable.torti,
-                R.drawable.mandu, R.drawable.noodle };
+    public class RowDataViewHolder {
+        public TextView nameTvHolder;
+        public TextView phoneTvHolder;
+        public TextView explainTvHolder;
+        public ImageView foodIvHoler;
+    }
 
-        String[] foodTitle = { "부드러운 소고기 : 280kcal", "맛있는 비빔밥 : 706kcal", "바삭바삭 치킨 : 1700kcal",
-                "달달한 커피 : 200kcal",
-                "쫄깃한 회 : 100kcal", "동그란 햄버거 : 558kcal", " 맛있는 자장면 : 864kcal", "영양가득 김밥 : 500kcal", "담백한 파스타 : 400kcal", "맛있는 피자 : 253kcal"
-                , "간편한 라면 : 422kcal", "건강한 새우요리 : 700kcal", "싱싱한 초밥 : 140kcal", "이국적인 토르티야 : 319kcal", "간편한 만두 : 52kcal", "상쾌한 국수 : 374kcal"};
+    class MyAdapter extends ArrayAdapter {
+        LayoutInflater lnf;
 
-
-        public MyGalleryAdapter(Context c) {
-            context = c;
+        public MyAdapter(Activity context) {
+            super(context, R.layout.tab4_item, arr);
+            lnf = (LayoutInflater) context
+                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         }
 
+        @Override
         public int getCount() {
-            return posterID.length;
+// TODO Auto-generated method stub
+            return arr.size();
         }
 
-        public Object getItem(int arg0) {
-            return null;
+        @Override
+        public Object getItem(int position) {
+// TODO Auto-generated method stub
+            return arr.get(position);
         }
 
+        @Override
         public long getItemId(int position) {
-            return 0;
+// TODO Auto-generated method stub
+            return position;
         }
 
         public View getView(int position, View convertView, ViewGroup parent) {
-            ImageView imageview = new ImageView(context);
-            imageview.setLayoutParams(new Gallery.LayoutParams(200, 300));
-            imageview.setScaleType(ImageView.ScaleType.FIT_CENTER);
-            imageview.setPadding(5, 5, 5, 5);
-            imageview.setImageResource(posterID[position]);
+            RowDataViewHolder viewHolder;
+            if (convertView == null) {
+                convertView = lnf.inflate(R.layout.tab4_item, parent, false);
+                viewHolder = new RowDataViewHolder();
+                viewHolder.nameTvHolder = (TextView) convertView.findViewById(R.id.nameTv);
+                viewHolder.phoneTvHolder = (TextView) convertView.findViewById(R.id.phoneTv);
+                viewHolder.explainTvHolder = (TextView) convertView.findViewById(R.id.explainTv);
+                viewHolder.foodIvHoler = (ImageView) convertView.findViewById(R.id.foodIv);
 
-            final int pos = position;
-            imageview.setOnTouchListener(new View.OnTouchListener() {
-                public boolean onTouch(View v, MotionEvent event) {
-                    ImageView ivPoster = (ImageView) findViewById(R.id.ivPoster);
-                    ivPoster.setScaleType(ImageView.ScaleType.FIT_CENTER);
-                    ivPoster.setImageResource(posterID[pos]);
-                    foodtv.setText(foodTitle[pos]);
-                    return false;
-                }
-            });
+                convertView.setTag(viewHolder);
+            } else {
+                viewHolder = (RowDataViewHolder) convertView.getTag();
+            }
 
-            return imageview;
+            viewHolder.nameTvHolder.setText(arr.get(position).name);
+            viewHolder.phoneTvHolder.setText(arr.get(position).phone);
+            viewHolder.explainTvHolder.setText(arr.get(position).explain);
+            viewHolder.foodIvHoler.setImageResource(arr.get(position).resId);
+
+            return convertView;
         }
     }
-
 }

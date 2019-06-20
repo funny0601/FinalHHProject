@@ -5,115 +5,126 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:layout_marginLeft="20dp"
-    android:layout_marginRight="20dp"
     android:layout_marginTop="20dp"
+    android:layout_marginRight="20dp"
     android:layout_marginBottom="20dp"
-    tools:context=".MainActivity"
-    >
+    android:orientation="vertical"
+    tools:context=".MainActivity">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#8064A176"
-        android:text="산에 대한 부가적인 정보를 선택하여
-        지금 내가 등산하고 싶은 산을 추천 받아보세요."/>
+        android:text="산에 대한 부가적인 정보를 선택하여 지금 내가 등산하고 싶은 산을 추천 받아보세요." />
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    >
-
-
-    <CheckBox
-
-        android:text="지역"
-        android:textSize="20dp"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#803EA843"
-        android:layout_margin="10dp"
-        android:id="@+id/ChkAgree"/>
-
-    <Spinner
-
-        android:id="@+id/spinner2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:overlapAnchor="false"
-        android:visibility="invisible"></Spinner>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
 
-    <CheckBox
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="20dp"
-        android:text="테마"
-        android:background="#803EA843"
-        android:layout_margin="10dp"
-        android:id="@+id/ChkAgree2"/>
+        <CheckBox
 
-    <Spinner
+            android:id="@+id/ChkAgree"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="#803EA843"
+            android:text="지역"
+            android:textSize="20dp" />
 
-        android:id="@+id/spinner3"
-        android:visibility="invisible"
-        android:layout_width="match_parent"
-        android:overlapAnchor="false"
-        android:layout_height="wrap_content"></Spinner>
+        <Spinner
+
+            android:id="@+id/spinner2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:overlapAnchor="false"
+            android:visibility="invisible"></Spinner>
 
 
+        <CheckBox
+            android:id="@+id/ChkAgree2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="#803EA843"
+            android:text="테마"
+            android:textSize="20dp" />
+
+        <Spinner
+
+            android:id="@+id/spinner3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:overlapAnchor="false"
+            android:visibility="invisible"></Spinner>
 
 
-    <CheckBox
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="20dp"
-        android:text="계절"
-        android:layout_margin="10dp"
-        android:background="#803EA843"
-        android:id="@+id/ChkAgree3"/>
+        <CheckBox
+            android:id="@+id/ChkAgree3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="#803EA843"
+            android:text="계절"
+            android:textSize="20dp" />
 
-    <Spinner
-        android:overlapAnchor="false"
-        android:visibility="invisible"
-        android:id="@+id/spinner4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"></Spinner>
+        <Spinner
+            android:id="@+id/spinner4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:overlapAnchor="false"
+            android:visibility="invisible"></Spinner>
 
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
 
-    <Button
-        android:id="@+id/btnInit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="선택 초기화"
-        android:textSize="15dp"
-        android:layout_marginLeft="70dp"
-        android:layout_alignParentLeft="true"
-        android:background="#8064A176"/>
-    <Button
-        android:id="@+id/btnSearch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="선택 완료"
-        android:layout_marginRight="70dp"
-        android:layout_alignParentRight="true"
-        android:textSize="15dp"
-        android:background="#8064A176"/>
-</RelativeLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.4">
 
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/listview1"
-        android:layout_weight="9">
+            </LinearLayout>
 
-    </ListView>
-</LinearLayout>
+            <ImageButton
+                android:id="@+id/btnInit"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:background="#ffffff"
+                android:scaleType="centerInside"
+                android:src="@drawable/initbtn" />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.2"></LinearLayout>
+            <ImageButton
+                android:id="@+id/btnSearch"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:background="#ffffff"
+                android:scaleType="centerInside"
+                android:src="@drawable/initbtn" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.4"></LinearLayout>
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/listview1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="9">
+
+        </ListView>
+    </LinearLayout>
 
 </LinearLayout>
 

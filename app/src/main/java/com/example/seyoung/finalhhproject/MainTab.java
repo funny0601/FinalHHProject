@@ -26,10 +26,7 @@ public class MainTab extends TabActivity {
         ImageView tw01 = new ImageView(this);
         tw01.setImageResource(R.drawable.tw_1);
         TabHost.TabSpec tabCurrentMyHikingStatus = tabHost.newTabSpec("currentMyHikingStatus").setIndicator(tw01);
-        Intent int1 = new Intent(this, tab1.class);
-        tabCurrentMyHikingStatus.setContent(int1);
-        int1.putExtra("nickname", nickname);
-        int1.putExtra("profileImagePath", profileImagePath);
+        tabCurrentMyHikingStatus.setContent(new Intent(this, tab1.class));
         tabHost.addTab(tabCurrentMyHikingStatus);
 
         ImageView tw02 = new ImageView(this);
@@ -73,6 +70,7 @@ public class MainTab extends TabActivity {
                     tabHost.getTabWidget().getChildAt(tabHost.getCurrentTab()).setBackgroundColor(Color.parseColor("#64A176"));
             }
         });
+
 
         DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);

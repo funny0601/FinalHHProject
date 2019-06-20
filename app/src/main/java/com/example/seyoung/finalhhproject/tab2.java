@@ -114,7 +114,6 @@ public class tab2 extends Activity {
         //"지역" 체크박스 선택시 스피너 안에 들어갈 arrayList
         arrayList = new ArrayList<>();
 
-        arrayList.add("선택하세요");
         arrayList.add("서울특별시");
         arrayList.add("부산광역시");
         arrayList.add("대구광역시");
@@ -146,7 +145,7 @@ public class tab2 extends Activity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 Toast.makeText(getApplicationContext(), arrayList.get(i) + "가 선택되었습니다.",
                         Toast.LENGTH_SHORT).show();
-                key2= Integer.toString(i);
+                key2= Integer.toString(i+1);
             }
 
             @Override
@@ -179,7 +178,6 @@ public class tab2 extends Activity {
 
         arrayList2 = new ArrayList<>();
 
-        arrayList2.add("선택하세요");
         arrayList2.add("계곡");
         arrayList2.add("단풍");
         arrayList2.add("억새");
@@ -207,7 +205,7 @@ public class tab2 extends Activity {
                 Toast.makeText(getApplicationContext(), arrayList2.get(i) + "가 선택되었습니다.",
                         Toast.LENGTH_SHORT).show();
 
-                key3= Integer.toString(i);
+                key3= Integer.toString(i+1);
 
 
             }
@@ -227,7 +225,6 @@ public class tab2 extends Activity {
 
         arrayList3 = new ArrayList<>();
 
-        arrayList3.add("선택하세요");
         arrayList3.add("봄");
         arrayList3.add("여름");
         arrayList3.add("가을");
@@ -256,7 +253,7 @@ public class tab2 extends Activity {
                 Toast.makeText(getApplicationContext(), arrayList3.get(i) + "가 선택되었습니다.",
                         Toast.LENGTH_SHORT).show();
 
-                key4= Integer.toString(i);
+                key4= Integer.toString(i+1);
 
             }
 
