@@ -1,60 +1,46 @@
 package com.example.seyoung.finalhhproject;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.net.Uri;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.os.StrictMode;
-import android.support.annotation.Nullable;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.ListView;
-import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
+        import android.app.Activity;
+        import android.content.Intent;
+        import android.net.Uri;
+        import android.os.AsyncTask;
+        import android.os.Bundle;
+        import android.os.StrictMode;
+        import android.support.annotation.Nullable;
+        import android.view.View;
+        import android.widget.AdapterView;
+        import android.widget.ArrayAdapter;
+        import android.widget.Button;
+        import android.widget.CheckBox;
+        import android.widget.CompoundButton;
+        import android.widget.ImageButton;
+        import android.widget.ListView;
+        import android.widget.Spinner;
+        import android.widget.TextView;
+        import android.widget.Toast;
 
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserFactory;
+        import com.example.seyoung.finalhhproject.R;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.StringReader;
-import java.io.UnsupportedEncodingException;
-import java.lang.reflect.Array;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.Random;
+        import org.xmlpull.v1.XmlPullParser;
+        import org.xmlpull.v1.XmlPullParserFactory;
+
+        import java.io.BufferedInputStream;
+        import java.io.BufferedReader;
+        import java.io.IOException;
+        import java.io.InputStream;
+        import java.io.InputStreamReader;
+        import java.io.StringReader;
+        import java.io.UnsupportedEncodingException;
+        import java.lang.reflect.Array;
+        import java.net.HttpURLConnection;
+        import java.net.URL;
+        import java.net.URLEncoder;
+        import java.util.ArrayList;
+        import java.util.Random;
 
 // 지금 쓰는 데이터 이름 : 산 정보 조회  , 대략 데이터 수가 15000 개 정도..
 public class tab2 extends Activity {
 
-    /*
-    TextView result;
-    ArrayList<mountainTable> mt = new ArrayList<mountainTable>();
-
-    protected void onCreate(final Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.tab2_frame);
-
-        // 앞 클래스에서 파싱한 데이터 저장하는 클래스
-        parseXML dataLoad = new parseXML();
-        mt= dataLoad.createData();
-
-        // 제대로 받아왔는지 체크용 코드
-        result = (TextView)findViewById(R.id.result);
-        result.setText(mt.get(0).getName()+mt.get(0).getArea());
-
-    }*/
 
     String keyword;
 
@@ -79,11 +65,10 @@ public class tab2 extends Activity {
     ArrayAdapter<String> arrayAdapter3;
 
     //선택완료 버튼
-    Button btnSearch;
-    Button btnInit;
+    ImageButton btnSearch;
+    ImageButton btnInit;
 
     // String logt= "mountain";
-
 
     //리스트뷰
     ListView listview;
@@ -91,14 +76,11 @@ public class tab2 extends Activity {
 
     String key2;//산지역정보
     String key3;//산주제코드
-
-
     String key4;//산정보계절코드
 
     String mymountain;//산이름
 
-
-
+    ArrayList<selectedMount> selectedMounts = new ArrayList<selectedMount>();
 
     @Override
 
@@ -145,7 +127,7 @@ public class tab2 extends Activity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 Toast.makeText(getApplicationContext(), arrayList.get(i) + "가 선택되었습니다.",
                         Toast.LENGTH_SHORT).show();
-                key2= Integer.toString(i+1);
+                key2 = Integer.toString(i + 1);
             }
 
             @Override
@@ -165,7 +147,7 @@ public class tab2 extends Activity {
                     spinner2.setVisibility(android.view.View.VISIBLE);
                 } else {
                     spinner2.setVisibility(android.view.View.INVISIBLE);
-                    key2="";//선택안하면 "" 처리
+                    key2 = "";//선택안하면 "" 처리
                 }
             }
         });
@@ -205,7 +187,7 @@ public class tab2 extends Activity {
                 Toast.makeText(getApplicationContext(), arrayList2.get(i) + "가 선택되었습니다.",
                         Toast.LENGTH_SHORT).show();
 
-                key3= Integer.toString(i+1);
+                key3 = Integer.toString(i + 1);
 
 
             }
@@ -217,8 +199,6 @@ public class tab2 extends Activity {
             }
 
         });
-
-
 
 
         //이제부터  "산정보 계절" 체크박스 선택시 스피너에 들어갈 어레이리스트
@@ -253,7 +233,7 @@ public class tab2 extends Activity {
                 Toast.makeText(getApplicationContext(), arrayList3.get(i) + "가 선택되었습니다.",
                         Toast.LENGTH_SHORT).show();
 
-                key4= Integer.toString(i+1);
+                key4 = Integer.toString(i + 1);
 
             }
 
@@ -264,8 +244,6 @@ public class tab2 extends Activity {
             }
 
         });
-
-
 
 
         //여기까지  "산정보 주제" 체크박스 선택시 스피너
@@ -281,7 +259,7 @@ public class tab2 extends Activity {
 
                 } else {
                     spinner3.setVisibility(android.view.View.INVISIBLE);
-                    key3="";//선택안하면 "" 처리
+                    key3 = "";//선택안하면 "" 처리
                 }
             }
         });
@@ -298,19 +276,17 @@ public class tab2 extends Activity {
 
                 } else {
                     spinner4.setVisibility(android.view.View.INVISIBLE);
-                    key4= "";//선택안하면 "" 처리
+                    key4 = "";//선택안하면 "" 처리
                 }
             }
         });
 
 
+        btnSearch = (ImageButton) findViewById(R.id.btnSearch);
+        btnInit = (ImageButton) findViewById(R.id.btnInit);
+        //listview = (ListView) findViewById(R.id.listview1);
 
-
-        btnSearch = (Button) findViewById(R.id.btnSearch);
-        btnInit = (Button) findViewById(R.id.btnInit);
-        listview = (ListView) findViewById(R.id.listview1);
-
-        keyword=null;
+        keyword = null;
 
 
         // 인코딩 에러날 수 있어서 try-catch 처리한거임
@@ -324,23 +300,19 @@ public class tab2 extends Activity {
         }
 
 
-
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 String serviceUrl = "http://openapi.forest.go.kr/openapi/service/trailInfoService/getforeststoryservice";
                 //본인 키값!
-                String serviceKey = "AH9qYYkdDabmHdMVNVZt4viR7E2TclJYSbjCck2jgrsVTe%2FcBC7lyWLbEBMoUo3gtUrixKaUpRRBM%2BeVwGJIrQ%3D%3D"
+                String serviceKey = "cg57liprV33JjaeFy1LJgzsD6EYcgoaVf9Du7P2W8P47pfco85kGJPMrOhESrZluVfW1D2k%2BgX7yxn%2F40U6VWA%3D%3D"
                         //"cg57liprV33JjaeFy1LJgzsD6EYcgoaVf9Du7P2W8P47pfco85kGJPMrOhESrZluVfW1D2k%2BgX7yxn%2F40U6VWA%3D%3D"
                         ;
 
-
-                String strUrl = serviceUrl + "?serviceKey=" + serviceKey + "&mntnInfoAraCd="+key2+"&mntnInfoThmCd="+key3+"&mntnInfoSsnCd="+key4;
-
+                String strUrl = serviceUrl + "?serviceKey=" + serviceKey + "&mntnInfoAraCd=" + key2 + "&mntnInfoThmCd=" + key3 + "&mntnInfoSsnCd=" + key4;
+                selectedMounts.clear();
                 new DownloadWebpageTask().execute(strUrl);
-
-
             }
         });
 
@@ -351,6 +323,11 @@ public class tab2 extends Activity {
                 chkAgree.setChecked(false);
                 chkAgree2.setChecked(false);
                 chkAgree3.setChecked(false);
+
+                key2 = "";
+                key3 = "";
+                key4 = "";
+
             }
         });
 
@@ -367,7 +344,7 @@ public class tab2 extends Activity {
             }
         }
 
-        protected void onPostExecute(String result){
+        protected void onPostExecute(String result) {
             try {
                 XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
                 factory.setNamespaceAware(true);
@@ -378,13 +355,7 @@ public class tab2 extends Activity {
                 boolean bSetmnt = false;
                 String mnt = "";
 
-               // adapter = new ListViewAdapter();
-
-                // 지금 신경써야하는 태그가 3가지 이니까 3가지에 맞게 더 추가해서 다 넣어줘야하는데
-                // 만약 유저가 3가지 조건중에 2개만 선택하면 (예를 들어 산이름, 산높이, 산주제중에 산이름하고 높이만 선택했을때)
-                // 그럼 선택되지 않은 산주제 태그에 대해서는 그냥 "" 이 값 (근데 이건 위에서 변수 선언할때 default로 넣어줄거니까
-                // 넣어주면 &mntnHght= 이렇게 하고 바로 그냥 조건안에 넣어준거 없으니까 별 에러 안내고 넘어감
-                // 모르겠으면 직접 링크에 숫자 넣었다가 뺐다가 해보기
+                // adapter = new ListViewAdapter();
 
                 while (eventType != XmlPullParser.END_DOCUMENT) {
                     if (eventType == XmlPullParser.START_DOCUMENT) {
@@ -395,30 +366,43 @@ public class tab2 extends Activity {
                     } else if (eventType == XmlPullParser.TEXT) {
                         if (bSetmnt) {
                             mnt = xpp.getText();
-                            System.out.println("hello mountain name is"+mnt);
-                            mymountain=mnt;
-                           // Random random=new Random();
-                           // random.nextInt(i);
+                            System.out.println("hello mountain name is" + mnt);
+                            mymountain = mnt;
+                            selectedMount stm = new selectedMount(mymountain);
+                            selectedMounts.add(stm);
 
-                            //선택한 조건으로 버튼누르면 구글맵에 뜬다!
-                            Intent mapIntent1=new Intent(Intent.ACTION_VIEW, Uri.parse("geo:0,0?q="+mymountain));
-                            startActivity(mapIntent1);
+                            for (int i = 0; i < selectedMounts.size(); i++) {
+                                System.out.println(selectedMounts.get(i).getMnt());
+                            }
 
-
-                           //adapter.addItem(mnt); 원래 밑에 리스트 뜨게 하는건데 사용안함
+                            //adapter.addItem(mnt); 원래 밑에 리스트 뜨게 하는건데 사용안함
                             bSetmnt = false;
                         }
-
-                        //else{
-                         //   mnt="해당하는산이 존재하지않습니다.";
-                        //    adapter.addItem(mnt);
-                       // }
 
                     } else if (eventType == XmlPullParser.END_TAG) {
                     }
                     eventType = xpp.next();
-                } // while
-                listview.setAdapter(adapter);//리스트뷰에 붙이기
+                }
+                // while
+
+                // 랜덤 선택
+                if (selectedMounts.size() == 0) {
+                    System.out.println("해당하는 산이 없습니다.");
+                    Toast.makeText(tab2.this, "해당하는 산이 없습니다.", Toast.LENGTH_LONG).show();
+                }
+
+                Random random = new Random();
+                int randomNum = random.nextInt(selectedMounts.size());
+                System.out.println(randomNum);
+
+                selectedMounts.get(randomNum).setSelected(true);
+                System.out.println(selectedMounts.get(randomNum).isSelected());
+                // 구글맵 띄우기
+                //Intent mapIntent1 = new Intent(Intent.ACTION_VIEW, Uri.parse("geo:0,0?q=" + selectedMounts.get(randomNum).getMnt().toString()));
+                //startActivity(mapIntent1);
+
+                Toast.makeText(tab2.this, selectedMounts.get(randomNum).getMnt(), Toast.LENGTH_LONG).show();
+                //listview.setAdapter(adapter);//리스트뷰에 붙이기
             } catch (Exception e) {
 
             }
@@ -446,6 +430,4 @@ public class tab2 extends Activity {
             }
         }
     }
-
 }
-

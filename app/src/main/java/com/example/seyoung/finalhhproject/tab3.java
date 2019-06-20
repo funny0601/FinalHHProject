@@ -355,7 +355,8 @@ public class tab3 extends Activity {
                 btnSearch.setText("선택되었습니다.");
 
                 // String strUrl = serviceUrl + "?serviceKey=" + serviceKey + "&mntnInfoAraCd="+key2+"&mntnInfoThmCd="+key3+"&mntnInfoSsnCd="+key4;
-
+                System.out.println("nx:"+nx);
+                System.out.println("ny:"+ny);
                 new DownloadWebpageTask().execute(strUrl);
 
 
@@ -392,12 +393,6 @@ public class tab3 extends Activity {
                 String mnt = "";
 
                 adapter = new ListViewAdapter();
-
-                // 지금 신경써야하는 태그가 3가지 이니까 3가지에 맞게 더 추가해서 다 넣어줘야하는데
-                // 만약 유저가 3가지 조건중에 2개만 선택하면 (예를 들어 산이름, 산높이, 산주제중에 산이름하고 높이만 선택했을때)
-                // 그럼 선택되지 않은 산주제 태그에 대해서는 그냥 "" 이 값 (근데 이건 위에서 변수 선언할때 default로 넣어줄거니까
-                // 넣어주면 &mntnHght= 이렇게 하고 바로 그냥 조건안에 넣어준거 없으니까 별 에러 안내고 넘어감
-                // 모르겠으면 직접 링크에 숫자 넣었다가 뺐다가 해보기
 
                 while (eventType != XmlPullParser.END_DOCUMENT) {
                     if (eventType == XmlPullParser.START_DOCUMENT) {

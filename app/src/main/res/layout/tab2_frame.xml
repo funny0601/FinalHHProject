@@ -109,7 +109,7 @@
                 android:layout_weight="0.5"
                 android:background="#ffffff"
                 android:scaleType="centerInside"
-                android:src="@drawable/initbtn" />
+                android:src="@drawable/searchbtn" />
 
             <LinearLayout
                 android:layout_width="0dp"
