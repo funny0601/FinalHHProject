@@ -1,5 +1,7 @@
 # 맛동산
 > <strong>'맛집, 동네날씨, 산'</strong>이라는 의미로 <br>맛동산처럼 남녀노소 즐겨찾을 수 있는 앱을 의미합니다. 
+ 
+## [어플리케이션 시연 영상](https://youtu.be/V3lpmFCzQi4)
 
 ![타이틀](https://user-images.githubusercontent.com/38810970/59881144-bc75a380-93e9-11e9-89b7-9c8227d5e4a3.png)
 ![개요](https://user-images.githubusercontent.com/38810970/59881142-bb447680-93e9-11e9-97e5-7d6e749a870e.png)
