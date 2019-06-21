@@ -12,10 +12,12 @@
         android:layout_marginRight="20dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="5dp"
-        android:lines="2"
+        android:lines="5"
+        android:maxLines="5"
         android:background="#803EA843"
         android:padding="10dp"
         android:textSize="15dp"
+        android:inputType="textMultiLine"
         android:id="@+id/content2"/>
 
     <TextView
