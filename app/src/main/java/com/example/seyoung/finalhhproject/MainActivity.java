@@ -89,7 +89,6 @@ public class MainActivity extends AppCompatActivity {
                         //에러로 인한 로그인 실패
                         // finish();
                     } else {
-                        //Toast.makeText(MainActivity.this, "넌 뭐냐", Toast.LENGTH_SHORT).show();
                         //redirectMainActivity();
                     }
                 }
@@ -134,7 +133,6 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onSessionOpenFailed(KakaoException exception) {
 
-            Toast.makeText(MainActivity.this, "시발", Toast.LENGTH_SHORT).show();
             System.out.println("Session Fail Error is " + exception.getMessage().toString());
 
             // 유저마다 해시코드 값이 다르니 일단 네이버 개발자 등록에서 하단 코드로 해시코드 확인 후 등록해야 api 사용가능
